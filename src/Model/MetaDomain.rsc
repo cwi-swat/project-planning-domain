@@ -1,14 +1,17 @@
 module Model::MetaDomain
 
 
-data Class = class(str name, list[Attribute] attributes, list[Association] assocations);
+data Class 
+	= class(str name, list[Attribute] attributes, list[Association] assocations)
+	| specialisation(str name, str baseClass, list[Attribute] attributes, list[Association] assocations)
+	;
 
 data Attribute = attr(str name);
-data Association = comp(str otherClass, Cardinality from, Cardinality to, str label);
+data Association = asso(str label, str otherClass, Cardinality from, Cardinality to);
 
 anno Class Association@class;
 
-data Cardinality = \one() | oneOrMore() | noneOrMore();
+data Cardinality = none() | \one() | oneOrMore() | noneOrMore();
 
 anno set[int] Class@source;
 anno set[int] Attribute@source;
