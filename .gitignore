@@ -1,0 +1,7 @@
+.metadata
+.metadata/
+*/bin/*
+bin
+
+*.*~
+.DS_Store
