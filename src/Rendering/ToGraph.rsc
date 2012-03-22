@@ -1,6 +1,7 @@
 module Rendering::ToGraph
 
-
+import Real;
+import Integer;
 import vis::Figure;
 import vis::Render;
 
@@ -18,10 +19,16 @@ private Figure getNode(Class cl) {
 	
 }
 
+public Figure diamond(int side,FProperty props...){
+  return overlay([point(left(),vcenter()),point(top()), point(right(),vcenter()), point(hcenter(), bottom())], 
+  	[shapeConnected(true), shapeClosed(true),  size(toReal(side)),
+  	resizable(false)] + props);
+}
+
 public void renderGraph(DomainModel dom) {
 	nodes = [ getNode(c)  | c <- dom];
 	Edges emptyToAvoidRascalBug = [];
-	edges = [*(emptyToAvoidRascalBug + [edge(c.name, asoc.otherClass, label(text(asoc.label))) | asoc <- c.assocations]) | c <- dom];
+	edges = [*(emptyToAvoidRascalBug + [edge(c.name, asoc.otherClass, fromArrow(diamond(10)), label(text(asoc.label))) | asoc <- c.assocations]) | c <- dom];
 	edges += [edge(sp.name, sp.baseClass, toArrow(triangle(10))) | sp:specialisation(_,_,_,_) <- dom];
-    render(graph(nodes, edges, size(600),gap(40)));
+    render(graph(nodes, edges, size(600),gap(40), hint("layered")));
 }
