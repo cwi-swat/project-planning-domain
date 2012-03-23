@@ -15,7 +15,15 @@ private Figure getNode(Class cl) {
 	if (attrText == "") {
 		return vcat([box(text(cl.name, fontBold(true)), grow(1.3))], id(cl.name));
 	}
-	return box(vcat([text(cl.name, fontBold(true), grow(1.2)),  text(attrText, grow(1.2))]), id(cl.name));
+	return vcat([
+		box(hcat([
+				space(width(10)), text(cl.name, fontBold(true)), space(width(10))
+			], std(resizable(false)))), 
+		box(hcat([
+				space(width(10)), text(attrText), space(width(10))
+			], std(resizable(false)), left()))
+		]
+		, resizable(false), id(cl.name));
 	
 }
 
