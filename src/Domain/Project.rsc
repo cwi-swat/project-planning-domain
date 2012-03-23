@@ -19,13 +19,23 @@ public DomainModel project = {
 		{1}),
 	class("Result", {1}),
 	class("Objective", {3}),
-	class("Requirement", {5}),
+	class("Requirement", 
+		[
+			attr("version", {12})
+		],
+		[
+			asso("previous", "Requirement", noneOrMore(), noneOrMore(), {12})
+		],
+		{5}),
 	class("StakeHolder",
 		[
 			attr("needs", {7}),
 			attr("concerns", {7}),
 			attr("expectations", {7})
 		], 
+		[
+			asso("priority", "Constrain", oneOrMore(), oneOrMore(), {11})
+		],
 		{7}),
 	class("Constrain",
 		[
