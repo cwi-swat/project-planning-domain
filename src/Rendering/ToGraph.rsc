@@ -13,15 +13,15 @@ private str getAttrText([Attribute first, list[Attribute] rest]) = (first.name |
 private Figure getNode(Class cl) {
 	str attrText = getAttrText(cl.attributes);
 	if (attrText == "") {
-		return vcat([box(text(cl.name, fontBold(true)), grow(1.3))], id(cl.name));
+		return vcat([box(text(cl.name, fontBold(true)), grow(1.7))], id(cl.name));
 	}
 	return vcat([
 		box(hcat([
-				space(width(10)), text(cl.name, fontBold(true)), space(width(10))
-			], std(resizable(false)))), 
+				space(width(10), height(1)), text(cl.name, fontBold(true)), space(width(10), height(1))
+			], std(resizable(false))), resizable(true)), 
 		box(hcat([
 				space(width(10)), text(attrText), space(width(10))
-			], std(resizable(false)), left()))
+			], std(resizable(false)), left()), resizable(true))
 		]
 		, resizable(false), id(cl.name));
 	
