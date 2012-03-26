@@ -5,6 +5,8 @@ data Class
 	= class(str name, list[Attribute] attributes, list[Association] assocations)
 	| specialisation(str name, str baseClass, list[Attribute] attributes, list[Association] assocations)
 	;
+	
+public anno set[str] Class@alternativeNames;
 
 public Class class(str name) = class(name, [],[]);
 public Class class(str name, set[int] source) = class(name)[@source = source];
