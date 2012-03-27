@@ -18,10 +18,10 @@ private Figure getNode(Class cl) {
 	return vcat([
 		box(hcat([
 				space(width(10), height(1)), text(cl.name, fontBold(true)), space(width(10), height(1))
-			], std(resizable(false))), resizable(true)), 
+			], std(resizable(false))), hresizable(true), grow(1.3)), 
 		box(hcat([
 				space(width(10)), text(attrText), space(width(10))
-			], std(resizable(false)), left()), resizable(true))
+			], std(resizable(false)), left()), hresizable(true), grow(1.1))
 		]
 		, resizable(false), id(cl.name));
 	
