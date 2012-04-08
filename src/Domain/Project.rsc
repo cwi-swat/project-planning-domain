@@ -48,8 +48,10 @@ public DomainModel project = {
 		[
 			asso("priority", "Constrain", oneOrMore(), oneOrMore(), {11}),
 			asso("objective", "Requirement", {56})
+			,asso("needs", "Information", {68})[@class="Communications plan"]
 		],
 		{7}),
+	class("Information", {68}),
 	specialisation("Person", "StakeHolder", {38}),
 	specialisation("Organisation", "StakeHolder", {38}),
 	
@@ -69,15 +71,36 @@ public DomainModel project = {
 		], {9}),
 			
 	specialisation("Quality", "Constrain", {9}),
-	specialisation("Schedule", "Constrain", {9}),
+	specialisation("Schedule", "Constrain", 
+		[
+		],
+		[
+			asso("constists of", "Project schedule", {97})
+			,asso("constists of", "Schedule baseline", {97})
+			,asso("constists of", "Schedule data", {97})
+		], {9}),
 	specialisation("Budget", "Constrain", {9}),
 	specialisation("Resource", "Constrain", {9}),
-	specialisation("Risk", "Constrain", {9}),
+	specialisation("Risk", "Constrain", 
+		[
+			attr("characteristics", {70})
+			,attr("probability", {70})
+			,attr("impact", {70})
+		],
+		[
+			asso("affects", "Project", {70})	
+			,asso("affects", "Objective", {70})
+		], {9})[@alternativeNames = {"Project risk"}],
 	
 	specialisation("Material", "Resource", {61}),
 	specialisation("People", "Resource", {61}),
 	specialisation("Equipment", "Resource", {61}),
 	specialisation("Supplies", "Resource", {61}),
+	
+	
+	class("Schedule baseline", {97}),
+	class("Schedule data", {97}),
+	
 
 	class("Project plan",
 		[
@@ -131,17 +154,19 @@ public DomainModel project = {
 			asso("produce", "Deliverable", {59}),
 			asso("requires", "Resource", {61})[@class="Activity resource"],
 			asso("takes", "Activity duration", {62})
+			,asso("based on", "Template", {90})
+			,asso("constists of", "Work Breakdown Structure", {94})
 		], {43}),
 	specialisation("Action", "Process", {43}),
 	
 	class("Activity sequence", [], [asso("sequence", "Activity", {60})], {60}),
-	class("Activity resource", [attr("is estimation", {61})], {61}),
+	class("Activity resource", [attr("is estimation", {61})], {61, 94}),
 	class("Activity duration", [attr("is estimation", {62}), attr("duration", {62})], {62}),
 	
-	class("Work Breakdown Structure", {58})[@alternativeNames={"WBS"}],
+	class("Activity template", {90}),
 	
 	// what is difference between this and project plan?
-	class("Project schedule", 
+	class("Project schedule",
 		[
 		],
 		[
@@ -151,4 +176,66 @@ public DomainModel project = {
 			asso("based on", "Activity resource", {63}),
 			asso("based on", "Schedule", {63})
 		], {63})
+		
+	,class("Project schedule network diagram",
+		[
+		],
+		[
+			asso("contains", "Activity sequence", {93})
+		], {93})
+	// relation between these plans an the project plan?
+	,class("Human Resource Plan",
+		[
+			attr("project roles")
+			,attr("responsibilities")
+			,attr("required skills")
+			,attr("reporting relationships")
+			,attr("staffing management plan")
+		],
+		[
+		
+		], {67})
+		
+	,class("Communications plan", [ attr("strategy")], {68})
+	,class("Risk management plan", [], [asso("manages", "Risk",{69})], {69})
+
+	,class("Approver")
+	,specialisation("Project management", "Approver", {80})
+	,specialisation("Change Control Board", "Approver", {80})
+	,class("Change request",
+		[
+			attr("state")	
+		],
+		[
+			asso("approved by", "Approver", {80})
+			,asso("rejected by" , "Approver", {80})	
+			,asso("influences", "Activity sequence", {81})
+			,asso("influences", "Schedule", {81})
+			,asso("influences", "Risk management plan", {81})
+		], {80})
+	
+	,class("Work Breakdown Structure",
+		[
+		
+		],
+		[
+			asso("decomposed in", "Work Breakdown Structure Component", {82})	
+		], {58, 82})[@alternativeNames = {"WBS"}]
+		
+	,class("Work Breakdown Structure Component",
+		[
+		
+		],
+		[
+			asso("accomplishes", "Objective", {82})
+			,asso("creates",  "Deliverable", {82})
+			,asso("consists out of", "Work Breakdown Structure Component", {82})	
+		], {82})
+	,specialisation("Work Package", "Work Breakdown Structure Component", 
+		[
+		
+		],
+		[
+			asso("plans", "Planned work", {83})
+		], {83})
 };
