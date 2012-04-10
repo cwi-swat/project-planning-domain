@@ -149,21 +149,33 @@ public DomainModel project = {
 			asso("accieves", "Result", {43})
 		], {43}),
 		
-	specialisation("Activity", "Process", [] ,
+	specialisation("Activity", "Process", 
+		[
+			attr("identifier", {102})
+			,attr("scope of work description", {102})
+			,attr("name", {104})
+		] ,
 		[
 			asso("produce", "Deliverable", {59}),
 			asso("requires", "Resource", {61})[@class="Activity resource"],
-			asso("takes", "Activity duration", {62})
+			asso("takes", "Activity duration", {62, 95})
 			,asso("based on", "Template", {90})
 			,asso("constists of", "Work Breakdown Structure", {94})
-		], {43}),
+			,asso("described by", "Activity Attribute", {103})
+		], {43})[@alternativeNames={"Schedule activity"}],
 	specialisation("Action", "Process", {43}),
 	
 	class("Activity sequence", [], [asso("sequence", "Activity", {60})], {60}),
 	class("Activity resource", [attr("is estimation", {61})], {61, 94}),
-	class("Activity duration", [attr("is estimation", {62}), attr("duration", {62})], {62}),
+	class("Activity duration", [attr("is estimation", {62}), attr("duration", {62})], {62, 95}),
 	
 	class("Activity template", {90}),
+	class("Activity list", [],
+		[
+			asso("lists", "Activity", {101})	
+		],{101}),
+	
+	class("Activity Attribute", [attr("name", {103}), attr("value", {103})], {103}),
 	
 	// what is difference between this and project plan?
 	class("Project schedule",
@@ -237,5 +249,7 @@ public DomainModel project = {
 		],
 		[
 			asso("plans", "Planned work", {83})
+			,asso("constists of", "Activity", {99})
 		], {83})
+	,class("Planned work", {83})
 };
