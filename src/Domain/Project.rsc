@@ -24,6 +24,7 @@ public DomainModel project = {
 			asso("follows", "Life cycle", {24}),
 			asso("follows", "Project plan", {55}),
 			asso("subdivised in", "Work Breakdown Structure", {58})
+			,asso("has", "Milestone", {108})
 		],
 		{1}),
 	class("Result", {1}),
@@ -54,6 +55,17 @@ public DomainModel project = {
 	class("Information", {68}),
 	specialisation("Person", "StakeHolder", {38}),
 	specialisation("Organisation", "StakeHolder", {38}),
+	
+	class("Milestone", 
+		[
+			attr("mandatory", {109})
+			,attr("lag time", {111})
+			,attr("lead time", {111})
+		],
+		[
+			asso("previous", "Milestone", {110})
+			,asso("following", "Milestone", {110})	
+		], {108,109}),
 	
 	class("Constrain",
 		[
@@ -154,16 +166,24 @@ public DomainModel project = {
 			attr("identifier", {102})
 			,attr("scope of work description", {102})
 			,attr("name", {104})
+			,attr("lag time", {111})
+			,attr("lead time", {111})
 		] ,
 		[
 			asso("produce", "Deliverable", {59}),
 			asso("requires", "Resource", {61})[@class="Activity resource"],
 			asso("takes", "Activity duration", {62, 95})
-			,asso("based on", "Template", {90})
+			//,asso("based on", "Template", {90})
 			,asso("constists of", "Work Breakdown Structure", {94})
 			,asso("described by", "Activity Attribute", {103})
+			,asso("assigned to", "Team Member", {106})
+			,asso("previous", "Milestone", {110})
+			,asso("previous", "Milestone", {110})
+			,asso("depends on", "Activity relation", {113})
 		], {43})[@alternativeNames={"Schedule activity"}],
 	specialisation("Action", "Process", {43}),
+	
+	class("Activity relation", [attr("mandatory", {112})], {113}),
 	
 	class("Activity sequence", [], [asso("sequence", "Activity", {60})], {60}),
 	class("Activity resource", [attr("is estimation", {61})], {61, 94}),
@@ -177,6 +197,7 @@ public DomainModel project = {
 	
 	class("Activity Attribute", [attr("name", {103}), attr("value", {103})], {103}),
 	
+	class("Team Member", {106}),
 	// what is difference between this and project plan?
 	class("Project schedule",
 		[
@@ -194,6 +215,7 @@ public DomainModel project = {
 		],
 		[
 			asso("contains", "Activity sequence", {93})
+			,asso("dependens on", "Activity relation", {116})
 		], {93})
 	// relation between these plans an the project plan?
 	,class("Human Resource Plan",
@@ -252,4 +274,25 @@ public DomainModel project = {
 			,asso("constists of", "Activity", {99})
 		], {83})
 	,class("Planned work", {83})
+	
+	,class("Resource calendar",
+		[],
+		[
+			asso("available", "Resource", {118, 119})[@class="Resource calendar availability"]
+		], {118})
+	,class("Resource calendar availability", 
+		[
+			attr("when")
+			,attr("how long")
+		], {119})
+		
+	,class("Composite resource calendar", [],
+		[
+			asso("available", "People", {120})[@class="Composite resouce calendar availability"]
+		], {120})
+	,class("Composite resouce calendar availability",
+		[
+			attr("capabilities")
+			,attr("skills")
+		], {120})
 };
