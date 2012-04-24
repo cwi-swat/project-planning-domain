@@ -110,7 +110,7 @@ public DomainModel project = {
 	specialisation("Supplies", "Resource", {61}),
 	
 	
-	class("Schedule baseline", {97}),
+	class("Schedule baseline", [], [asso("based on", "Project schedule", {135})],{97}),
 	class("Schedule data", {97}),
 	
 
@@ -186,8 +186,9 @@ public DomainModel project = {
 	class("Activity relation", [attr("mandatory", {112})], {113}),
 	
 	class("Activity sequence", [], [asso("sequence", "Activity", {60})], {60}),
-	class("Activity resource", [attr("is estimation", {61})], {61, 94}),
+	class("Activity resource", [attr("is estimation", {61}), attr("quantity", {123})], {61, 94}),
 	class("Activity duration", [attr("is estimation", {62}), attr("duration", {62})], {62, 95}),
+	// how about activity durations and resources? these are collections of all the durations per activity
 	
 	class("Activity template", {90}),
 	class("Activity list", [],
@@ -208,7 +209,12 @@ public DomainModel project = {
 			asso("based on", "Activity duration", {63}),
 			asso("based on", "Activity resource", {63}),
 			asso("based on", "Schedule", {63})
+			,asso("schedules", "Milestone", {130})[@class="Schedule Dates"]
+			,asso("schedules", "Activity", {130})[@class="Schedule Dates"]
+			,asso("previous version", "Project schedule", {135})
 		], {63})
+	
+	,class("Schedule Dates", [attr("begin"), attr("end")], {130})
 		
 	,class("Project schedule network diagram",
 		[
@@ -284,8 +290,11 @@ public DomainModel project = {
 		[
 			attr("when")
 			,attr("how long")
+			,attr("type", {126})
+			,attr("capabilities", {126})
 		], {119})
 		
+		// these composite resource calendars are not mentioned for the rest of the book?
 	,class("Composite resource calendar", [],
 		[
 			asso("available", "People", {120})[@class="Composite resouce calendar availability"]
