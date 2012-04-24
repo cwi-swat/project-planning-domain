@@ -111,7 +111,11 @@ public DomainModel project = {
 	
 	
 	class("Schedule baseline", [], [asso("based on", "Project schedule", {135})],{97}),
-	class("Schedule data", {97}),
+	class("Schedule data", [], 
+		[
+			asso("requires", "Activity resource", {137})
+			,asso("alternatives", "Project schedule", {137})
+		], {97}),
 	
 
 	class("Project plan",
@@ -212,7 +216,10 @@ public DomainModel project = {
 			,asso("schedules", "Milestone", {130})[@class="Schedule Dates"]
 			,asso("schedules", "Activity", {130})[@class="Schedule Dates"]
 			,asso("previous version", "Project schedule", {135})
+			,asso("includes", "Documentation", {136})
 		], {63})
+	
+	,class("Documentation", {136})
 	
 	,class("Schedule Dates", [attr("begin"), attr("end")], {130})
 		
@@ -231,10 +238,12 @@ public DomainModel project = {
 			,attr("required skills")
 			,attr("reporting relationships")
 			,attr("staffing management plan")
+			,attr("authority", {145})
+			,attr("training needs", {145})
 		],
 		[
-		
-		], {67})
+			asso("plans", "Resource calendar", {145})
+		], {67, 142})
 		
 	,class("Communications plan", [ attr("strategy")], {68})
 	,class("Risk management plan", [], [asso("manages", "Risk",{69})], {69})
