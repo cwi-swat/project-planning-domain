@@ -35,11 +35,18 @@ private str toGraphviz(DomainModel model) {
 	}
 	
 	str getAssocation(str from, str to, str label) {
-		return "";	
+		return "<shortName[from]> -\> <shortName[to]> [label=\"<label>\", dir=\"none\"];";	
 	}
 	
+	int assocLabelCount = 0;	
 	str getAssocation(str from, str to, str label, str asso) {
-		return "";	
+		str assocLabel = "ac<assocLabelCount>";
+		shortName[assocLabel] = assocLabel;
+		assocLabelCount += 1;
+		return "<assocLabel> [label=\"\", style=\"invis\", fixedsize=\"true\", width=\"0\", height=\"0\"];
+			'<getAssocation(from, assocLabel, "")>
+			'<getAssocation(assocLabel, to, "")>
+		 	'<assocLabel> -\> <shortName[asso]> [label=\"<label>\", dir=\"none\", style=\"dashed\"]";	
 	}
 	str getSpecialisation(Class sp) {
 		return "";	
