@@ -44,7 +44,7 @@ private str toGraphviz(DomainModel model) {
 		shortName[assocLabel] = assocLabel;
 		assocLabelCount += 1;
 		return "<assocLabel> [label=\"\", style=\"invis\", fixedsize=\"true\", width=\"0\", height=\"0\"];
-			'<getAssocation(from, assocLabel, "")>
+			'<getAssocation(from, assocLabel, label)>
 			'<getAssocation(assocLabel, to, "")>
 		 	'<assocLabel> -\> <shortName[asso]> [label=\"<label>\", dir=\"none\", style=\"dashed\"]";	
 	}
