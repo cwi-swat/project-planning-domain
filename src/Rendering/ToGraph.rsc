@@ -51,8 +51,8 @@ public Figure diamond(int side,FProperty props...){
 }
 
 public void renderGraph(DomainModel dom) {
-	nodes = [ getNode2(c)  | c <- dom];
-	edges = [*[edge(c.name, asoc.otherClass, fromArrow(diamond(10)), label(text(asoc.label))) | asoc <- c.assocations, c.name != asoc.otherClass] | c <- dom];
+	nodes = [ getNode(c)  | c <- dom];
+	edges = [*[edge(c.name, asoc.otherClass, label(text(asoc.label))) | asoc <- c.assocations, c.name != asoc.otherClass] | c <- dom];
 	//edges = [*[edge(c.name, asoc.otherClass, fromArrow(diamond(10))) | asoc <- c.assocations] | c <- dom];
 	edges += [edge(sp.name, sp.baseClass, toArrow(triangle(10))) | sp:specialisation(_,_,_,_) <- dom];
     render(graph(nodes, edges, size(600),gap(40), hint("layered")));
