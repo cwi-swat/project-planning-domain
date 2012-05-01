@@ -58,6 +58,7 @@ private str toGraphviz(DomainModel model) {
 	'	node [fontname=\"Helvetica\",fontsize=10,shape=plaintext];
 	'	nodesep=0.25;
 	'	ranksep=0.5;
+	'	rankdir=BT;
 	'	<for (Class c <- model) {>
 		'	<getClass(c)>
 	'	<}>
