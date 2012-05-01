@@ -17,7 +17,7 @@ private str table(Class c) {
 	"\<table border=\"0\" cellborder=\"1\" cellspacing=\"0\" cellpadding=\"2\" port=\"p\"\>" 
 		+ "\<tr\>\<td\><c.name>\</td\>\</tr\>"
 		+ (c.attributes == [] ? "" : (
-			"\<tr\>\<td balign=\"left\"\>" + ("+" + head(c.attributes).name | it + "\<br /\>+" + a.name | a <- tail(c.attributes)) + "\</td\>\</tr\>"))
+			"\<tr\>\<td balign=\"left\" align=\"left\"\>" + ("+" + head(c.attributes).name | it + "\<br /\>+" + a.name | a <- tail(c.attributes)) + "\</td\>\</tr\>"))
 	+ "\</table\>";
 }
 
