@@ -49,7 +49,7 @@ private str toGraphviz(DomainModel model) {
 		 	'<assocLabel> -\> <shortName[asso]> [label=\"<label>\", dir=\"none\", style=\"dashed\"]";	
 	}
 	str getSpecialisation(Class sp) {
-		return "";	
+		return "<shortName[sp.name]> -\> <shortName[sp.baseClass]> [arrowhead=\"empty\"];";	
 	}
 	
 	return 
