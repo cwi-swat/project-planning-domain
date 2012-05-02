@@ -43,7 +43,8 @@ private str toGraphviz(DomainModel model) {
 		str assocLabel = "ac<assocLabelCount>";
 		shortName[assocLabel] = assocLabel;
 		assocLabelCount += 1;
-		return "<assocLabel> [label=\"\", style=\"invis\", fixedsize=\"true\", width=\"0\", height=\"0\"];
+		//style=\"invis\", fixedsize=\"true\", width=\"0\", height=\"0\"
+		return "<assocLabel> [label=\"\", shape=\"circle\", width=0.01, height=0.01 ];
 			'<shortName[from]> -\> <assocLabel> [label=\"<label>\", dir=\"none\"];
 			'<assocLabel> -\> <shortName[to]> [label=\"\"];
 		 	'<assocLabel> -\> <shortName[asso]> [label=\"<label>\", dir=\"none\", style=\"dashed\"]";	
@@ -60,6 +61,7 @@ private str toGraphviz(DomainModel model) {
 	'	ranksep=0.5;
 	'	ratio=0.7;
 	'	minlen=2;
+	'	concentrate=true;
 	'	rankdir=BT;
 	'	<for (Class c <- model) {>
 		'	<getClass(c)>
