@@ -61,7 +61,6 @@ private str toGraphviz(DomainModel model) {
 	'	ranksep=0.5;
 	'	ratio=0.7;
 	'	minlen=2;
-	'	concentrate=true;
 	'	rankdir=BT;
 	'	<for (Class c <- model) {>
 		'	<getClass(c)>
