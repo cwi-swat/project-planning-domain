@@ -35,7 +35,7 @@ private str toGraphviz(DomainModel model) {
 	}
 	
 	str getAssocation(str from, str to, str label) {
-		return "<shortName[from]> -\> <shortName[to]> [label=\"<label>\", dir=\"none\"];";	
+		return "<shortName[from]> -\> <shortName[to]> [label=\"<label>\"];";	
 	}
 	
 	int assocLabelCount = 0;	
@@ -44,8 +44,8 @@ private str toGraphviz(DomainModel model) {
 		shortName[assocLabel] = assocLabel;
 		assocLabelCount += 1;
 		return "<assocLabel> [label=\"\", style=\"invis\", fixedsize=\"true\", width=\"0\", height=\"0\"];
-			'<getAssocation(from, assocLabel, label)>
-			'<getAssocation(assocLabel, to, "")>
+			'<shortName[from]> -\> <assocLabel> [label=\"<label>\", dir=\"none\"];
+			'<assocLabel> -\> <shortName[to]> [label=\"\"];
 		 	'<assocLabel> -\> <shortName[asso]> [label=\"<label>\", dir=\"none\", style=\"dashed\"]";	
 	}
 	str getSpecialisation(Class sp) {
