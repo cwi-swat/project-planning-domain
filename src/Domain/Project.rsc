@@ -182,7 +182,7 @@ public DomainModel project = {
 			,asso("described by", "Activity Attribute", {103})
 			,asso("assigned to", "Team Member", {106})
 			,asso("previous", "Milestone", {110})
-			,asso("previous", "Milestone", {110})
+			,asso("next", "Milestone", {110})
 			,asso("depends on", "Activity relation", {113})
 		], {43})[@alternativeNames={"Schedule activity"}],
 	specialisation("Action", "Process", {43}),
@@ -314,3 +314,14 @@ public DomainModel project = {
 			,attr("skills")
 		], {120})
 };
+
+public set[str] ProjectOnly =
+	 {
+	 	"Organisation","Project","Person","Environment","Risk","Equipment","Supplies",
+	 	"Communications plan","External","Budget","Preparing","Life cycle","Protofolio",
+	 	"Deliverable","Quality","Internal","Phase","Main","Constrain","Action",
+	 	"Milestone","Product","Process","Project management","Material","Organizing",
+	 	"Result","Scope","People","Activity","Resource","StakeHolder","Requirement",
+	 	"Documentation","Objective","Closing","Service","Information", "Change request", 
+	 	"Change Control Board", "Approver", "Risk", "Risk management plan", "Project plan"
+	 };
