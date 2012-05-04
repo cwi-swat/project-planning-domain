@@ -4,7 +4,7 @@ import Model::MetaDomain;
 
 
 public DomainModel project = {
-	class("Protofolio", [], [asso("contains", "Project", {16})], {16}),
+	class("Portofolio", [], [asso("contains", "Project", {16})], {16}),
 	class("Environment", [], [asso("influences", "Project")], {20})[@alternativeNames={"Enterprise environment"}],
 	specialisation("Internal", "Environment", {20}),
 	specialisation("External", "Environment", {20}),
@@ -318,7 +318,7 @@ public DomainModel project = {
 public set[str] ProjectOnly =
 	 {
 	 	"Organisation","Project","Person","Environment","Risk","Equipment","Supplies",
-	 	"Communications plan","External","Budget","Preparing","Life cycle","Protofolio",
+	 	"Communications plan","External","Budget","Preparing","Life cycle","Portofolio",
 	 	"Deliverable","Quality","Internal","Phase","Main","Constrain","Action",
 	 	"Milestone","Product","Process","Project management","Material","Organizing",
 	 	"Result","Scope","People","Activity","Resource","StakeHolder","Requirement",
