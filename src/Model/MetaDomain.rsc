@@ -44,3 +44,6 @@ anno set[int] Cardinality@source;
 
 
 alias DomainModel = set[Class];
+
+data DictionaryWord = term(str name, set[int] descriptions);
+alias Dictionary = set[DictionaryWord];

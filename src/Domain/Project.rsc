@@ -325,3 +325,40 @@ public set[str] ProjectOnly =
 	 	"Documentation","Objective","Closing","Service","Information", "Change request", 
 	 	"Change Control Board", "Approver", "Risk", "Risk management plan", "Project plan"
 	 };
+	 
+public Dictionary ProjectDict = {
+	  term("deliverable", {23})
+	, term("activity", {23})
+	, term("project management", {5, 7, 42, 45})
+	, term("costs", {64})
+	, term("budget", {65})
+	, term("quality", {66})
+	, term("procurement", {71})
+	, term("scheduling methodology", {88})
+	, term("lead", {114})
+	, term("lag", {115})
+	, term("activity duration estimates", {127})
+	, term("schedule methods", {132})
+	, term("schedule compression", {133})
+	, term("project schedule", {63, 134})
+	, term("schedule performance index", {140})
+	, term("human resource plan", {67, 144})
+	, term("risk management", {146})
+	, term("project", {1, 2, 3, 4})
+	, term("constrains", {9})
+	, term("project plan", {15})
+	, term("project life cycle", {21, 24})
+	, term("phase", {26, 27, 28, 30, 33})
+	, term("stakeholder", {38})
+	, term("process", {43})
+	, term("requirement", {56})
+	, term("scope", {57})
+	, term("work breakdown structure", {58, 82, 86})
+	, term("activity", {59, 90})
+	, term("sequence activity", {60})
+	, term("activity resources", {61})
+	, term("activity durations", {62})
+	, term("work package", {83, 84})
+	, term("work", {85})
+	
+};
