@@ -48,7 +48,7 @@ public DomainModel project = {
 		], 
 		[
 			asso("priority", "Constrain", oneOrMore(), oneOrMore(), {11}),
-			asso("objective", "Requirement", {56})
+			asso("objective", "Requirement", {39, 56})
 			,asso("needs", "Information", {68})[@class="Communications plan"]
 		],
 		{7}),
@@ -123,7 +123,7 @@ public DomainModel project = {
 			attr("version", {14, 55})
 		],
 		[
-			asso("previous", "Project plan", noneOrMore(), noneOrMore(), {14, 55})
+			asso("previous", "Project plan", noneOrMore(), noneOrMore(), {13, 14, 55})
 		]
 		)
 		[@alternativeNames = {"Project management plan"}],
@@ -215,7 +215,7 @@ public DomainModel project = {
 			asso("based on", "Schedule", {63})
 			,asso("schedules", "Milestone", {130})[@class="Schedule Dates"]
 			,asso("schedules", "Activity", {130})[@class="Schedule Dates"]
-			,asso("previous version", "Project schedule", {135})
+			,asso("previous version", "Project schedule", {128, 135})
 			,asso("includes", "Documentation", {136})
 		], {63})
 	
@@ -334,15 +334,19 @@ public Dictionary ProjectDict = {
 	, term("budget", {65})
 	, term("quality", {66})
 	, term("procurement", {71})
-	, term("scheduling methodology", {88})
-	, term("lead", {114})
-	, term("lag", {115})
+	, term("lead", {114, 111})
+	, term("lag", {115, 111})
 	, term("activity duration estimates", {127})
+	, term("schedule", {97, 130})
+	, term("schedule baseline", {135})
 	, term("schedule methods", {132})
 	, term("schedule compression", {133})
-	, term("project schedule", {63, 134})
+	, term("scheduling methodology", {88, 132})
+	, term("schedule performance review", {139})
 	, term("schedule performance index", {140})
-	, term("human resource plan", {67, 144})
+	, term("project schedule", {63, 134})
+	, term("project schedule diagram", {116})
+	, term("human resource plan", {67, 144,142})
 	, term("risk management", {146})
 	, term("project", {1, 2, 3, 4})
 	, term("constrains", {9})
@@ -354,11 +358,17 @@ public Dictionary ProjectDict = {
 	, term("requirement", {56})
 	, term("scope", {57})
 	, term("work breakdown structure", {58, 82, 86})
-	, term("activity", {59, 90})
+	, term("activity", {59, 90, 112})
 	, term("sequence activity", {60})
-	, term("activity resources", {61})
-	, term("activity durations", {62})
+	, term("activity resources", {61, 123})
+	, term("activity durations", {62, 124})
+	, term("activity duration estimates", {127})
+	, term("activity list", {101})
+	, term("activity attribute", {103})
 	, term("work package", {83, 84})
 	, term("work", {85})
+	, term("project schedule diagram", {94})
+	, term("milestone", {108, 109, 112})
+	, term("resource calendar", {118, 119})
 	
 };
