@@ -372,3 +372,21 @@ public Dictionary ProjectDict = {
 	, term("resource calendar", {118, 119})
 	
 };
+
+public BehaviorRelations ProjectBehavior = {
+	*processActionMultiple("initiate phase", "specify", {"expected", "allowed"}, {34})
+	, actorActivity("requirements", "Planning Process Group", "define", "scope", {47})
+	, *actorActivityMultiple("Planning Process Group", "define", {"activity", "activity sequence", "activity resource", "activity duration", "schedule"}, {48})
+	, *actorActivityMultiple("Planning Process Group", "estimate", {"costs", "budget"}, {49})
+	, actorActivity("Planning Process Group", "plans", "quality", {50})
+	, actorActivity("Planning Process Group", "plans", "communication", {51})
+	, actorActivity("Planning Process Group", "plans", "risk management", {52})
+	, actorActivity("Planning Process Group", "identifies", "risks", {52})
+	, *actorActivityMultiple("Planning Process Group", "performs", {"qualitative analysis", "quantitative analysis"}, {52})
+	, actorActivity("Planning Process Group", "plans", "risk responses", {52})
+	, actorActivity("Planning Process Group", "plans", "procurement", {53})
+};
+
+
+// to solve:
+// - diff between schedule and project schedule and project plan
