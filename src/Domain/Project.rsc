@@ -385,6 +385,15 @@ public BehaviorRelations ProjectBehavior = {
 	, *actorActivityMultiple("Planning Process Group", "performs", {"qualitative analysis", "quantitative analysis"}, {52})
 	, actorActivity("Planning Process Group", "plans", "risk responses", {52})
 	, actorActivity("Planning Process Group", "plans", "procurement", {53})
+	, actorActivity("Planning Process Group", "establish", "scope of the effort", {54})
+	, actorActivity("Planning Process Group", "(re)define", "objectives", {54})
+	, actorActivity("Planning Process Group", "develop", "course of action", {54}) // blergh
+	, *actorActivityMultiple("Project Management", "generates", {"change requests", "work performance information", "project plan updates", "project documentation updates"}, {72})
+	, *actorActivityMultiple("Project Management", "performs", {"quality audit", "quality control measurements"}, {73})
+	, actorActivity("Project Management", "assigns", "staff", {74})
+	, actorActivity("Project Management", "arranges", "resource calendar", {74})
+	, *actorActivityMultiple("Project Management", "develops", {"team competencies", "team interaction", "team environment"}, {75})
+	
 };
 
 
