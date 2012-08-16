@@ -408,7 +408,11 @@ public BehaviorRelations ProjectBehavior = {
 	, processActivity("reality", "control schedule", "improve/adjust", "schedule", {98})
 	, processActivity("control schedule", "generate", "change requests", {98})
 	, processActivity("control schedule", "generate", "performance measurements", {98})
-};
+	, composedOutOf("activity list", {"previous project"}, {100})	, processActivity("activity attributes", "schedule development", "review/revision", "estimates", {107,131})	, composedOutOf("project", {"previous project history"}, {121})
+	, *processActivityMultiple({"estimated work effort", "estimated resources"}, "Estimate Activity Durations", "estimates", "activity durations", {125})
+	, *processActivityMultiple({"activity sequence", "activity durations", "resource requirements", "schedule constraints"}, "Develop Schedule", "develops", "schedule", {129})	, composedOutOf("schedule", {"activity sequence", "activity durations", "resource requirements", "schedule constraints"}, {129})	, processActivity("performance previous tasks", "Control Schedule", "changes", "schedule", {138})	, processActivity("activity resource requirements", "Human resource planning", " determine", "human resources", {143})
+	, processActivity("Risk monitoring", "create", "change requests", {147})
+	, processActivity("Procurement", "create", "change requests", {148})};
 
 
 // to solve:

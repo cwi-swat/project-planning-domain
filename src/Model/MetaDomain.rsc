@@ -62,15 +62,19 @@ public set[Behavior] actorActivityMultiple(str input, str name, str activity, se
 public Behavior actorActivity(str name, str activity, str entity, set[int] source)
 	= actorActivity("", name, activity, entity, source);
 public set[Behavior] actorActivityMultiple(str name, str activity, set[str] entities, set[int] source)
-	= {actorActivity(name, activity, e, source) | e <- entities};
+	= {actorActivity(name, activity, e, source) | e <- entities};	
 public Behavior processActivity(str input, str name, str activity, str entity, set[int] source)
 	= processActivity(input, name, activity, entity)[@source=source];
 public set[Behavior] processActivityMultiple(str input, str name, str activity, set[str] entities, set[int] source)
 	= {processActivity(input, name, activity, e, source) | e <- entities};
+public set[Behavior] processActivityMultiple(set[str] inputs, str name, str activity, set[str] entities, set[int] source)
+	= {*processActivityMultiple(i, name, activity, entities, source) | i <- inputs };
+public set[Behavior] processActivityMultiple(set[str] inputs, str name, str activity, entity, set[int] source)
+	= {processActivity(i, name, activity, entity, source) | i <- inputs };
 public Behavior processActivity(str name, str activity, str entity, set[int] source)
 	= processActivity("", name, activity, entity, source);
 public set[Behavior] processActivityMultiple(str name, str activity, set[str] entities, set[int] source)
-	= {processActivity(name, activity, e, source) | e <- entities};
+	= {processActivity(name, activity, e, source) | e <- entities};	
 public Behavior composedOutOf(str input, str entity, set[str] sourceEntitys, set[int] source)
 	= composedOutOf(input, entity, sourceEntitys)[@source = source];
 public Behavior composedOutOf(str entity, set[str] sourceEntitys, set[int] source)
