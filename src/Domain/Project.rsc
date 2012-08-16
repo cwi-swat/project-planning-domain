@@ -374,7 +374,7 @@ public Dictionary ProjectDict = {
 };
 
 public BehaviorRelations ProjectBehavior = {
-	*processActionMultiple("initiate phase", "specify", {"expected", "allowed"}, {34})
+	*processActivityMultiple("initiate phase", "specify", {"expected", "allowed"}, {34})
 	, processActivity("requirements", "Planning Process Group", "define", "scope", {47})
 	, *processActivityMultiple("Planning Process Group", "define", {"activity", "activity sequence", "activity resource", "activity duration", "schedule"}, {48})
 	, *processActivityMultiple("Planning Process Group", "estimate", {"costs", "budget"}, {49})
