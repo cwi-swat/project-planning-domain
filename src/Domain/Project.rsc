@@ -401,7 +401,13 @@ public BehaviorRelations ProjectBehavior = {
 	, actorActivity("Project Management", "communicate with", "stakeholder", {78})
 	, actorActivity("Project Management", "work with", "stakeholder", {78})
 	, *actorActivityMultiple("Stakeholder", "express", {"needs","issues"}, {78})
-	
+	, *processActivityMultiple("activity definition process", "define", {"activity list", "activity attribute", "milestone list"}, {91}) // blergh
+	, composedOutOf("schedule", {"activity list", "activity attributes", "project schedule network diagrams", 
+		"activity resource requirements", "resource calendars", "activity duration estimates", "project scope statement",
+		"enterprise environmental factors", "organizational process assets"}, {96})
+	, processActivity("reality", "control schedule", "improve/adjust", "schedule", {98})
+	, processActivity("control schedule", "generate", "change requests", {98})
+	, processActivity("control schedule", "generate", "performance measurements", {98})
 };
 
 
