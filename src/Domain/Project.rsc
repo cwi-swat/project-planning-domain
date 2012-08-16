@@ -393,6 +393,14 @@ public BehaviorRelations ProjectBehavior = {
 	, actorActivity("Project Management", "assigns", "staff", {74})
 	, actorActivity("Project Management", "arranges", "resource calendar", {74})
 	, *actorActivityMultiple("Project Management", "develops", {"team competencies", "team interaction", "team environment"}, {75})
+	, actorActivity("Project Management", "track", "team performance", {76})
+	, actorActivity("Project Management", "provide", "feedback", {76})
+	, actorActivity("Project Management", "solve", "issue", {76})
+	, actorActivity("Project Management", "optimize", "project performance", {76})
+	, actorActivity("Project Management", "distrubute", "information", {77}) // to stakeholders? need another kind of activity perhaps?
+	, actorActivity("Project Management", "communicate with", "stakeholder", {78})
+	, actorActivity("Project Management", "work with", "stakeholder", {78})
+	, *actorActivityMultiple("Stakeholder", "express", {"needs","issues"}, {78})
 	
 };
 
