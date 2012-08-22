@@ -7,17 +7,13 @@ import Data::Facts;
 import Domain::Project;
 import Model::MetaDomain;
 
-set[int] validSources = {2};
 
 anno set[int] node@source;
 
-public Facts getProjectUnusedFacts() {
+public Facts getUnusedFacts(set[int] validSources, DomainModel model, Dictionary dictionary, BehaviorRelations behavior) {
 	facts = readFacts();
-	usedFacts = { *(x@source) | /node x := project, (x@source)?};	
-	usedFacts += { *(w.descriptions) | DictionaryWord w <- ProjectDict};	
+	usedFacts = { *(x@source) | /node x := model, (x@source)?};	
+	usedFacts += { *(w.descriptions) | DictionaryWord w <- dictionary};	
+	usedFacts += { *(x@source) | /node x := behavior, (x@source)?};	
 	return {x | x:<f,s,_,_> <- facts, s in validSources, !(f in usedFacts)}; 
-}
-
-public void writeUnusedFacts() {
-	writeFacts(getProjectUnusedFacts(), |project://projectdomain/src/unused.csv|);
 }
