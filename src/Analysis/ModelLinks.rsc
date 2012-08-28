@@ -39,22 +39,6 @@ public ConceptLinks getLinkageBetween(DomainModel model, Dictionary dictionary, 
 			}	
 		}
 	}
-	// now join the results
-	concepts = domain(result);
-	oldResult = result;
-	result = {};
-	for (c <- concepts) {
-		cs = oldResult[c];
-		if (size(cs) != 1) {
-			<newcs, cs> = takeOneFrom(cs);	
-			for (ocs <- cs) {
-				newcs[1] = newcs[1] || ocs[1];	
-				newcs[2] = newcs[2] || ocs[2];	
-				newcs[3] = newcs[3] || ocs[3];	
-			}
-			cs = newcs;
-		}
-		result += {<c, cse[0], cse[1], cse[2]> | cse <- cs};	
-	}
-	return result;
+	// now or the synonyms
+	return { <c> + (getOneFrom(result[c]) | <it[0] || o[0], it[1] || o[1], it[2] || o[2] > | o <- result[c]) | c <- domain(result)};
 }
