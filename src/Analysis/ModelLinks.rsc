@@ -15,6 +15,18 @@ anno set[str] node@alternativeNames;
 public ConceptLinks getLinkageBetween(DomainModel model, Dictionary dictionary, BehaviorRelations behavior)
 	= getLinkageBetween(model, dictionary, behavior, false);
 public ConceptLinks getLinkageBetween(DomainModel model, Dictionary dictionary, BehaviorRelations behavior, bool caseInsensitive) {
+	if (caseInsensitive) {
+		// now lets lower case everything to remove even more
+		model = visit(model) {
+			case str s => toLowerCase(s)
+		}
+		dictionary = visit(dictionary) {
+			case str s => toLowerCase(s)
+		}
+		behavior = visit(behavior) {
+			case str s => toLowerCase(s)
+		}
+	}
 	set[str] allConcepts = {};
 	visit (model) {
 		case class(str name, _,_) : allConcepts += {name};
@@ -41,12 +53,6 @@ public ConceptLinks getLinkageBetween(DomainModel model, Dictionary dictionary, 
 					case set[str] s:{normalName, _*} => s + {altName}
 				};
 			}	
-		}
-	}
-	if (caseInsensitive) {
-		// now lets lower case everything to remove even more
-		result = visit(result) {
-			case str s => toLowerCase(s)
 		}
 	}
 	// now or the synonyms
