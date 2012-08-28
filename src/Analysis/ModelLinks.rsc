@@ -12,7 +12,9 @@ alias ConceptLinks = rel[set[str] concept, bool inDomainModel, bool inDictionary
 
 anno set[str] node@alternativeNames;
 
-public ConceptLinks getLinkageBetween(DomainModel model, Dictionary dictionary, BehaviorRelations behavior) {
+public ConceptLinks getLinkageBetween(DomainModel model, Dictionary dictionary, BehaviorRelations behavior)
+	= getLinkageBetween(model, dictionary, behavior, false);
+public ConceptLinks getLinkageBetween(DomainModel model, Dictionary dictionary, BehaviorRelations behavior, bool caseInsensitive) {
 	set[str] allConcepts = {};
 	visit (model) {
 		case class(str name, _,_) : allConcepts += {name};
@@ -41,9 +43,11 @@ public ConceptLinks getLinkageBetween(DomainModel model, Dictionary dictionary, 
 			}	
 		}
 	}
-	// now lets lower case everything to remove even more
-	result = visit(result) {
-		case str s => toLowerCase(s)
+	if (caseInsensitive) {
+		// now lets lower case everything to remove even more
+		result = visit(result) {
+			case str s => toLowerCase(s)
+		}
 	}
 	// now or the synonyms
 	return { <c> + (getOneFrom(result[c]) | <it[0] || o[0], it[1] || o[1], it[2] || o[2] > | o <- result[c]) | c <- domain(result)};
