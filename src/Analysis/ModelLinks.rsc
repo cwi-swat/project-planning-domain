@@ -4,6 +4,7 @@ import IO;
 import Node;
 import Relation;
 import Set;
+import String;
 
 import Model::MetaDomain;
 
@@ -39,6 +40,10 @@ public ConceptLinks getLinkageBetween(DomainModel model, Dictionary dictionary, 
 				};
 			}	
 		}
+	}
+	// now lets lower case everything to remove even more
+	result = visit(result) {
+		case str s => toLowerCase(s)
 	}
 	// now or the synonyms
 	return { <c> + (getOneFrom(result[c]) | <it[0] || o[0], it[1] || o[1], it[2] || o[2] > | o <- result[c]) | c <- domain(result)};
