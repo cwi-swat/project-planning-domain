@@ -35,6 +35,7 @@ public ConceptLinks getLinkageBetween(DomainModel model, Dictionary dictionary, 
 			for (str altName <- n@alternativeNames) {
 				result = visit(result) {
 					case set[str] s:{altName, _*} => s + {normalName}
+					case set[str] s:{normalName, _*} => s + {altName}
 				};
 			}	
 		}
