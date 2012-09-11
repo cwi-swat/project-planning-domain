@@ -1,31 +1,26 @@
 concept;inDomainModel;inDictionary;inBehavior
 action;true;false;false
 activity attribute;true;true;true
-activity attributes;false;false;true
 activity duration estimates;false;true;true
-activity duration;true;false;true
-activity durations;false;true;true
+activity duration;true;true;true
 activity list;true;true;true
 activity relation;true;false;false
-activity resource requirements;false;false;true
-activity resource;true;false;true
-activity resources;false;true;false
-activity sequence;true;false;true
+activity resource requirement;false;false;true
+activity resource;true;true;true
+activity sequence;true;true;true
 activity template;true;false;false
 activity, schedule activity;true;true;true
 allowed;false;false;true
 approver;true;false;false
 budget;true;true;true
 change control board;true;false;false
-change request;true;false;false
-change requests;false;false;true
+change request;true;false;true
 closing;true;false;false
 communication;false;false;true
 communications plan;true;false;false
-composite resouce calendar availability;true;false;false
+composite resource calendar availability;true;false;false
 composite resource calendar;true;false;false
-constrain;true;false;false
-constrains;false;true;false
+constrain;true;true;false
 costs;false;true;true
 course of action;false;false;true
 deliverable;true;true;false
@@ -44,7 +39,6 @@ human resources;false;false;true
 information;true;false;true
 internal;true;false;false
 issue;false;false;true
-issues;false;false;true
 lag;false;true;false
 lead;false;true;false
 life cycle;true;false;false
@@ -53,8 +47,7 @@ material;true;false;false
 milestone list;false;false;true
 milestone;true;true;false
 needs;true;false;true
-objective;true;false;false
-objectives;false;false;true
+objective;true;false;true
 organisation;true;false;false
 organizational process assets;false;false;true
 organizing;true;false;false
@@ -77,10 +70,9 @@ project management plan, project plan;true;true;false
 project management;true;true;true
 project performance;false;false;true
 project plan updates;false;false;true
-project risk, risk;true;false;false
+project risk, risk;true;false;true
 project schedule diagram;false;true;false
-project schedule network diagram;true;false;false
-project schedule network diagrams;false;false;true
+project schedule network diagram;true;false;true
 project schedule;true;true;false
 project scope statement;false;false;true
 project;true;true;true
@@ -90,18 +82,15 @@ quality control measurements;false;false;true
 quality;true;true;true
 quantitative analysis;false;false;true
 reality;false;false;true
-requirement;true;true;false
-requirements;false;false;true
+requirement;true;true;true
 resource calendar availability;true;false;false
 resource calendar;true;true;true
-resource calendars;false;false;true
-resource requirements;false;false;true
+resource requirement;false;false;true
 resource;true;false;false
 result;true;false;false
 risk management plan;true;false;false
 risk management;false;true;true
 risk responses;false;false;true
-risks;false;false;true
 schedule baseline;true;true;false
 schedule compression;false;true;false
 schedule constraints;false;false;true
@@ -112,9 +101,7 @@ schedule performance index;false;true;false
 schedule performance review;false;true;false
 schedule;true;true;true
 scheduling methodology;false;true;false
-scope of the effort;false;false;true
-scope;true;true;true
-sequence activity;false;true;false
+scope, scope of the effort;true;true;true
 service;true;false;false
 staff;false;false;true
 stakeholder;true;true;true

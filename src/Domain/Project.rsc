@@ -80,7 +80,7 @@ public DomainModel project = {
 		[
 			asso("describes", "Project", {57}),
 			asso("describes", "Product", {57})
-		], {9}),
+		], {9})[@alternativeNames={"scope of the effort"}],
 			
 	specialisation("Quality", "Constrain", {9}),
 	specialisation("Schedule", "Constrain", 
@@ -349,7 +349,7 @@ public Dictionary ProjectDict = {
 	, term("human resource plan", {67, 144,142})
 	, term("risk management", {146})
 	, term("project", {1, 2, 3, 4})
-	, term("constrains", {9})
+	, term("constrain", {9})
 	, term("project plan", {15})
 	, term("project life cycle", {21, 24})
 	, term("phase", {26, 27, 28, 30, 33})
@@ -359,9 +359,9 @@ public Dictionary ProjectDict = {
 	, term("scope", {57})
 	, term("work breakdown structure", {58, 82, 86})
 	, term("activity", {59, 90, 112})
-	, term("sequence activity", {60})
-	, term("activity resources", {61, 123})
-	, term("activity durations", {62, 124})
+	, term("activity sequence", {60})
+	, term("activity resource", {61, 123})
+	, term("activity duration", {62, 124})
 	, term("activity duration estimates", {127})
 	, term("activity list", {101})
 	, term("activity attribute", {103})
@@ -375,20 +375,20 @@ public Dictionary ProjectDict = {
 
 public BehaviorRelations ProjectBehavior = {
 	*processActivityMultiple("initiate phase", "specify", {"expected", "allowed"}, {34})
-	, processActivity("requirements", "Planning Process Group", "define", "scope", {47})
+	, processActivity("requirement", "Planning Process Group", "define", "scope", {47})
 	, *processActivityMultiple("Planning Process Group", "define", {"activity", "activity sequence", "activity resource", "activity duration", "schedule"}, {48})
 	, *processActivityMultiple("Planning Process Group", "estimate", {"costs", "budget"}, {49})
 	, processActivity("Planning Process Group", "plans", "quality", {50})
 	, processActivity("Planning Process Group", "plans", "communication", {51})
 	, processActivity("Planning Process Group", "plans", "risk management", {52})
-	, processActivity("Planning Process Group", "identifies", "risks", {52})
+	, processActivity("Planning Process Group", "identifies", "risk", {52})
 	, *processActivityMultiple("Planning Process Group", "performs", {"qualitative analysis", "quantitative analysis"}, {52})
 	, processActivity("Planning Process Group", "plans", "risk responses", {52})
 	, processActivity("Planning Process Group", "plans", "procurement", {53})
 	, processActivity("Planning Process Group", "establish", "scope of the effort", {54})
-	, processActivity("Planning Process Group", "(re)define", "objectives", {54})
+	, processActivity("Planning Process Group", "(re)define", "objective", {54})
 	, processActivity("Planning Process Group", "develop", "course of action", {54}) // blergh
-	, *actorActivityMultiple("Project Management", "generates", {"change requests", "work performance information", "project plan updates", "project documentation updates"}, {72})
+	, *actorActivityMultiple("Project Management", "generates", {"change request", "work performance information", "project plan updates", "project documentation updates"}, {72})
 	, *actorActivityMultiple("Project Management", "performs", {"quality audit", "quality control measurements"}, {73})
 	, actorActivity("Project Management", "assigns", "staff", {74})
 	, actorActivity("Project Management", "arranges", "resource calendar", {74})
@@ -400,19 +400,19 @@ public BehaviorRelations ProjectBehavior = {
 	, actorActivity("Project Management", "distrubute", "information", {77}) // to stakeholders? need another kind of activity perhaps?
 	, actorActivity("Project Management", "communicate with", "stakeholder", {78})
 	, actorActivity("Project Management", "work with", "stakeholder", {78})
-	, *actorActivityMultiple("Stakeholder", "express", {"needs","issues"}, {78})
+	, *actorActivityMultiple("Stakeholder", "express", {"needs","issue"}, {78})
 	, *processActivityMultiple("activity definition process", "define", {"activity list", "activity attribute", "milestone list"}, {91}) // blergh
-	, composedOutOf("schedule", {"activity list", "activity attributes", "project schedule network diagrams", 
-		"activity resource requirements", "resource calendars", "activity duration estimates", "project scope statement",
+	, composedOutOf("schedule", {"activity list", "activity attribute", "project schedule network diagram", 
+		"activity resource requirement", "resource calendar", "activity duration estimates", "project scope statement",
 		"enterprise environmental factors", "organizational process assets"}, {96})
 	, processActivity("reality", "control schedule", "improve/adjust", "schedule", {98})
-	, processActivity("control schedule", "generate", "change requests", {98})
+	, processActivity("control schedule", "generate", "change request", {98})
 	, processActivity("control schedule", "generate", "performance measurements", {98})
-	, composedOutOf("activity list", {"previous project"}, {100})	, processActivity("activity attributes", "schedule development", "review/revision", "estimates", {107,131})	, composedOutOf("project", {"previous project history"}, {121})
-	, *processActivityMultiple({"estimated work effort", "estimated resources"}, "Estimate Activity Durations", "estimates", "activity durations", {125})
-	, *processActivityMultiple({"activity sequence", "activity durations", "resource requirements", "schedule constraints"}, "Develop Schedule", "develops", "schedule", {129})	, composedOutOf("schedule", {"activity sequence", "activity durations", "resource requirements", "schedule constraints"}, {129})	, processActivity("performance previous tasks", "Control Schedule", "changes", "schedule", {138})	, processActivity("activity resource requirements", "Human resource planning", " determine", "human resources", {143})
-	, processActivity("Risk monitoring", "create", "change requests", {147})
-	, processActivity("Procurement", "create", "change requests", {148})};
+	, composedOutOf("activity list", {"previous project"}, {100})	, processActivity("activity attribute", "schedule development", "review/revision", "estimates", {107,131})	, composedOutOf("project", {"previous project history"}, {121})
+	, *processActivityMultiple({"estimated work effort", "estimated resources"}, "Estimate Activity Durations", "estimates", "activity duration", {125})
+	, *processActivityMultiple({"activity sequence", "activity duration", "resource requirement", "schedule constraints"}, "Develop Schedule", "develops", "schedule", {129})	, composedOutOf("schedule", {"activity sequence", "activity duration", "resource requirement", "schedule constraints"}, {129})	, processActivity("performance previous tasks", "Control Schedule", "changes", "schedule", {138})	, processActivity("activity resource requirement", "Human resource planning", " determine", "human resources", {143})
+	, processActivity("Risk monitoring", "create", "change request", {147})
+	, processActivity("Procurement", "create", "change request", {148})};
 
 
 // to solve:
