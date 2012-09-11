@@ -19,6 +19,9 @@ public ConceptLinks getLinkageBetween(DomainModel model, Dictionary dictionary, 
 		// now lets lower case everything to remove even more
 		model = visit(model) {
 			case str s => toLowerCase(s)
+			// strings inside the annotations are not visited
+			case Class c => c[@alternativeNames = {toLowerCase(a) | a <- c@alternativeNames}]
+				when c@alternativeNames?
 		}
 		dictionary = visit(dictionary) {
 			case str s => toLowerCase(s)
