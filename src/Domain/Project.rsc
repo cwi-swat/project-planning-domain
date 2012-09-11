@@ -306,9 +306,9 @@ public DomainModel project = {
 		// these composite resource calendars are not mentioned for the rest of the book?
 	,class("Composite resource calendar", [],
 		[
-			asso("available", "People", {120})[@class="Composite resouce calendar availability"]
+			asso("available", "People", {120})[@class="Composite resource calendar availability"]
 		], {120})
-	,class("Composite resouce calendar availability",
+	,class("Composite resource calendar availability",
 		[
 			attr("capabilities")
 			,attr("skills")
