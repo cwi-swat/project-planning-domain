@@ -4,30 +4,27 @@ activity attribute;true;true;true
 activity duration estimates;false;true;true
 activity duration;true;true;true
 activity list;true;true;true
-activity relation;true;false;false
+activity relation, activity sequence;true;true;true
 activity resource requirement;false;false;true
 activity resource;true;true;true
-activity sequence;true;true;true
 activity template;true;false;false
 activity, schedule activity;true;true;true
-allowed;false;false;true
+allowed result, deliverable, expected result;true;true;true
 approver;true;false;false
 budget;true;true;true
-change control board;true;false;false
+change control board;true;true;true
 change process;false;false;true
 change request;true;false;true
 change;false;false;true
-closing;true;false;false
-communication;false;false;true
-communications plan;true;false;false
+closing, closing phase;true;false;false
+communications plan;true;false;true
 composite resource calendar availability;true;false;false
 composite resource calendar;true;false;false
 constrain;true;true;false
 costs;false;true;true
 course of action;false;false;true
-deliverable;true;true;false
-documentation;true;false;false
-enterprise environment, environment;true;false;false
+documentation, project documentation;true;false;false
+enterprise environment, enterprise environment factors, environment;true;false;false
 enterprise environmental factors;false;false;true
 equipment;true;false;false
 estimate review;false;false;true
@@ -35,18 +32,16 @@ estimate revision;false;false;true
 estimated resources;false;false;true
 estimated work effort;false;false;true
 estimates;false;false;true
-expected;false;false;true
 external;true;false;false
 feedback;false;false;true
-human resource plan;true;true;false
-human resources;false;false;true
+human resource plan;true;true;true
 information;true;false;true
 internal;true;false;false
 issue;false;false;true
 lag;false;true;false
 lead;false;true;false
 life cycle;true;false;false
-main;true;false;false
+main, main phase;true;false;false
 material;true;false;false
 milestone list;false;false;true
 milestone;true;true;false
@@ -54,7 +49,7 @@ needs;true;false;true
 objective;true;false;true
 organisation;true;false;false
 organizational process assets;false;false;true
-organizing;true;false;false
+organizing, organizing phase;true;false;false
 people;true;false;false
 performance measurements;false;false;true
 performance previous tasks;false;false;true
@@ -62,7 +57,7 @@ person;true;false;false
 phase;true;true;false
 planned work;true;false;false
 portofolio;true;false;false
-preparing;true;false;false
+preparing, preparing phase;true;false;false
 previous project history;false;false;true
 previous project;false;false;true
 process;true;true;false

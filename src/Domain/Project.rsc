@@ -5,7 +5,7 @@ import Model::MetaDomain;
 
 public DomainModel project = {
 	class("Portofolio", [], [asso("contains", "Project", {16})], {16}),
-	class("Environment", [], [asso("influences", "Project")], {20})[@alternativeNames={"Enterprise environment"}],
+	class("Environment", [], [asso("influences", "Project")], {20})[@alternativeNames={"Enterprise environment", "Enterprise environment factors"}],
 	specialisation("Internal", "Environment", {20}),
 	specialisation("External", "Environment", {20}),
 	class("Project", 
@@ -147,12 +147,12 @@ public DomainModel project = {
 			asso("following", "Phase", {35,36, 37})
 		], {21}),
 		
-	specialisation("Organizing", "Phase", {26}),
-	specialisation("Preparing", "Phase", {26}),
-	specialisation("Main", "Phase", {27}),
-	specialisation("Closing", "Phase", {28}),
+	specialisation("Organizing", "Phase", {26})[@alternativeNames = {"Organizing phase"}],
+	specialisation("Preparing", "Phase", {26})[@alternativeNames = {"Preparing phase"}],
+	specialisation("Main", "Phase", {27})[@alternativeNames = {"Main phase"}],
+	specialisation("Closing", "Phase", {28})[@alternativeNames = {"Closing phase"}],
 	
-	class("Deliverable", {30}),
+	class("Deliverable", {30})[@alternativeNames = {"expected result", "allowed result"}],
 	
 	class("Process",
 		[
@@ -183,13 +183,11 @@ public DomainModel project = {
 			,asso("assigned to", "Team Member", {106})
 			,asso("previous", "Milestone", {110})
 			,asso("next", "Milestone", {110})
-			,asso("depends on", "Activity relation", {113})
+			,asso("depends on", "Activity sequence", {113})
 		], {43})[@alternativeNames={"Schedule activity"}],
 	specialisation("Action", "Process", {43}),
 	
-	class("Activity relation", [attr("mandatory", {112})], {113}),
-	
-	class("Activity sequence", [], [asso("sequence", "Activity", {60})], {60}),
+	class("Activity sequence", [attr("mandatory", {112})], [asso("sequence", "Activity", {60, 113})], {60})[@alternativeNames = {"Activity relation"}],
 	class("Activity resource", [attr("is estimation", {61}), attr("quantity", {123})], {61, 94}),
 	class("Activity duration", [attr("is estimation", {62}), attr("duration", {62})], {62, 95}),
 	// how about activity durations and resources? these are collections of all the durations per activity
@@ -219,7 +217,7 @@ public DomainModel project = {
 			,asso("includes", "Documentation", {136})
 		], {63})
 	
-	,class("Documentation", {136})
+	,class("Documentation", {136})[@alternativeNames={"Project Documentation"}]
 	
 	,class("Schedule Dates", [attr("begin"), attr("end")], {130})
 		
@@ -228,7 +226,7 @@ public DomainModel project = {
 		],
 		[
 			asso("contains", "Activity sequence", {93})
-			,asso("dependens on", "Activity relation", {116})
+			,asso("dependens on", "Activity sequence", {116})
 		], {93})
 	// relation between these plans an the project plan?
 	,class("Human Resource Plan",
@@ -369,17 +367,17 @@ public Dictionary ProjectDict = {
 	, term("work", {85})
 	, term("project schedule diagram", {94})
 	, term("milestone", {108, 109, 112})
-	, term("resource calendar", {118, 119})
+	, term("resource calendar", {118, 119})	, term("change control board", {80})
 	
 };
 
 public BehaviorRelations ProjectBehavior = {
-	*processActivityMultiple("initiate phase", "specify", {"expected", "allowed"}, {34})
+	*processActivityMultiple("initiate phase", "specify", {"expected result", "allowed result"}, {34})
 	, processActivity("requirement", "Planning Process Group", "define", "scope", {47})
 	, *processActivityMultiple("Planning Process Group", "define", {"activity", "activity sequence", "activity resource", "activity duration", "schedule"}, {48})
 	, *processActivityMultiple("Planning Process Group", "estimate", {"costs", "budget"}, {49})
 	, processActivity("Planning Process Group", "plans", "quality", {50})
-	, processActivity("Planning Process Group", "plans", "communication", {51})
+	, processActivity("Planning Process Group", "plans", "communications plan", {51})
 	, processActivity("Planning Process Group", "plans", "risk management", {52})
 	, processActivity("Planning Process Group", "identifies", "risk", {52})
 	, *processActivityMultiple("Planning Process Group", "performs", {"qualitative analysis", "quantitative analysis"}, {52})
@@ -413,9 +411,9 @@ public BehaviorRelations ProjectBehavior = {
 	, composedOutOf("activity list", {"previous project"}, {100})	, processActivity("activity attribute", "schedule development", "review/revision", "estimates", {107,131})	, composedOutOf("project", {"previous project history"}, {121})
 	, *processActivityMultiple({"estimated work effort", "estimated resources"}, "Estimate Activity Durations", "estimates", "activity duration", {125})
 	, *processActivityMultiple({"activity sequence", "activity duration", "resource requirement", "schedule constraints"}, "Develop Schedule", "develops", "schedule", {129})	, composedOutOf("schedule", {"activity sequence", "activity duration", "resource requirement", "schedule constraints"}, {129})
-	, *processActivityMultiple("Schedule development", "causes", {"estimate review", "estimate revision"}, {131}) 	, processActivity("performance previous tasks", "Control Schedule", "changes", "schedule", {138})	, processActivity("activity resource requirement", "Human resource planning", " determine", "human resources", {143})
+	, *processActivityMultiple("Schedule development", "causes", {"estimate review", "estimate revision"}, {131}) 	, processActivity("performance previous tasks", "Control Schedule", "changes", "schedule", {138})	, processActivity("activity resource requirement", "Human resource planning", " determine", "human resource plan", {143})
 	, processActivity("Risk monitoring", "create", "change request", {147})
-	, processActivity("Procurement", "create", "change request", {148})};
+	, processActivity("Procurement", "create", "change request", {148})	, actorActivity("Change Control Board", "approve/reject", "change request", {80})	, actorActivity("Project Management", "approve/reject", "change request", {80})};
 
 
 // to solve:
