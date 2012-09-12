@@ -388,6 +388,7 @@ public BehaviorRelations ProjectBehavior = {
 	, processActivity("Planning Process Group", "establish", "scope of the effort", {54})
 	, processActivity("Planning Process Group", "(re)define", "objective", {54})
 	, processActivity("Planning Process Group", "develop", "course of action", {54}) // blergh
+	, actorActivity("change", "Project Management","implement", "change process", {17})
 	, *actorActivityMultiple("Project Management", "generates", {"change request", "work performance information", "project plan updates", "project documentation updates"}, {72})
 	, *actorActivityMultiple("Project Management", "performs", {"quality audit", "quality control measurements"}, {73})
 	, actorActivity("Project Management", "assigns", "staff", {74})
@@ -401,6 +402,7 @@ public BehaviorRelations ProjectBehavior = {
 	, actorActivity("Project Management", "communicate with", "stakeholder", {78})
 	, actorActivity("Project Management", "work with", "stakeholder", {78})
 	, *actorActivityMultiple("Stakeholder", "express", {"needs","issue"}, {78})
+	, actorActivity("Stakeholder", "influence", "requirement", {39})
 	, *processActivityMultiple("activity definition process", "define", {"activity list", "activity attribute", "milestone list"}, {91}) // blergh
 	, composedOutOf("schedule", {"activity list", "activity attribute", "project schedule network diagram", 
 		"activity resource requirement", "resource calendar", "activity duration estimates", "project scope statement",
@@ -410,7 +412,8 @@ public BehaviorRelations ProjectBehavior = {
 	, processActivity("control schedule", "generate", "performance measurements", {98})
 	, composedOutOf("activity list", {"previous project"}, {100})	, processActivity("activity attribute", "schedule development", "review/revision", "estimates", {107,131})	, composedOutOf("project", {"previous project history"}, {121})
 	, *processActivityMultiple({"estimated work effort", "estimated resources"}, "Estimate Activity Durations", "estimates", "activity duration", {125})
-	, *processActivityMultiple({"activity sequence", "activity duration", "resource requirement", "schedule constraints"}, "Develop Schedule", "develops", "schedule", {129})	, composedOutOf("schedule", {"activity sequence", "activity duration", "resource requirement", "schedule constraints"}, {129})	, processActivity("performance previous tasks", "Control Schedule", "changes", "schedule", {138})	, processActivity("activity resource requirement", "Human resource planning", " determine", "human resources", {143})
+	, *processActivityMultiple({"activity sequence", "activity duration", "resource requirement", "schedule constraints"}, "Develop Schedule", "develops", "schedule", {129})	, composedOutOf("schedule", {"activity sequence", "activity duration", "resource requirement", "schedule constraints"}, {129})
+	, *processActivityMultiple("Schedule development", "causes", {"estimate review", "estimate revision"}, {131}) 	, processActivity("performance previous tasks", "Control Schedule", "changes", "schedule", {138})	, processActivity("activity resource requirement", "Human resource planning", " determine", "human resources", {143})
 	, processActivity("Risk monitoring", "create", "change request", {147})
 	, processActivity("Procurement", "create", "change request", {148})};
 

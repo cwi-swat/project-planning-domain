@@ -14,7 +14,9 @@ allowed;false;false;true
 approver;true;false;false
 budget;true;true;true
 change control board;true;false;false
+change process;false;false;true
 change request;true;false;true
+change;false;false;true
 closing;true;false;false
 communication;false;false;true
 communications plan;true;false;false
@@ -28,6 +30,8 @@ documentation;true;false;false
 enterprise environment, environment;true;false;false
 enterprise environmental factors;false;false;true
 equipment;true;false;false
+estimate review;false;false;true
+estimate revision;false;false;true
 estimated resources;false;false;true
 estimated work effort;false;false;true
 estimates;false;false;true
