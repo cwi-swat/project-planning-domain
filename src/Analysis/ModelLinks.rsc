@@ -50,10 +50,11 @@ public ConceptLinks getLinkageBetween(DomainModel model, Dictionary dictionary, 
 	// now lets join the synonyms
 	for (n <- model, n@alternativeNames?) {
 		if (str normalName := n[0]) {
+			allNames = normalName + n@alternativeNames;
 			for (str altName <- n@alternativeNames) {
 				result = visit(result) {
-					case set[str] s:{altName, _*} => s + {normalName}
-					case set[str] s:{normalName, _*} => s + {altName}
+					case set[str] s:{altName, _*} => s + allNames
+					case set[str] s:{normalName, _*} => s + allNames
 				};
 			}	
 		}
