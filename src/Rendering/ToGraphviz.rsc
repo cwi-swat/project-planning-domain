@@ -2,7 +2,7 @@ module Rendering::ToGraphviz
 
 import IO;
 import Real;
-import Integer;
+import util::Math;
 import List;
 import Relation;
 import Set;
@@ -161,6 +161,56 @@ private str toGraphviz(DomainModel model) {
 	'	<}>
 	'	<for (sp:specialisation(_,_,_,_) <- model) {>
 		'	<getSpecialisation(sp)>
+	'	<}>
+	'}";
+}
+
+public void renderGraphviz(loc target, BehaviorRelations behavior) {
+	writeFile(target, toGraphviz(behavior));
+}
+
+private str toGraphviz(BehaviorRelations behavior) {
+	set[str] entities = { *{input, name} |n <- behavior, str input := n[0], str name := n[1]};
+	entities += { output |n <- behavior, n[3]?, str output := n[3]};
+	entities += { *sources | n <- behavior, set[str] sources := n[2]};
+	entityList = [*entities];
+	map[str, str] shortName = (entityList[n] : "e<n>" | n <- [0..size(entityList) - 1]);
+	
+	str printBehavior(Behavior b) {
+		if (str input := b[0], str name := b[1], str activity := b[2], str output := b[3]) {
+			//either actorActivity or processActivity
+			str result = "";
+			if (input != "") {
+				result = "<shortName[input]> -\> <shortName[name]>;\n";	
+			}
+			return result + "<shortName[name]> -\> <shortName[output]> [label=\"<activity>\"];";
+		}
+		else if (str input := b[0], str target := b[1], set[str] source := b[2]) {
+			str result = "";
+			if (input != "") {
+				result = "<shortName[input]> -\> <shortName[target]>;\n";	
+			}
+			return result + "<for (s <- source) {>
+					'<shortName[s]> -\><shortName[target]>;
+				'<}>
+				";
+		}
+	}
+	
+	return 
+	"digraph G {
+	'	edge [fontname=\"Helvetica\",fontsize=10,labelfontname=\"Helvetica\",labelfontsize=10];
+	'	node [fontname=\"Helvetica\",fontsize=10,shape=plaintext];
+	'	//nodesep=0.25;
+	'	//ranksep=0.5;
+	'	//ratio=0.7;
+	'	//minlen=2;
+	'	//rankdir=BT;
+	'	<for (e  <- entities) {>
+		'	<shortName[e]> [label=\"<e>\", shape=\"box\"];
+	'	<}>
+	'	<for (b <- behavior) {>
+			<printBehavior(b)>
 	'	<}>
 	'}";
 }
