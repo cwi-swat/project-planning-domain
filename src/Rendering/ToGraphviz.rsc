@@ -181,17 +181,17 @@ private str toGraphviz(BehaviorRelations behavior) {
 			//either actorActivity or processActivity
 			str result = "";
 			if (input != "") {
-				result = "<shortName[input]> -\> <shortName[name]>;\n";	
+				result = "<shortName[input]> -\> <shortName[name]> [style=dashed];\n";	
 			}
 			return result + "<shortName[name]> -\> <shortName[output]> [label=\"<activity>\"];";
 		}
 		else if (str input := b[0], str target := b[1], set[str] source := b[2]) {
 			str result = "";
 			if (input != "") {
-				result = "<shortName[input]> -\> <shortName[target]>;\n";	
+				result = "<shortName[input]> -\> <shortName[target]> [style=dashed];\n";	
 			}
 			return result + "<for (s <- source) {>
-					'<shortName[s]> -\><shortName[target]>;
+					'<shortName[target]> -\> <shortName[s]> [dir=back,arrowtail=empty, style=dotted];
 				'<}>
 				";
 		}
@@ -203,9 +203,9 @@ private str toGraphviz(BehaviorRelations behavior) {
 	'	node [fontname=\"Helvetica\",fontsize=10,shape=plaintext];
 	'	//nodesep=0.25;
 	'	//ranksep=0.5;
-	'	//ratio=0.7;
+	'	ratio=0.9;
 	'	//minlen=2;
-	'	//rankdir=BT;
+	'	rankdir=LR;
 	'	<for (e  <- entities) {>
 		'	<shortName[e]> [label=\"<e>\", shape=\"box\"];
 	'	<}>
