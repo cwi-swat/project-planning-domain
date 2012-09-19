@@ -170,9 +170,9 @@ public void renderGraphviz(loc target, BehaviorRelations behavior) {
 }
 
 private str toGraphviz(BehaviorRelations behavior) {
-	set[str] entities = { *{input, name} |n <- behavior, str input := n[0], str name := n[1]};
-	entities += { output |n <- behavior, n[3]?, str output := n[3]};
-	entities += { *sources | n <- behavior, set[str] sources := n[2]};
+	set[str] entities = { *{"$_$" + input, "<input>$_$<name>"} |n <- behavior, str input := n[0], str name := n[1]};
+	entities += { "$_$" +output |n <- behavior, n[3]?, str output := n[3]};
+	entities += { "$_$" + s | n <- behavior, set[str] sources := n[2], s <- sources};
 	entityList = [*entities];
 	map[str, str] shortName = (entityList[n] : "e<n>" | n <- [0..size(entityList) - 1]);
 	
@@ -181,20 +181,41 @@ private str toGraphviz(BehaviorRelations behavior) {
 			//either actorActivity or processActivity
 			str result = "";
 			if (input != "") {
-				result = "<shortName[input]> -\> <shortName[name]> [style=dashed];\n";	
+				result = "<shortName["$_$" + input]> -\> <shortName[input + "$_$" + name]> [style=dashed];\n";	
 			}
-			return result + "<shortName[name]> -\> <shortName[output]> [label=\"<activity>\"];";
+			return result + "<shortName[input + "$_$" + name]> -\> <shortName["$_$" + output]> [label=\"<activity>\"];";
 		}
 		else if (str input := b[0], str target := b[1], set[str] source := b[2]) {
 			str result = "";
 			if (input != "") {
-				result = "<shortName[input]> -\> <shortName[target]> [style=dashed];\n";	
+				result = "<shortName["$_$" + input]> -\> <shortName[input + "$_$" + target]> [style=dashed];\n";	
 			}
 			return result + "<for (s <- source) {>
-					'<shortName[target]> -\> <shortName[s]> [dir=back,arrowtail=empty, style=dotted];
+					'<shortName[input + "$_$" + target]> -\> <shortName["$_$" + s]> [dir=back,arrowtail=empty, style=dotted];
 				'<}>
 				";
 		}
+	}
+	str getEntity (str entity) {
+		if (/<i:.*>\$_\$<e:.*>/ := entity) {
+			if (i == "" || "$_$<e>" notin shortName) {
+				subClusters = {es |es <- shortName, /\$_\$<e>$/ := es};
+				if (size(subClusters) > 1) {
+					return "subgraph cluster_<shortName[entity]> {
+						' style=invis;
+						'	<for (es <- shortName, /\$_\$<e>$/ := es) {>
+								'	<shortName[es]> [label=\"<e>\", shape=\"box\"];
+						'	<}>
+						}
+						";
+				}
+				else {
+					return "<shortName[entity]> [label=\"<e>\", shape=\"box\"];";
+				}
+			}	
+		}	
+		// not the "root" entity?
+		return "";
 	}
 	
 	return 
@@ -203,11 +224,12 @@ private str toGraphviz(BehaviorRelations behavior) {
 	'	node [fontname=\"Helvetica\",fontsize=10,shape=plaintext];
 	'	//nodesep=0.25;
 	'	//ranksep=0.5;
-	'	ratio=0.9;
+	'	//ratio=0.95;
+	'	ranksep=2.0;
 	'	//minlen=2;
 	'	rankdir=LR;
 	'	<for (e  <- entities) {>
-		'	<shortName[e]> [label=\"<e>\", shape=\"box\"];
+		'	<getEntity(e)>
 	'	<}>
 	'	<for (b <- behavior) {>
 			<printBehavior(b)>
