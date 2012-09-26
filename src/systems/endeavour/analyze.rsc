@@ -1,4 +1,4 @@
-module system::endeavour::analyze
+module systems::endeavour::analyze
 
 import IO;
 import ValueIO;
