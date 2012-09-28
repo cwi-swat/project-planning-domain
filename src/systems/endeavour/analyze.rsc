@@ -4,6 +4,8 @@ import IO;
 import ValueIO;
 import Relation;
 import Set;
+import Map;
+import String;
 import util::FastPrint;
 import util::Resources;
 import lang::java::jdt::JDT;
@@ -22,7 +24,7 @@ public Resource getProjectData() {
 }
 
 public void main() {
-	visualizeDomainLinks();
+	visualizeDomainLinks2();
 }
 
 private list[Id] modelOnly = [package("org"),package("endeavour"),package("mgmt"),package("model")];
@@ -44,6 +46,21 @@ public void visualizeDomainLinks() {
 	render(graph(nodes, edges, size(600), vgap(10), hgap(5), hint("layered")));
 }
 
+public void visualizeDomainLinks2() {
+	proj = getProjectData();
+	domainClasses = { c | <_,c> <- proj@types, entity([*modelOnly,_*]) := c};
+	map[tuple[Entity, Entity], int] domainLinks = ();
+	for( <f,t> <- proj@calls
+		, entity([*cf, method(fname,_,_)]) := f, [*modelOnly,_*] := cf
+		, entity([*ct, method(tname,_,_)]) := t, [*modelOnly,_*] := ct
+		, ct != cf) {
+		domainLinks[<entity(cf), entity(ct)>] ? 0 += 1;		
+	}
+	cScale = 200 / max(range(domainLinks));
+	nodes = [box(text(printable(c)), id(readable(c)), resizable(false)) | c <- domainClasses];
+	edges = [edge(readable(f), readable(t), lineColor(gray(55 + cScale * domainLinks[<f,t>]))) | <f, t> <- domainLinks];
+	render(graph(nodes, edges, size(600), vgap(10), hgap(5), hint("layered")));
+}
 
 public void printDomainMethodsUsed() {
 	proj = getProjectData();
