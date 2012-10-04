@@ -85,13 +85,20 @@ public void visualizeDomainLinks3() {
 	proj = getProjectData();
 	domainClasses = getModelClasses(proj);
 	domainASTs = getModelAst(proj);
-	domainLinks = {<t@javaType, fe> | /t:typeDeclaration(_,_,_,_,_,_,_, b) <- domainASTs,
+	domainLinks = {<t@javaType, ft@javaType> | /t:typeDeclaration(_,_,_,_,_,_,_, b) <- domainASTs,
 		t@javaType in domainClasses,
 		f:fieldDeclaration(_,_,ft,_) <- b,  
-		((ft.typeOfParam?) && Entity fe := (ft.typeOfParam)@javaType) || Entity fe := ft@javaType,
-		fe in domainClasses};
+		ft@javaType in domainClasses};
+	// now add the relations in generic classes
+	domainLinks += {<t@javaType, fe@javaType> | /t:typeDeclaration(_,_,_,_,_,_,_, b) <- domainASTs,
+		t@javaType in domainClasses,
+		f:fieldDeclaration(_,_,ft,_) <- b,  
+		ft.genericTypes?,
+		fe <- ft.genericTypes,
+		fe@javaType in domainClasses};
 	nodes = [box(text(printable(c)), id(readable(c)), resizable(false)) | c <- domainClasses];
 	edges = [edge(readable(f), readable(t)) | <f, t> <- domainLinks];
+	
 	render(graph(nodes, edges, size(1000), vgap(10), hgap(5), hint("layered")));
 }
 public void printDomainMethodsUsed() {
