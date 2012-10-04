@@ -85,17 +85,17 @@ public void visualizeDomainLinks3() {
 	proj = getProjectData();
 	domainClasses = getModelClasses(proj);
 	domainASTs = getModelAst(proj);
-	domainLinks = {<t@javaType, ft@javaType> | /t:typeDeclaration(_,_,_,_,_,_,_, b) <- domainASTs,
-		t@javaType in domainClasses,
-		f:fieldDeclaration(_,_,ft,_) <- b,  
-		ft@javaType in domainClasses};
-	// now add the relations in generic classes
-	domainLinks += {<t@javaType, fe@javaType> | /t:typeDeclaration(_,_,_,_,_,_,_, b) <- domainASTs,
-		t@javaType in domainClasses,
-		f:fieldDeclaration(_,_,ft,_) <- b,  
-		ft.genericTypes?,
-		fe <- ft.genericTypes,
-		fe@javaType in domainClasses};
+	rel[Entity, Entity] domainLinks = {};
+	for (/t:typeDeclaration(_,_,_,_,_,_,_, b) <- domainASTs, 
+			t@javaType in domainClasses,
+			f:fieldDeclaration(_,_,ft,_) <- b) {
+		if (ft.genericTypes?) {
+			domainLinks += {<t@javaType, fe@javaType> | fe <- ft.genericTypes, fe@javaType in domainClasses};
+		}
+		else if (ft@javaType in domainClasses) {
+			domainLinks += {<t@javaType, ft@javaType>};	
+		}		
+	}
 	nodes = [box(text(printable(c)), id(readable(c)), resizable(false)) | c <- domainClasses];
 	edges = [edge(readable(f), readable(t)) | <f, t> <- domainLinks];
 	
