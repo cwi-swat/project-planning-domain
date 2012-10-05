@@ -6,6 +6,7 @@ import Relation;
 import Set;
 import Map;
 import String;
+import List;
 import util::FastPrint;
 import util::Resources;
 import lang::java::jdt::JDT;
@@ -113,29 +114,35 @@ public void writeFirstModel(loc targetFile) {
 	first = true;
 	str sep() { if(first) { first = false; return ""; } else { return ", "; } }
 	str reset() { first= true; return ""; }
-	writeFile(targetFile, removeNewLines("module X
+	classes = for(d <- domainClasses) {
+			str cl = "class(<quoted(printable(d))>,\n";
+			attrs = for(t <- entToAst[d], f:fieldDeclaration(_,_,ft, n) <- t.bodyDeclarations, ft@javaType notin domainClasses, nf <- n, nf.name?, toUpperCase(nf.name) != nf.name) {
+				append "attr(<quoted(nf.name)>, <f@location>)";
+			};
+			attrs = sort(attrs);
+			cl += "\t[\n\t\t" + intercalate("\n\t\t, ", attrs) + "\n\t],\n";
+			list[str] assos = [];
+			for(t <- entToAst[d], f:fieldDeclaration(_,_,ft, n) <- t.bodyDeclarations, nf <- n, nf.name?, toUpperCase(nf.name) != nf.name) {
+				if (ft.genericTypes?) {
+					for (fe <- ft.genericTypes, fe@javaType in domainClasses) {
+						assos += ["attr(<quoted(nf.name)>, <quoted(printable(fe@javaType))>, <f@location>)"];
+					}
+				}
+				if (ft@javaType in domainClasses) {
+					 assos += ["asso(<quoted(nf.name)>, <quoted(printable(ft@javaType))>, <f@location>)"];
+				}
+			}
+			assos = sort(assos);
+			cl += "\t[\n\t\t" + intercalate("\n\t\t, ", assos) + "\n\t],\n";
+			cl += "\t<getOneFrom(entToAst[d])@location>\n\t)";
+			append cl;
+	};
+	classes = sort(classes);	
+	writeFile(targetFile, "module X
 		'import Model::MetaDomain;
 		'DomainModel endeavour = {
-		'	<for(d <- domainClasses) {> 
-			'	class(<quoted(printable(d))>, <reset()>
-			'		[<for(t <- entToAst[d], f:fieldDeclaration(_,_,ft, n) <- t.bodyDeclarations, ft@javaType notin domainClasses, nf <- n, nf.name?, toUpperCase(nf.name) != nf.name) {>
-				'		<sep()> asso(<quoted(nf.name)>, <f@location>)
-			'		<}>], <reset()>
-			'		[<for(t <- entToAst[d], f:fieldDeclaration(_,_,ft, n) <- t.bodyDeclarations, nf <- n, nf.name?, toUpperCase(nf.name) != nf.name) {>
-				'		<if (ft.genericTypes?) {>
-					'		<for (fe <- ft.genericTypes, fe@javaType in domainClasses) {>
-						'		<sep()> attr(<quoted(nf.name)>,  <quoted(printable(fe@javaType))>, <f@location>)
-					'		<}>
-				'		<}>
-				'		<if (ft@javaType in domainClasses) {>
-					'		<sep()> attr(<quoted(nf.name)>,  <quoted(printable(ft@javaType))>,<f@location>)
-				'		<}>
-			'		<}>],
-			'		<getOneFrom(entToAst[d])@location.path>
-			'		),
-		'	<}>
-		'};
-		"));
+		'	<intercalate("\n, ", classes)>
+		'};");
 }
 
 public void printDomainMethodsUsed() {
