@@ -118,10 +118,10 @@ public void writeFirstModel(loc targetFile) {
 		'DomainModel endeavour = {
 		'	<for(d <- domainClasses) {> 
 			'	class(<quoted(printable(d))>, <reset()>
-			'		[<for(t <- entToAst[d], f:fieldDeclaration(_,_,ft, n) <- t.bodyDeclarations, ft@javaType notin domainClasses, nf <- n, nf.name?) {>
+			'		[<for(t <- entToAst[d], f:fieldDeclaration(_,_,ft, n) <- t.bodyDeclarations, ft@javaType notin domainClasses, nf <- n, nf.name?, toUpperCase(nf.name) != nf.name) {>
 				'		<sep()> asso(<quoted(nf.name)>, <f@location>)
 			'		<}>], <reset()>
-			'		[<for(t <- entToAst[d], f:fieldDeclaration(_,_,ft, n) <- t.bodyDeclarations, nf <- n, nf.name?) {>
+			'		[<for(t <- entToAst[d], f:fieldDeclaration(_,_,ft, n) <- t.bodyDeclarations, nf <- n, nf.name?, toUpperCase(nf.name) != nf.name) {>
 				'		<if (ft.genericTypes?) {>
 					'		<for (fe <- ft.genericTypes, fe@javaType in domainClasses) {>
 						'		<sep()> attr(<quoted(nf.name)>,  <quoted(printable(fe@javaType))>, <f@location>)
@@ -131,7 +131,7 @@ public void writeFirstModel(loc targetFile) {
 					'		<sep()> attr(<quoted(nf.name)>,  <quoted(printable(ft@javaType))>,<f@location>)
 				'		<}>
 			'		<}>],
-			'		<getOneFrom(invert(proj@types)[d])>
+			'		<getOneFrom(entToAst[d])@location.path>
 			'		),
 		'	<}>
 		'};
