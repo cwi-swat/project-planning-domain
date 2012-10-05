@@ -101,6 +101,52 @@ public void visualizeDomainLinks3() {
 	
 	render(graph(nodes, edges, size(1000), vgap(10), hgap(5), hint("layered")));
 }
+str quoted(str inp) = "\"" + inp + "\"";
+
+public void writeFirstModel(loc targetFile) {
+	proj = getProjectData();
+	domainClasses = getModelClasses(proj);
+	domainASTs = getModelAst(proj);
+	rel[Entity, Entity, loc] domainLinks = {};
+	for (/t:typeDeclaration(_,_,_,_,_,_,_, b) <- domainASTs, 
+			t@javaType in domainClasses,
+			f:fieldDeclaration(_,_,ft,_) <- b) {
+		if (ft.genericTypes?) {
+			domainLinks += {<t@javaType, fe@javaType,f@location> | fe <- ft.genericTypes, fe@javaType in domainClasses};
+		}
+		else if (ft@javaType in domainClasses) {
+			domainLinks += {<t@javaType, ft@javaType, f@location>};	
+		}
+	}
+	rel[Entity, AstNode] entToAst = {<e, t> | e <- domainClasses, /t:typeDeclaration(_,_,_,_,_,_,_,_) <- domainASTs, t@javaType?, t@javaType == e};
+	first = true;
+	str sep() { if(first) { first = false; return ""; } else { return ", "; } }
+	str reset() { first= true; return ""; }
+	writeFile(targetFile, "module X
+		'import Model::MetaDomain;
+		'DomainModel endeavour = {
+		'	<for(d <- domainClasses) {>
+			'	class(<quoted(printable(d))>, <reset()>
+			'		[<for(t <- entToAst[d], f:fieldDeclaration(_,_,ft, n) <- t.bodyDeclarations, ft@javaType notin domainClasses, nf <- n, nf.name?) {>
+				'		<sep()> asso(<quoted(nf.name)>, <f@location>)
+			'		<}>], <reset()>
+			'		[<for(t <- entToAst[d], f:fieldDeclaration(_,_,ft, n) <- t.bodyDeclarations, nf <- n, nf.name?) {>
+				'		<if (ft.genericTypes?) {>
+					'		<for (fe <- ft.genericTypes, fe@javaType in domainClasses) {>
+						'		<sep()> attr(<quoted(n.name)>,  <quoted(printable(fe@javaType))>, <f@location>)
+					'		<}>
+				'		<}>
+				'		<if (ft@javaType in domainClasses) {>
+					'		<sep()> attr(<quoted(n.name)>,  <quoted(printable(ft@javaType))>,<f@location>)
+				'		<}>
+			'		<}>],
+			'		
+			
+		'	<}>
+		'}
+		");
+}
+
 public void printDomainMethodsUsed() {
 	proj = getProjectData();
 	domainMethods = { m | <l, m> <- proj@declaredMethods, entity([*modelOnly,_*]) := m};
