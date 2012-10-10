@@ -14,6 +14,8 @@ import lang::java::jdt::Java;
 import lang::java::jdt::JavaADT;
 import vis::Figure;
 import vis::Render;
+import util::IDE;
+import util::Clipboard;
 
 public Resource getProjectData() {
 	cache = |rascal:///endeavour.cache|;
@@ -154,4 +156,13 @@ public void printDomainMethodsUsed() {
 		for (c <- incomingCalls[m]) 
 			println("\t" + readable(c));
 	}
+}
+
+
+public void prepareJavaEditor() {
+	registerNonRascalContributions("org.eclipse.jdt.ui.CompilationUnitEditor", {
+		popup(action("Copy location", void (str selected, loc filePos) {
+			copy(filePos);
+		}))
+	});
 }
