@@ -127,7 +127,7 @@ public void writeFirstModel(loc targetFile) {
 			for(t <- entToAst[d], f:fieldDeclaration(_,_,ft, n) <- t.bodyDeclarations, nf <- n, nf.name?, toUpperCase(nf.name) != nf.name) {
 				if (ft.genericTypes?) {
 					for (fe <- ft.genericTypes, fe@javaType in domainClasses) {
-						assos += ["attr(<quoted(nf.name)>, <quoted(printable(fe@javaType))>, <f@location>)"];
+						assos += ["asso(<quoted(nf.name)>, <quoted(printable(fe@javaType))>, <f@location>)"];
 					}
 				}
 				if (ft@javaType in domainClasses) {

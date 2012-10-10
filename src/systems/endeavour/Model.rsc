@@ -10,7 +10,7 @@ DomainModel endeavour = {
 		],
 		[
 			asso("belongs to", "Project", {|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Actor.java|(1393,31,<36,1>,<36,31>), |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Actor.java|(1857,0,<61,0>,<61,0>)})
-			, attr("assigned to", "UseCase", {|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Actor.java|(1353,37,<35,1>,<35,37>),|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Actor.java|(4630,0,<167,0>,<167,0>)})
+			, asso("assigned to", "UseCase", {|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Actor.java|(1353,37,<35,1>,<35,37>),|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Actor.java|(4630,0,<167,0>,<167,0>)})
 		],
 		|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Actor.java|(1203,4013,<30,0>,<190,0>)
 		)
@@ -42,13 +42,13 @@ DomainModel endeavour = {
 			, attr("text", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Comment.java|(1373,27,<37,1>,<37,27>))
 		],
 		[
-			asso("testCase", "TestCase", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Comment.java|(1505,33,<41,1>,<41,33>))
-			, asso("testRun", "TestRun", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Comment.java|(1541,31,<42,1>,<42,31>))
-			, asso("workProduct", "WorkProduct", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Comment.java|(1463,39,<40,1>,<40,39>))
+			asso("for", "TestCase", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Comment.java|(1505,33,<41,1>,<41,33>))
+			, asso("during", "TestRun", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Comment.java|(1541,31,<42,1>,<42,31>))
+			, asso("on", "WorkProduct", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Comment.java|(1463,39,<40,1>,<40,39>))
 		],
 		|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Comment.java|(1179,2911,<30,0>,<159,0>)
 		)
-	, class("Defect",
+	, specialisation("Defect", "WorkProduct",
 		[
 			
 		],
@@ -73,28 +73,26 @@ DomainModel endeavour = {
 			attr("description", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Document.java|(1292,34,<33,1>,<33,34>))
 			, attr("fileName", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Document.java|(1329,31,<34,1>,<34,31>))
 			, attr("id", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Document.java|(1263,26,<32,1>,<32,26>))
-			, attr("versions", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Document.java|(1397,38,<36,1>,<36,38>))
-			, attr("workProducts", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Document.java|(1438,45,<37,1>,<37,45>))
 		],
 		[
-			asso("project", "Project", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Document.java|(1363,31,<35,1>,<35,31>))
+			asso("part of", "Project", {|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Document.java|(1363,31,<35,1>,<35,31>), |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Document.java|(3056,0,<106,0>,<106,0>)})
 			, attr("versions", "Version", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Document.java|(1397,38,<36,1>,<36,38>))
-			, attr("workProducts", "WorkProduct", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Document.java|(1438,45,<37,1>,<37,45>))
+			, attr("current", "Version", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Document.java|(6722,0,<230,0>,<230,0>))
+			, attr("assigned to", "WorkProduct", {|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Document.java|(1438,45,<37,1>,<37,45>), |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Document.java|(5492,0,<190,0>,<190,0>)})
 		],
 		|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Document.java|(1203,6202,<30,0>,<258,0>)
 		)
 	, class("Event",
 		[
-			attr("extensions", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Event.java|(1243,38,<33,1>,<33,38>))
-			, attr("id", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Event.java|(1153,26,<30,1>,<30,26>))
+			attr("id", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Event.java|(1153,26,<30,1>,<30,26>))
 			, attr("index", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Event.java|(1182,28,<31,1>,<31,28>))
 			, attr("text", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Event.java|(1213,27,<32,1>,<32,27>))
 		],
 		[
-			asso("parentEvent", "Event", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Event.java|(1284,33,<34,1>,<34,33>))
+			asso("parent", "Event", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Event.java|(1284,33,<34,1>,<34,33>))
 			, asso("testCase", "TestCase", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Event.java|(1362,33,<36,1>,<36,33>))
 			, asso("workProduct", "WorkProduct", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Event.java|(1320,39,<35,1>,<35,39>))
-			, attr("extensions", "Event", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Event.java|(1243,38,<33,1>,<33,38>))
+			, asso("extensions", "Event", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Event.java|(1243,38,<33,1>,<33,38>))
 		],
 		|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Event.java|(1128,2735,<28,0>,<149,0>)
 		)
@@ -106,40 +104,22 @@ DomainModel endeavour = {
 			, attr("name", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/GlossaryTerm.java|(1214,27,<31,1>,<31,27>))
 		],
 		[
-			asso("project", "Project", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/GlossaryTerm.java|(1316,31,<34,1>,<34,31>))
+			asso("for", "Project", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/GlossaryTerm.java|(1316,31,<34,1>,<34,31>))
 		],
 		|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/GlossaryTerm.java|(1153,2867,<28,0>,<144,0>)
-		)
-	, class("IPlanElement",
-		[
-			
-		],
-		[
-			
-		],
-		|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/IPlanElement.java|(945,229,<23,0>,<36,0>)
-		)
-	, class("ITestPlanElement",
-		[
-			
-		],
-		[
-			
-		],
-		|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/ITestPlanElement.java|(917,165,<20,0>,<29,0>)
 		)
 	, class("Iteration",
 		[
 			attr("createdBy", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Iteration.java|(1357,32,<35,1>,<35,32>))
+			, attr("startDate", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Iteration.java|(1426,30,<37,1>,<37,30>))
 			, attr("endDate", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Iteration.java|(1459,28,<38,1>,<38,28>))
 			, attr("id", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Iteration.java|(1298,26,<33,1>,<33,26>))
 			, attr("name", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Iteration.java|(1327,27,<34,1>,<34,27>))
-			, attr("startDate", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Iteration.java|(1426,30,<37,1>,<37,30>))
-			, attr("workProducts", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Iteration.java|(1490,46,<39,1>,<39,46>))
+			, attr("progress", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Iteration.java|(7071,0,<239,0>,<239,0>))
 		],
 		[
 			asso("project", "Project", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Iteration.java|(1392,31,<36,1>,<36,31>))
-			, attr("workProducts", "WorkProduct", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Iteration.java|(1490,46,<39,1>,<39,46>))
+			, asso("workProducts", "WorkProduct", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Iteration.java|(1490,46,<39,1>,<39,46>))
 		],
 		|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Iteration.java|(1213,6644,<30,0>,<266,0>)
 		)
@@ -155,42 +135,25 @@ DomainModel endeavour = {
 		)
 	, class("Project",
 		[
-			attr("actors", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1778,34,<47,1>,<47,34>))
-			, attr("createdBy", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1563,32,<42,1>,<42,32>))
+			attr("createdBy", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1563,32,<42,1>,<42,32>))
 			, attr("description", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1430,34,<38,1>,<38,34>))
-			, attr("documents", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1735,40,<46,1>,<46,40>))
-			, attr("endDate", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1500,28,<40,1>,<40,28>))
-			, attr("glossaryTerms", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1815,48,<48,1>,<48,48>))
-			, attr("id", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1371,26,<36,1>,<36,26>))
-			, attr("iterations", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1598,42,<43,1>,<43,42>))
-			, attr("name", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1400,27,<37,1>,<37,27>))
-			, attr("projectMembers", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1909,49,<50,1>,<50,49>))
 			, attr("startDate", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1467,30,<39,1>,<39,30>))
+			, attr("endDate", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1500,28,<40,1>,<40,28>))
+			, attr("id", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1371,26,<36,1>,<36,26>))
+			, attr("name", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1400,27,<37,1>,<37,27>))
 			, attr("status", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1531,29,<41,1>,<41,29>))
-			, attr("testCases", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1692,40,<45,1>,<45,40>))
-			, attr("testPlans", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1866,40,<49,1>,<49,40>))
-			, attr("workProducts", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1643,46,<44,1>,<44,46>))
 		],
 		[
-			attr("actors", "Actor", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1778,34,<47,1>,<47,34>))
-			, attr("documents", "Document", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1735,40,<46,1>,<46,40>))
-			, attr("glossaryTerms", "GlossaryTerm", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1815,48,<48,1>,<48,48>))
-			, attr("iterations", "Iteration", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1598,42,<43,1>,<43,42>))
-			, attr("projectMembers", "ProjectMember", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1909,49,<50,1>,<50,49>))
-			, attr("testCases", "TestCase", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1692,40,<45,1>,<45,40>))
-			, attr("testPlans", "TestPlan", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1866,40,<49,1>,<49,40>))
-			, attr("workProducts", "WorkProduct", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1643,46,<44,1>,<44,46>))
+			asso("has", "Actor", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1778,34,<47,1>,<47,34>))
+			, asso("has", "Document", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1735,40,<46,1>,<46,40>))
+			, asso("defines", "GlossaryTerm", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1815,48,<48,1>,<48,48>))
+			, asso("contains", "Iteration", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1598,42,<43,1>,<43,42>))
+			, asso("has", "ProjectMember", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1909,49,<50,1>,<50,49>))
+			, asso("has", "TestCase", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1692,40,<45,1>,<45,40>))
+			, asso("has", "TestPlan", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1866,40,<49,1>,<49,40>))
+			, asso("delivers", "WorkProduct", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1643,46,<44,1>,<44,46>))
 		],
 		|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(1288,16886,<33,0>,<634,0>)
-		)
-	, class("Project.IterationsComparator",
-		[
-			
-		],
-		[
-			
-		],
-		|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Project.java|(17840,331,<624,1>,<633,1>)
 		)
 	, class("ProjectMember",
 		[
@@ -199,20 +162,15 @@ DomainModel endeavour = {
 			, attr("firstName", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/ProjectMember.java|(1458,32,<39,1>,<39,32>))
 			, attr("id", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/ProjectMember.java|(1363,26,<36,1>,<36,26>))
 			, attr("lastName", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/ProjectMember.java|(1493,31,<40,1>,<40,31>))
-			, attr("password", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/ProjectMember.java|(1424,31,<38,1>,<38,31>))
-			, attr("projects", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/ProjectMember.java|(1794,37,<48,1>,<48,37>))
 			, attr("role", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/ProjectMember.java|(1559,27,<42,1>,<42,27>))
 			, attr("status", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/ProjectMember.java|(1527,29,<41,1>,<41,29>))
 			, attr("statusDate", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/ProjectMember.java|(1666,31,<45,1>,<45,31>))
-			, attr("testRuns", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/ProjectMember.java|(1834,37,<49,1>,<49,37>))
-			, attr("userId", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/ProjectMember.java|(1392,29,<37,1>,<37,29>))
-			, attr("workProducts", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/ProjectMember.java|(1746,45,<47,1>,<47,45>))
 		],
 		[
 			asso("securityGroup", "SecurityGroup", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/ProjectMember.java|(1700,43,<46,1>,<46,43>))
-			, attr("projects", "Project", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/ProjectMember.java|(1794,37,<48,1>,<48,37>))
-			, attr("testRuns", "TestRun", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/ProjectMember.java|(1834,37,<49,1>,<49,37>))
-			, attr("workProducts", "WorkProduct", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/ProjectMember.java|(1746,45,<47,1>,<47,45>))
+			, asso("projects", "Project", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/ProjectMember.java|(1794,37,<48,1>,<48,37>))
+			, asso("testRuns", "TestRun", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/ProjectMember.java|(1834,37,<49,1>,<49,37>))
+			, asso("workProducts", "WorkProduct", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/ProjectMember.java|(1746,45,<47,1>,<47,45>))
 		],
 		|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/ProjectMember.java|(1293,12811,<34,0>,<484,0>)
 		)
@@ -220,42 +178,36 @@ DomainModel endeavour = {
 		[
 			attr("id", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/SecurityGroup.java|(1302,26,<33,1>,<33,26>))
 			, attr("name", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/SecurityGroup.java|(1331,27,<34,1>,<34,27>))
-			, attr("privileges", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/SecurityGroup.java|(1361,42,<35,1>,<35,42>))
-			, attr("projectMembers", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/SecurityGroup.java|(1406,50,<36,1>,<36,50>))
 		],
 		[
-			attr("privileges", "Privilege", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/SecurityGroup.java|(1361,42,<35,1>,<35,42>))
-			, attr("projectMembers", "ProjectMember", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/SecurityGroup.java|(1406,50,<36,1>,<36,50>))
+			asso("privileges", "Privilege", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/SecurityGroup.java|(1361,42,<35,1>,<35,42>))
+			, asso("projectMembers", "ProjectMember", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/SecurityGroup.java|(1406,50,<36,1>,<36,50>))
 		],
 		|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/SecurityGroup.java|(1237,4407,<30,0>,<189,0>)
 		)
 	, class("Task",
 		[
-			attr("dependencies", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Task.java|(1414,45,<35,1>,<35,45>))
 		],
 		[
 			asso("workProduct", "WorkProduct", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Task.java|(1372,39,<34,1>,<34,39>))
-			, attr("dependencies", "Dependency", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Task.java|(1414,45,<35,1>,<35,45>))
+			, asso("dependencies", "Dependency", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Task.java|(1414,45,<35,1>,<35,45>))
 		],
 		|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Task.java|(1296,8790,<31,0>,<308,0>)
 		)
 	, class("TestCase",
 		[
-			attr("comments", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestCase.java|(1447,38,<38,1>,<38,38>))
-			, attr("createdBy", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestCase.java|(1378,32,<36,1>,<36,32>))
+			attr("createdBy", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestCase.java|(1378,32,<36,1>,<36,32>))
 			, attr("id", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestCase.java|(1213,26,<31,1>,<31,26>))
 			, attr("name", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestCase.java|(1242,27,<32,1>,<32,27>))
 			, attr("prerequisites", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestCase.java|(1305,36,<34,1>,<34,36>))
 			, attr("purpose", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestCase.java|(1272,30,<33,1>,<33,30>))
-			, attr("steps", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestCase.java|(1488,33,<39,1>,<39,33>))
 			, attr("testData", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestCase.java|(1344,31,<35,1>,<35,31>))
-			, attr("testRuns", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestCase.java|(1524,38,<40,1>,<40,38>))
 		],
 		[
 			asso("project", "Project", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestCase.java|(1413,31,<37,1>,<37,31>))
-			, attr("comments", "Comment", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestCase.java|(1447,38,<38,1>,<38,38>))
-			, attr("steps", "Event", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestCase.java|(1488,33,<39,1>,<39,33>))
-			, attr("testRuns", "TestRun", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestCase.java|(1524,38,<40,1>,<40,38>))
+			, asso("comments", "Comment", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestCase.java|(1447,38,<38,1>,<38,38>))
+			, asso("steps", "Event", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestCase.java|(1488,33,<39,1>,<39,33>))
+			, asso("testRuns", "TestRun", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestCase.java|(1524,38,<40,1>,<40,38>))
 		],
 		|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestCase.java|(1153,7318,<28,0>,<313,0>)
 		)
@@ -263,11 +215,10 @@ DomainModel endeavour = {
 		[
 			attr("id", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestFolder.java|(1148,26,<30,1>,<30,26>))
 			, attr("name", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestFolder.java|(1177,27,<31,1>,<31,27>))
-			, attr("testRuns", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestFolder.java|(1207,38,<32,1>,<32,38>))
 		],
 		[
 			asso("testPlan", "TestPlan", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestFolder.java|(1248,33,<33,1>,<33,33>))
-			, attr("testRuns", "TestRun", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestFolder.java|(1207,38,<32,1>,<32,38>))
+			, asso("testRuns", "TestRun", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestFolder.java|(1207,38,<32,1>,<32,38>))
 		],
 		|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestFolder.java|(1090,2325,<28,0>,<123,0>)
 		)
@@ -277,48 +228,41 @@ DomainModel endeavour = {
 			, attr("folders", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestPlan.java|(1335,30,<34,1>,<34,30>))
 			, attr("id", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestPlan.java|(1276,26,<32,1>,<32,26>))
 			, attr("name", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestPlan.java|(1305,27,<33,1>,<33,27>))
-			, attr("testFolders", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestPlan.java|(1478,44,<38,1>,<38,44>))
-			, attr("testRuns", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestPlan.java|(1403,38,<36,1>,<36,38>))
 		],
 		[
 			asso("project", "Project", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestPlan.java|(1444,31,<37,1>,<37,31>))
-			, attr("testFolders", "TestFolder", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestPlan.java|(1478,44,<38,1>,<38,44>))
-			, attr("testRuns", "TestRun", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestPlan.java|(1403,38,<36,1>,<36,38>))
+			, asso("testFolders", "TestFolder", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestPlan.java|(1478,44,<38,1>,<38,44>))
+			, asso("testRuns", "TestRun", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestPlan.java|(1403,38,<36,1>,<36,38>))
 		],
 		|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestPlan.java|(1188,8570,<29,0>,<329,0>)
 		)
 	, class("TestRun",
 		[
-			attr("comments", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestRun.java|(1516,38,<40,1>,<40,38>))
-			, attr("executionDate", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestRun.java|(1375,34,<36,1>,<36,34>))
+			attr("executionDate", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestRun.java|(1375,34,<36,1>,<36,34>))
 			, attr("folder", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestRun.java|(1412,29,<37,1>,<37,29>))
 			, attr("id", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestRun.java|(1314,26,<34,1>,<34,26>))
-			, attr("projectMembers", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestRun.java|(1557,49,<41,1>,<41,49>))
 			, attr("status", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestRun.java|(1343,29,<35,1>,<35,29>))
 		],
 		[
 			asso("testCase", "TestCase", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestRun.java|(1480,33,<39,1>,<39,33>))
 			, asso("testPlan", "TestPlan", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestRun.java|(1444,33,<38,1>,<38,33>))
-			, attr("comments", "Comment", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestRun.java|(1516,38,<40,1>,<40,38>))
-			, attr("projectMembers", "ProjectMember", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestRun.java|(1557,49,<41,1>,<41,49>))
+			, asso("comments", "Comment", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestRun.java|(1516,38,<40,1>,<40,38>))
+			, asso("projectMembers", "ProjectMember", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestRun.java|(1557,49,<41,1>,<41,49>))
 		],
 		|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/TestRun.java|(1227,5638,<31,0>,<243,0>)
 		)
 	, class("UseCase",
 		[
-			attr("actors", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/UseCase.java|(1436,33,<37,1>,<37,33>))
-			, attr("events", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/UseCase.java|(1364,34,<35,1>,<35,34>))
-			, attr("postconditions", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/UseCase.java|(1324,37,<34,1>,<34,37>))
+			attr("postconditions", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/UseCase.java|(1324,37,<34,1>,<34,37>))
 			, attr("preconditions", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/UseCase.java|(1285,36,<33,1>,<33,36>))
-			, attr("tasks", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/UseCase.java|(1401,32,<36,1>,<36,32>))
 			, attr("type", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/UseCase.java|(1255,27,<32,1>,<32,27>))
 		],
 		[
 			asso("extend", "UseCase", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/UseCase.java|(1506,30,<39,1>,<39,30>))
 			, asso("include", "UseCase", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/UseCase.java|(1472,31,<38,1>,<38,31>))
-			, attr("actors", "Actor", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/UseCase.java|(1436,33,<37,1>,<37,33>))
-			, attr("events", "Event", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/UseCase.java|(1364,34,<35,1>,<35,34>))
-			, attr("tasks", "Task", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/UseCase.java|(1401,32,<36,1>,<36,32>))
+			, asso("actors", "Actor", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/UseCase.java|(1436,33,<37,1>,<37,33>))
+			, asso("events", "Event", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/UseCase.java|(1364,34,<35,1>,<35,34>))
+			, asso("tasks", "Task", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/UseCase.java|(1401,32,<36,1>,<36,32>))
 		],
 		|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/UseCase.java|(1176,9731,<29,0>,<384,0>)
 		)
@@ -335,28 +279,24 @@ DomainModel endeavour = {
 		)
 	, class("WorkProduct",
 		[
-			attr("attachments", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/WorkProduct.java|(1902,44,<52,1>,<52,44>))
-			, attr("comments", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/WorkProduct.java|(1948,38,<53,1>,<53,38>))
-			, attr("createdBy", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/WorkProduct.java|(1574,32,<42,1>,<42,32>))
+			attr("createdBy", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/WorkProduct.java|(1574,32,<42,1>,<42,32>))
 			, attr("description", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/WorkProduct.java|(1608,34,<43,1>,<43,34>))
-			, attr("documents", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/WorkProduct.java|(1861,39,<51,1>,<51,39>))
 			, attr("endDate", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/WorkProduct.java|(1544,28,<41,1>,<41,28>))
 			, attr("id", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/WorkProduct.java|(1422,26,<37,1>,<37,26>))
 			, attr("label", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/WorkProduct.java|(1779,28,<48,1>,<48,28>))
 			, attr("name", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/WorkProduct.java|(1450,27,<38,1>,<38,27>))
 			, attr("priority", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/WorkProduct.java|(1746,31,<47,1>,<47,31>))
 			, attr("progress", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/WorkProduct.java|(1644,32,<44,1>,<44,32>))
-			, attr("projectMembers", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/WorkProduct.java|(1810,49,<50,1>,<50,49>))
 			, attr("startDate", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/WorkProduct.java|(1512,30,<40,1>,<40,30>))
 			, attr("status", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/WorkProduct.java|(1715,29,<46,1>,<46,29>))
 		],
 		[
 			asso("iteration", "Iteration", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/WorkProduct.java|(1678,35,<45,1>,<45,35>))
 			, asso("project", "Project", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/WorkProduct.java|(1479,31,<39,1>,<39,31>))
-			, attr("attachments", "Attachment", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/WorkProduct.java|(1902,44,<52,1>,<52,44>))
-			, attr("comments", "Comment", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/WorkProduct.java|(1948,38,<53,1>,<53,38>))
-			, attr("documents", "Document", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/WorkProduct.java|(1861,39,<51,1>,<51,39>))
-			, attr("projectMembers", "ProjectMember", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/WorkProduct.java|(1810,49,<50,1>,<50,49>))
+			, asso("attachments", "Attachment", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/WorkProduct.java|(1902,44,<52,1>,<52,44>))
+			, asso("comments", "Comment", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/WorkProduct.java|(1948,38,<53,1>,<53,38>))
+			, asso("documents", "Document", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/WorkProduct.java|(1861,39,<51,1>,<51,39>))
+			, asso("projectMembers", "ProjectMember", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/WorkProduct.java|(1810,49,<50,1>,<50,49>))
 		],
 		|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/WorkProduct.java|(1338,15789,<34,0>,<561,0>)
 		)
@@ -376,48 +316,15 @@ DomainModel endeavour = {
 		)
 	, class("email.EmailCourier",
 		[
-			attr("currentProjectMembers", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/email/EmailCourier.java|(1345,56,<34,1>,<34,56>))
-			, attr("description", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/email/EmailCourier.java|(1222,34,<31,1>,<31,34>))
+			attr("description", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/email/EmailCourier.java|(1222,34,<31,1>,<31,34>))
 			, attr("id", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/email/EmailCourier.java|(1162,26,<29,1>,<29,26>))
 			, attr("label", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/email/EmailCourier.java|(1191,28,<30,1>,<30,28>))
 			, attr("name", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/email/EmailCourier.java|(1259,27,<32,1>,<32,27>))
-			, attr("newProjectMembers", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/email/EmailCourier.java|(1289,53,<33,1>,<33,53>))
 		],
 		[
-			attr("currentProjectMembers", "ProjectMember", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/email/EmailCourier.java|(1345,56,<34,1>,<34,56>))
-			, attr("newProjectMembers", "ProjectMember", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/email/EmailCourier.java|(1289,53,<33,1>,<33,53>))
+			asso("currentProjectMembers", "ProjectMember", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/email/EmailCourier.java|(1345,56,<34,1>,<34,56>))
+			, asso("newProjectMembers", "ProjectMember", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/email/EmailCourier.java|(1289,53,<33,1>,<33,53>))
 		],
 		|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/email/EmailCourier.java|(1115,3448,<27,0>,<115,0>)
-		)
-	, class("persistence.BinaryBlobType",
-		[
-			
-		],
-		[
-			
-		],
-		|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/persistence/BinaryBlobType.java|(1183,1342,<30,0>,<82,0>)
-		)
-	, class("persistence.PersistenceManager",
-		[
-			attr("instance", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/persistence/PersistenceManager.java|(1341,108,<36,1>,<36,108>))
-			, attr("session", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/persistence/PersistenceManager.java|(1265,31,<34,1>,<34,31>))
-			, attr("transaction", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/persistence/PersistenceManager.java|(1299,39,<35,1>,<35,39>))
-		],
-		[
-			attr("instance", "persistence.PersistenceManager", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/persistence/PersistenceManager.java|(1341,108,<36,1>,<36,108>))
-		],
-		|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/persistence/PersistenceManager.java|(1195,2566,<31,0>,<130,0>)
-		)
-	, class("persistence.SessionFactoryManager",
-		[
-			attr("configuration", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/persistence/SessionFactoryManager.java|(1303,43,<32,1>,<32,43>))
-			, attr("connectionProvider", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/persistence/SessionFactoryManager.java|(1349,53,<33,1>,<33,53>))
-			, attr("sessionFactory", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/persistence/SessionFactoryManager.java|(1255,45,<31,1>,<31,45>))
-		],
-		[
-			asso("keeper", "persistence.SessionFactoryManager", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/persistence/SessionFactoryManager.java|(1405,51,<34,1>,<34,51>))
-		],
-		|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/persistence/SessionFactoryManager.java|(1214,1220,<29,0>,<74,0>)
 		)
 };
