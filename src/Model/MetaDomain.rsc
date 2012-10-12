@@ -20,17 +20,26 @@ public Class specialisation(str name, str baseClass, list[Attribute] attributes)
 public Class specialisation(str name, str baseClass, list[Attribute] attributes, set[int] source) = specialisation(name, baseClass, attributes)[@source = source];
 public Class specialisation(str name, str baseClass, list[Attribute] attributes, list[Association] assocations, set[int] source) = specialisation(name, baseClass, attributes, assocations)[@source = source];
 
+public Class class(str name, list[Attribute] attributes, list[Association] assocations, loc location) = class(name, attributes, assocations, {location}); 
+public Class class(str name, list[Attribute] attributes, list[Association] assocations, set[loc] locations) = class(name, attributes, assocations)[@location = locations];
 
-
+public Class specialisation(str name, str baseClass, list[Attribute] attributes, list[Association] assocations, loc location) = specialisation(name, baseClass, attributes, assocations, {location}); 
+public Class specialisation(str name, str baseClass, list[Attribute] attributes, list[Association] assocations, set[loc] locations) = specialisation(name, baseClass, attributes, assocations)[@location = locations];
 data Attribute = attr(str name);
 
 public Attribute attr(str name, set[int] source) = attr(name)[@source = source];
+
+public Attribute attr(str name, set[loc] locations) = attr(name)[@location = locations];
+public Attribute attr(str name, loc location) = attr(name)[@location = {location}];
 
 data Association = asso(str label, str otherClass, Cardinality from, Cardinality to);
 
 public Association asso(str label, str otherClass) = asso(label, otherClass, none(), none());
 public Association asso(str label, str otherClass, set[int] source) = asso(label, otherClass)[@source= source];
 public Association asso(str label, str otherClass, Cardinality from, Cardinality to, set[int] source) = asso(label, otherClass, from, to)[@source= source];
+
+public Association asso(str label, str otherClass, set[loc] locations) = asso(label, otherClass)[@location= locations];
+public Association asso(str label, str otherClass, loc location) = asso(label, otherClass)[@location= {location}];
 
 anno str Association@class;
 
@@ -42,6 +51,10 @@ anno set[int] Attribute@source;
 anno set[int] Association@source;
 anno set[int] Cardinality@source;
 
+anno set[loc] Class@location;
+anno set[loc] Attribute@location;
+anno set[loc] Association@location;
+anno set[loc] Cardinality@location;
 
 alias DomainModel = set[Class];
 
