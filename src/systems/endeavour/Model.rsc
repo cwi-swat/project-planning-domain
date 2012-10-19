@@ -7,11 +7,8 @@ public DomainModel endeavour = {
 			attr("description", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Actor.java|(1316,34,<34,1>,<34,34>))
 			, attr("id", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Actor.java|(1257,26,<32,1>,<32,26>))
 			, attr("name", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Actor.java|(1286,27,<33,1>,<33,27>))
-			, attr("useCases", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Actor.java|(1353,37,<35,1>,<35,37>))
 		],
 		[
-			asso("belongs to", "Project", {|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Actor.java|(1393,31,<36,1>,<36,31>), |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Actor.java|(1857,0,<61,0>,<61,0>)})
-			, asso("assigned to", "UseCase", {|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Actor.java|(1353,37,<35,1>,<35,37>),|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Actor.java|(4630,0,<167,0>,<167,0>)})
 		],
 		|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Actor.java|(1203,4013,<30,0>,<190,0>)
 		)
@@ -37,8 +34,7 @@ public DomainModel endeavour = {
 		)
 	, class("Comment",
 		[
-			attr("author", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Comment.java|(1403,29,<38,1>,<38,29>))
-			, attr("date", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Comment.java|(1435,25,<39,1>,<39,25>))
+			attr("date", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Comment.java|(1435,25,<39,1>,<39,25>))
 			, attr("id", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Comment.java|(1344,26,<36,1>,<36,26>))
 			, attr("text", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Comment.java|(1373,27,<37,1>,<37,27>))
 		],
@@ -46,6 +42,7 @@ public DomainModel endeavour = {
 			asso("for", "TestCase", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Comment.java|(1505,33,<41,1>,<41,33>))
 			, asso("during", "TestRun", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Comment.java|(1541,31,<42,1>,<42,31>))
 			, asso("on", "WorkProduct", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Comment.java|(1463,39,<40,1>,<40,39>))
+			, asso("owned by", "ProjectMember", {|project://Endeavour-Mgmt/controller/org/endeavour/mgmt/controller/CommentMaintenance.java|(2329,0,<64,0>,<64,0>),|project://Endeavour-Mgmt/controller/org/endeavour/mgmt/controller/CommentMaintenance.java|(2329,0,<64,0>,<64,0>)})
 		],
 		|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Comment.java|(1179,2911,<30,0>,<159,0>)
 		)
@@ -63,7 +60,7 @@ public DomainModel endeavour = {
 			attr("id", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Dependency.java|(1183,26,<30,1>,<30,26>))
 		],
 		[
-			asso("predecessor", "Task", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Dependency.java|(1274,32,<33,1>,<33,32>))
+			asso("predecessor", "Task", {|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Dependency.java|(1274,32,<33,1>,<33,32>),|project://Endeavour-Mgmt/controller/org/endeavour/mgmt/controller/DependencyMaintenance.java|(1989,0,<55,0>,<55,0>)})
 			, asso("sucessor", "Task", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Dependency.java|(1242,29,<32,1>,<32,29>))
 		],
 		|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Dependency.java|(1153,2379,<28,0>,<125,0>)
@@ -80,7 +77,7 @@ public DomainModel endeavour = {
 		],
 		[
 			asso("part of", "Project", {|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Document.java|(1363,31,<35,1>,<35,31>), |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Document.java|(3056,0,<106,0>,<106,0>)})
-			, asso("versions", "Version", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Document.java|(1397,38,<36,1>,<36,38>))
+			, asso("has", "Version", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Document.java|(1397,38,<36,1>,<36,38>))
 			, asso("current", "Version", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Document.java|(6722,0,<230,0>,<230,0>))
 			, asso("assigned to", "WorkProduct", {|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Document.java|(1438,45,<37,1>,<37,45>), |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Document.java|(5492,0,<190,0>,<190,0>)})
 		],
@@ -174,7 +171,7 @@ public DomainModel endeavour = {
 			asso("securityGroup", "SecurityGroup", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/ProjectMember.java|(1700,43,<46,1>,<46,43>))
 			, asso("projects", "Project", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/ProjectMember.java|(1794,37,<48,1>,<48,37>))
 			, asso("testRuns", "TestRun", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/ProjectMember.java|(1834,37,<49,1>,<49,37>))
-			, asso("workProducts", "WorkProduct", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/ProjectMember.java|(1746,45,<47,1>,<47,45>))
+			, asso("has", "WorkProduct", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/ProjectMember.java|(1746,45,<47,1>,<47,45>))
 		],
 		|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/ProjectMember.java|(1293,12811,<34,0>,<484,0>)
 		)
@@ -264,7 +261,7 @@ public DomainModel endeavour = {
 		[
 			asso("extend", "UseCase", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/UseCase.java|(1506,30,<39,1>,<39,30>))
 			, asso("include", "UseCase", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/UseCase.java|(1472,31,<38,1>,<38,31>))
-			, asso("actors", "Actor", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/UseCase.java|(1436,33,<37,1>,<37,33>))
+			, asso("assigns", "Actor", {|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/UseCase.java|(1436,33,<37,1>,<37,33>),|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Actor.java|(4662,0,<168,0>,<168,0>)})
 			, asso("events", "Event", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/UseCase.java|(1364,34,<35,1>,<35,34>))
 			, asso("tasks", "Task", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/UseCase.java|(1401,32,<36,1>,<36,32>))
 		],
@@ -304,4 +301,10 @@ public DomainModel endeavour = {
 		],
 		|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/WorkProduct.java|(1338,15789,<34,0>,<561,0>)
 		)
+};
+
+
+
+public BehaviorRelations behaviour = {
+	processActivity({"WorkProduct", "Dependency"}, "Planning system", "suggests possible", "Dependency",|project://Endeavour-Mgmt/controller/org/endeavour/mgmt/controller/DependencyMaintenance.java|(2336,0,<64,0>,<64,0>))
 };
