@@ -38,7 +38,7 @@ private str printable(Entity e) {
 }
 
 private set[Entity] getModelClasses(Resource proj) {
-	return { c | <_,c> <- proj@types, entity([*modelOnly,_*]) := c};	
+	return { c | <_,c> <- proj@classes, entity([*modelOnly,_*]) := c};	
 }
 
 private set[AstNode] getModelAst(Resource proj) {
