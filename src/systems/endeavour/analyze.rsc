@@ -166,3 +166,39 @@ public void prepareJavaEditor() {
 		}))
 	});
 }
+
+
+public list[Id] viewOnly = [package("org"),package("endeavour"),package("mgmt"),package("view")];
+
+public set[AstNode] getViewAst(Resource proj) {
+	cache = |rascal:///endeavour-adt-views.cache|;
+	if (exists(cache)) {
+		return readBinaryValueFile(#set[AstNode], cache);
+	}
+	result = {createAstFromFile(l) | <l, t> <- proj@classes, entity([*viewOnly,_*]) := t};;	
+	writeBinaryValueFile(cache, result);
+	return result;
+}
+
+public void listInterestingViewMethods() {
+	proj = getProjectData();
+	viewAsts = getViewAst(proj);
+	interestingMethods = { m | /m:methodDeclaration(_, _, _, _, _, _, _, Option[AstNode] i) <- viewAsts, some(AstNode b) := i, calcCC(b) > 3, m.name != "actionPerformed", m.name != "getValueAt" };
+	for (m <- interestingMethods) {
+		println("<m.name> <m@location>");
+	}
+}
+
+private int calcCC(AstNode body) {
+	// not accurate, but general idea of CC is used
+	result = 1;
+	visit (body) {
+		case conditionalExpression(_,_,_) : result += 1;
+		case ifStatement(_,_,_) : result += 1;
+		case whileStatement(_,_) : result += 1;
+		case forStatement(_,_,_,_) : result += 1;
+		case switchCase(false, _) : result += 1;
+		case catchClause(_, _) : result += 1;
+	};
+	return result;	
+}
