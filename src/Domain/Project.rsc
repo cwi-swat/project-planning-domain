@@ -4,7 +4,7 @@ import Model::MetaDomain;
 
 
 public DomainModel project = {
-	class("Portofolio", [], [asso("contains", "Project", {16})], {16}),
+	class("Portfolio", [], [asso("contains", "Project", {16})], {16}),
 	class("Environment", [], [asso("influences", "Project")], {20})[@alternativeNames={"Enterprise environment", "Enterprise environment factors"}],
 	specialisation("Internal", "Environment", {20}),
 	specialisation("External", "Environment", {20}),
@@ -19,11 +19,11 @@ public DomainModel project = {
 			asso("creates", "Result", {1,19}),
 			asso("has", "Objective", \one(), oneOrMore(), {3}),
 			asso("has", "Requirement", \one(), oneOrMore(), {5}),
-			asso("has", "StakeHolder", \one(), oneOrMore(), {7}),
+			asso("has", "Stakeholder", \one(), oneOrMore(), {7}),
 			asso("balances", "Constrain", \one(), oneOrMore(), {8}),
 			asso("follows", "Life cycle", {24}),
 			asso("follows", "Project plan", {55}),
-			asso("subdivised in", "Work Breakdown Structure", {58})
+			asso("subdivided in", "Work Breakdown Structure", {58})
 			,asso("has", "Milestone", {108})
 		],
 		{1}),
@@ -39,7 +39,7 @@ public DomainModel project = {
 			asso("previous", "Requirement", noneOrMore(), noneOrMore(), {12})
 		],
 		{5}),
-	class("StakeHolder",
+	class("Stakeholder",
 		[
 			attr("identity", {40}),
 			attr("needs", {7}),
@@ -53,8 +53,8 @@ public DomainModel project = {
 		],
 		{7}),
 	class("Information", {68}),
-	specialisation("Person", "StakeHolder", {38}),
-	specialisation("Organisation", "StakeHolder", {38}),
+	specialisation("Person", "Stakeholder", {38}),
+	specialisation("Organisation", "Stakeholder", {38}),
 	
 	class("Milestone", 
 		[
@@ -87,9 +87,9 @@ public DomainModel project = {
 		[
 		],
 		[
-			asso("constists of", "Project schedule", {97})
-			,asso("constists of", "Schedule baseline", {97})
-			,asso("constists of", "Schedule data", {97})
+			asso("consists of", "Project schedule", {97})
+			,asso("consists of", "Schedule baseline", {97})
+			,asso("consists of", "Schedule data", {97})
 		], {9}),
 	specialisation("Budget", "Constrain", {9}),
 	specialisation("Resource", "Constrain", {9}),
@@ -162,7 +162,7 @@ public DomainModel project = {
 		],
 		[
 			asso("related to", "Process", {43}),
-			asso("accieves", "Result", {43})
+			asso("achieves", "Result", {43})
 		], {43}),
 		
 	specialisation("Activity", "Process", 
@@ -178,7 +178,7 @@ public DomainModel project = {
 			asso("requires", "Resource", {61})[@class="Activity resource"],
 			asso("takes", "Activity duration", {62, 95})
 			//,asso("based on", "Template", {90})
-			,asso("constists of", "Work Breakdown Structure", {94})
+			,asso("consists of", "Work Breakdown Structure", {94})
 			,asso("described by", "Activity Attribute", {103})
 			,asso("assigned to", "Team Member", {106})
 			,asso("previous", "Milestone", {110})
@@ -206,7 +206,7 @@ public DomainModel project = {
 		[
 		],
 		[
-			// not sure if these are assocations
+			// not sure if these are associations
 			asso("based on", "Activity sequence", {63}),
 			asso("based on", "Activity duration", {63}),
 			asso("based on", "Activity resource", {63}),
@@ -226,7 +226,7 @@ public DomainModel project = {
 		],
 		[
 			asso("contains", "Activity sequence", {93})
-			,asso("dependens on", "Activity sequence", {116})
+			,asso("dependents on", "Activity sequence", {116})
 		], {93})
 	// relation between these plans an the project plan?
 	,class("Human Resource Plan",
@@ -284,7 +284,7 @@ public DomainModel project = {
 		],
 		[
 			asso("plans", "Planned work", {83})
-			,asso("constists of", "Activity", {99})
+			,asso("consists of", "Activity", {99})
 		], {83})
 	,class("Planned work", {83})
 	
@@ -316,10 +316,10 @@ public DomainModel project = {
 public set[str] ProjectOnly =
 	 {
 	 	"Organisation","Project","Person","Environment","Risk","Equipment","Supplies",
-	 	"Communications plan","External","Budget","Preparing","Life cycle","Portofolio",
+	 	"Communications plan","External","Budget","Preparing","Life cycle","Portfolio",
 	 	"Deliverable","Quality","Internal","Phase","Main","Constrain","Action",
 	 	"Milestone","Product","Process","Project management","Material","Organizing",
-	 	"Result","Scope","People","Activity","Resource","StakeHolder","Requirement",
+	 	"Result","Scope","People","Activity","Resource","Stakeholder","Requirement",
 	 	"Documentation","Objective","Closing","Service","Information", "Change request", 
 	 	"Change Control Board", "Approver", "Risk", "Risk management plan", "Project plan"
 	 };
@@ -396,7 +396,7 @@ public BehaviorRelations ProjectBehavior = {
 	, actorActivity("Project Management", "provide", "feedback", {76})
 	, actorActivity("Project Management", "solve", "issue", {76})
 	, actorActivity("Project Management", "optimize", "project performance", {76})
-	, actorActivity("Project Management", "distrubute", "information", {77}) // to stakeholders? need another kind of activity perhaps?
+	, actorActivity("Project Management", "distribute", "information", {77}) // to stakeholders? need another kind of activity perhaps?
 	, actorActivity("Project Management", "communicate with", "stakeholder", {78})
 	, actorActivity("Project Management", "work with", "stakeholder", {78})
 	, *actorActivityMultiple("Stakeholder", "express", {"needs","issue"}, {78})
