@@ -306,6 +306,8 @@ public DomainModel endeavour = {
 
 
 
+/*
 public BehaviorRelations behaviour = {
 	processActivity({"WorkProduct", "Dependency"}, "Planning system", "suggests possible", "Dependency",|project://Endeavour-Mgmt/controller/org/endeavour/mgmt/controller/DependencyMaintenance.java|(2336,0,<64,0>,<64,0>))
 };
+*/

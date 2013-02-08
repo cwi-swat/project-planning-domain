@@ -187,10 +187,18 @@ public DomainModel project = {
 		], {43})[@alternativeNames={"Schedule activity"}],
 	specialisation("Action", "Process", {43}),
 	
-	class("Activity sequence", [attr("mandatory", {112})], [asso("sequence", "Activity", {60, 113})], {60})[@alternativeNames = {"Activity relation"}],
+	class("Activity sequence", [attr("mandatory", {112})], [
+			asso("sequence", "Activity", {60, 113})[@class="Activity Dependency"]
+		], {60})[@alternativeNames = {"Activity relation"}],
 	class("Activity resource", [attr("is estimation", {61}), attr("quantity", {123})], {61, 94}),
-	class("Activity duration", [attr("is estimation", {62}), attr("duration", {62})], {62, 95}),
+	class("Activity duration", [attr("is estimation", {62}), attr("duration", {62})], {62, 95})[@alternativeNames = {"Activity duration estimates"}],
 	// how about activity durations and resources? these are collections of all the durations per activity
+	
+	class("Activity Dependency",{60,113}),
+	specialisation("StartStart", "Activity Dependency", {149}),
+	specialisation("StartFinish", "Activity Dependency", {149}),
+	specialisation("FinishStart", "Activity Dependency", {149}),
+	specialisation("FinishFinish", "Activity Dependency", {149}),
 	
 	class("Activity template", {90}),
 	class("Activity list", [],
