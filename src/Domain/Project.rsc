@@ -272,7 +272,7 @@ public DomainModel project = {
 	,specialisation("Preventive action", "Change request", {150})
 	,specialisation("Defect repair", "Change request", [], [asso("repairs", "Defect", {150})], {150})
 	
-	,class("Defect", [] [asso("mismatches", "Requirement", {151}), asso("related to", "Result", {151})], {151})
+	,class("Defect", [], [asso("mismatches", "Requirement", {151}), asso("related to", "Result", {151})], {151})
 	
 	,class("Work Breakdown Structure",
 		[
