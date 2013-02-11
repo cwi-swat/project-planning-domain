@@ -268,6 +268,11 @@ public DomainModel project = {
 			,asso("influences", "Schedule", {81})
 			,asso("influences", "Risk management plan", {81})
 		], {80})
+	,specialisation("Corrective action", "Change request", {150})
+	,specialisation("Preventive action", "Change request", {150})
+	,specialisation("Defect repair", "Change request", [], [asso("repairs", "Defect", {150})], {150})
+	
+	,class("Defect", [] [asso("mismatches", "Requirement", {151}), asso("related to", "Result", {151})], {151})
 	
 	,class("Work Breakdown Structure",
 		[
