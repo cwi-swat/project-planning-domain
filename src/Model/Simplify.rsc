@@ -1,7 +1,7 @@
 module Model::Simplify
 
 
-import Graph;
+import analysis::graphs::Graph;
 import Model::MetaDomain;
 
 public tuple[Graph[str] assocations, rel[tuple[str,str], str] assocClasses, Graph[str] specialisations] extractGraphs(DomainModel model) {
