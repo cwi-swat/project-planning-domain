@@ -2,7 +2,7 @@ module Rendering::ToGraph
 
 import IO;
 import Real;
-import Integer;
+import util::Math;
 import vis::Figure;
 import vis::Render;
 
