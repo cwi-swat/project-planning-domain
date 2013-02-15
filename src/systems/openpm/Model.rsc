@@ -45,15 +45,15 @@ public DomainModel openpm = {
 		)
 	, class("EmailSubscription",
 		[
-			attr("code", |project://OpenPM/src/main/java/org/tracka/EmailSubscription.java|(436,20,<19,1>,<19,20>))
-			, attr("id", |project://OpenPM/src/main/java/org/tracka/EmailSubscription.java|(396,38,<16,1>,<18,16>))
+			attr("id", |project://OpenPM/src/main/java/org/tracka/EmailSubscription.java|(396,38,<16,1>,<18,16>))
 		],
 		[
-			asso("user", "User", |project://OpenPM/src/main/java/org/tracka/EmailSubscription.java|(458,61,<20,1>,<22,18>))
+			asso("target", "User", |project://OpenPM/src/main/java/org/tracka/EmailSubscription.java|(458,61,<20,1>,<22,18>))
+			, asso("kind", "EmailSubscriptionType", |project://OpenPM/src/main/java/org/tracka/EmailSubscription.java|(436,20,<19,1>,<19,20>))
 		],
 		|project://OpenPM/src/main/java/org/tracka/EmailSubscription.java|(141,2079,<9,0>,<105,0>)
 		)
-	, class("EmailSubscription.Type",
+	, class("EmailSubscriptionType",
 		[
 			attr("code", |project://OpenPM/src/main/java/org/tracka/EmailSubscription.java|(1768,20,<80,2>,<80,21>))
 			, attr("description", |project://OpenPM/src/main/java/org/tracka/EmailSubscription.java|(1791,27,<81,2>,<81,28>))
