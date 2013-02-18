@@ -152,8 +152,8 @@ public DomainModel openpm = {
 			, asso("stateDone", "TaskState", |project://OpenPM/src/main/java/org/tracka/Product.java|(4339,73,<67,1>,<69,28>))
 			, asso("typeAnonymous", "TaskType", |project://OpenPM/src/main/java/org/tracka/Product.java|(4666,145,<80,1>,<85,31>))
 			, asso("has", "Label", |project://OpenPM/src/main/java/org/tracka/Label.java|(2065,69,<46,1>,<48,24>))
-			, asso("has", "Links", |project://OpenPM/src/main/java/org/tracka/Product.java|(5007,30,<91,1>,<91,30>))
-			, asso("decomposed in", "Tasks", |project://OpenPM/src/main/java/org/tracka/Task.java|(8592,69,<125,1>,<127,24>))
+			, asso("has", "Link", |project://OpenPM/src/main/java/org/tracka/Product.java|(5007,30,<91,1>,<91,30>))
+			, asso("decomposed in", "Task", |project://OpenPM/src/main/java/org/tracka/Task.java|(8592,69,<125,1>,<127,24>))
 		],
 		|project://OpenPM/src/main/java/org/tracka/Product.java|(256,17698,<12,0>,<543,0>)
 		)
