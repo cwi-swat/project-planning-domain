@@ -24,11 +24,11 @@ public DomainModel openpm = {
 		[
 			attr("creationDate", |project://OpenPM/src/main/java/org/tracka/Comment.java|(1175,26,<31,1>,<31,26>))
 			, attr("id", |project://OpenPM/src/main/java/org/tracka/Comment.java|(1089,83,<27,1>,<30,16>))
-			, attr("number", |project://OpenPM/src/main/java/org/tracka/Comment.java|(1204,24,<32,1>,<32,24>))
 			, attr("text", |project://OpenPM/src/main/java/org/tracka/Comment.java|(1539,59,<41,1>,<42,20>))
 		],
 		[
 			asso("made by", "User", |project://OpenPM/src/main/java/org/tracka/Comment.java|(1231,63,<33,1>,<35,18>))
+			, asso("next", "Comment",|project://OpenPM/src/main/java/org/tracka/Comment.java|(1204,24,<32,1>,<32,24>))
 		],
 		|project://OpenPM/src/main/java/org/tracka/Comment.java|(201,4888,<11,0>,<172,0>)
 		)
@@ -69,12 +69,11 @@ public DomainModel openpm = {
 			, attr("oldValue", |project://OpenPM/src/main/java/org/tracka/FieldVersion.java|(1693,103,<50,1>,<54,24>))
 		],
 		[
-			asso("fieldType", "FieldVersion.FieldType", |project://OpenPM/src/main/java/org/tracka/FieldVersion.java|(1631,59,<48,1>,<49,28>))
-			, asso("objectVersion", "ObjectVersion", |project://OpenPM/src/main/java/org/tracka/FieldVersion.java|(1577,49,<45,1>,<46,36>))
+			asso("fieldType", "FieldType", |project://OpenPM/src/main/java/org/tracka/FieldVersion.java|(1631,59,<48,1>,<49,28>))
 		],
 		|project://OpenPM/src/main/java/org/tracka/FieldVersion.java|(173,3795,<10,0>,<130,0>)
 		)
-	, class("FieldVersion.FieldType",
+	, class("FieldType",
 		[
 			attr("description", |project://OpenPM/src/main/java/org/tracka/FieldVersion.java|(1300,27,<29,2>,<29,28>))
 		],
@@ -92,62 +91,29 @@ public DomainModel openpm = {
 			, attr("title", |project://OpenPM/src/main/java/org/tracka/Label.java|(2139,21,<50,1>,<50,21>))
 		],
 		[
-			asso("product", "Product", |project://OpenPM/src/main/java/org/tracka/Label.java|(2065,69,<46,1>,<48,24>))
 		],
 		|project://OpenPM/src/main/java/org/tracka/Label.java|(441,8140,<17,0>,<294,0>)
-		)
-	, class("LabelTask",
-		[
-			attr("id", |project://OpenPM/src/main/java/org/tracka/LabelTask.java|(1299,83,<30,1>,<33,16>))
-		],
-		[
-			asso("label", "Label", |project://OpenPM/src/main/java/org/tracka/LabelTask.java|(1387,33,<35,1>,<36,20>))
-			, asso("task", "Task", |project://OpenPM/src/main/java/org/tracka/LabelTask.java|(1423,31,<37,1>,<38,18>))
-		],
-		|project://OpenPM/src/main/java/org/tracka/LabelTask.java|(375,3138,<15,0>,<114,0>)
-		)
-	, class("MyHttpSession",
-		[
-			attr("Id", |project://OpenPM/src/main/java/org/tracka/MyHttpSession.java|(283,24,<10,1>,<10,24>))
-			, attr("fullyAuthorized", |project://OpenPM/src/main/java/org/tracka/MyHttpSession.java|(464,32,<13,1>,<13,32>))
-			, attr("loggedInUserId", |project://OpenPM/src/main/java/org/tracka/MyHttpSession.java|(433,28,<12,1>,<12,28>))
-			, attr("time", |project://OpenPM/src/main/java/org/tracka/MyHttpSession.java|(374,18,<11,1>,<11,18>))
-		],
-		[
-			
-		],
-		|project://OpenPM/src/main/java/org/tracka/MyHttpSession.java|(23,1148,<3,0>,<45,0>)
-		)
-	, class("ObjectId",
-		[
-			attr("id", |project://OpenPM/src/main/java/org/tracka/ObjectId.java|(123,16,<8,1>,<8,16>))
-		],
-		[
-			asso("type", "ObjectVersion.ObjectType", |project://OpenPM/src/main/java/org/tracka/ObjectId.java|(82,38,<7,1>,<7,38>))
-		],
-		|project://OpenPM/src/main/java/org/tracka/ObjectId.java|(23,676,<3,0>,<35,0>)
 		)
 	, class("ObjectVersion",
 		[
 			attr("children", |project://OpenPM/src/main/java/org/tracka/ObjectVersion.java|(3238,126,<87,1>,<88,67>))
 			, attr("creationDate", |project://OpenPM/src/main/java/org/tracka/ObjectVersion.java|(3441,78,<93,1>,<94,26>))
-			, attr("fields", |project://OpenPM/src/main/java/org/tracka/ObjectVersion.java|(4224,129,<121,1>,<122,63>))
 			, attr("id", |project://OpenPM/src/main/java/org/tracka/ObjectVersion.java|(3069,83,<78,1>,<81,16>))
 			, attr("objectId", |project://OpenPM/src/main/java/org/tracka/ObjectVersion.java|(3524,70,<96,1>,<97,22>))
 		],
 		[
 			asso("children", "ObjectVersion", |project://OpenPM/src/main/java/org/tracka/ObjectVersion.java|(3238,126,<87,1>,<88,67>))
 			, asso("creator", "User", |project://OpenPM/src/main/java/org/tracka/ObjectVersion.java|(3369,69,<90,1>,<92,21>))
-			, asso("eventType", "ObjectVersion.EventType", |project://OpenPM/src/main/java/org/tracka/ObjectVersion.java|(4160,59,<118,1>,<119,28>))
-			, asso("fields", "FieldVersion", |project://OpenPM/src/main/java/org/tracka/ObjectVersion.java|(4224,129,<121,1>,<122,63>))
-			, asso("objectType", "ObjectVersion.ObjectType", |project://OpenPM/src/main/java/org/tracka/ObjectVersion.java|(4093,62,<115,1>,<116,30>))
+			, asso("eventType", "Event", |project://OpenPM/src/main/java/org/tracka/ObjectVersion.java|(4160,59,<118,1>,<119,28>))
+			, asso("fields", "FieldVersion", {|project://OpenPM/src/main/java/org/tracka/ObjectVersion.java|(4224,129,<121,1>,<122,63>),|project://OpenPM/src/main/java/org/tracka/FieldVersion.java|(1577,49,<45,1>,<46,36>)})
+			, asso("objectType", "ObjectType", |project://OpenPM/src/main/java/org/tracka/ObjectVersion.java|(4093,62,<115,1>,<116,30>))
 			, asso("parent", "ObjectVersion", |project://OpenPM/src/main/java/org/tracka/ObjectVersion.java|(3157,76,<83,1>,<85,29>))
-			, asso("product0", "Product", |project://OpenPM/src/main/java/org/tracka/ObjectVersion.java|(3599,260,<99,1>,<106,25>))
-			, asso("product1", "Product", |project://OpenPM/src/main/java/org/tracka/ObjectVersion.java|(3864,224,<108,1>,<113,25>))
+			, asso("taskCurrentTarget", "Product", |project://OpenPM/src/main/java/org/tracka/ObjectVersion.java|(3599,260,<99,1>,<106,25>))
+			, asso("taskChangeTarget", "Product", |project://OpenPM/src/main/java/org/tracka/ObjectVersion.java|(3864,224,<108,1>,<113,25>))
 		],
 		|project://OpenPM/src/main/java/org/tracka/ObjectVersion.java|(318,9695,<15,0>,<325,0>)
 		)
-	, class("ObjectVersion.EventType",
+	, class("Event",
 		[
 			attr("description", |project://OpenPM/src/main/java/org/tracka/ObjectVersion.java|(2882,27,<68,2>,<68,28>))
 		],
@@ -156,24 +122,19 @@ public DomainModel openpm = {
 		],
 		|project://OpenPM/src/main/java/org/tracka/ObjectVersion.java|(2760,304,<66,1>,<76,1>)
 		)
-	, class("ObjectVersion.ObjectType",
+	, specialisation("Create", "Event", |project://OpenPM/src/main/java/org/tracka/ObjectVersion.java|(2788,0,<67,0>,<67,0>))
+	, specialisation("Update", "Event", |project://OpenPM/src/main/java/org/tracka/ObjectVersion.java|(2788,0,<67,0>,<67,0>))
+	, specialisation("Delete", "Event", |project://OpenPM/src/main/java/org/tracka/ObjectVersion.java|(2788,0,<67,0>,<67,0>))
+	, specialisation("Add", "Event", |project://OpenPM/src/main/java/org/tracka/ObjectVersion.java|(2788,0,<67,0>,<67,0>))
+	, specialisation("Remove", "Event", |project://OpenPM/src/main/java/org/tracka/ObjectVersion.java|(2788,0,<67,0>,<67,0>))
+	, class("ObjectType",
 		[
 			attr("description", |project://OpenPM/src/main/java/org/tracka/ObjectVersion.java|(2368,27,<49,2>,<49,28>))
-			, attr("fieldTypes", |project://OpenPM/src/main/java/org/tracka/ObjectVersion.java|(2399,44,<50,2>,<50,45>))
 		],
 		[
-			
+			asso("fieldTypes", "FieldType", |project://OpenPM/src/main/java/org/tracka/ObjectVersion.java|(2399,44,<50,2>,<50,45>))
 		],
 		|project://OpenPM/src/main/java/org/tracka/ObjectVersion.java|(1594,1161,<33,1>,<64,1>)
-		)
-	, class("Ordered",
-		[
-			
-		],
-		[
-			
-		],
-		|project://OpenPM/src/main/java/org/tracka/Ordered.java|(23,94,<3,0>,<6,0>)
 		)
 	, class("Product",
 		[
@@ -182,37 +143,21 @@ public DomainModel openpm = {
 			, attr("isDeleted", |project://OpenPM/src/main/java/org/tracka/Product.java|(5402,26,<105,1>,<105,26>))
 			, attr("iterationEnd", |project://OpenPM/src/main/java/org/tracka/Product.java|(4247,89,<65,1>,<66,39>))
 			, attr("iterationLengthInWeeks", |project://OpenPM/src/main/java/org/tracka/Product.java|(4130,114,<63,1>,<64,62>))
-			, attr("linkText0", |project://OpenPM/src/main/java/org/tracka/Product.java|(5007,30,<91,1>,<91,30>))
-			, attr("linkText1", |project://OpenPM/src/main/java/org/tracka/Product.java|(5097,30,<94,1>,<94,30>))
-			, attr("linkText2", |project://OpenPM/src/main/java/org/tracka/Product.java|(5187,30,<97,1>,<97,30>))
-			, attr("linkText3", |project://OpenPM/src/main/java/org/tracka/Product.java|(5277,30,<100,1>,<100,30>))
-			, attr("linkText4", |project://OpenPM/src/main/java/org/tracka/Product.java|(5367,30,<103,1>,<103,30>))
-			, attr("linkUrl0", |project://OpenPM/src/main/java/org/tracka/Product.java|(4950,54,<89,1>,<90,29>))
-			, attr("linkUrl1", |project://OpenPM/src/main/java/org/tracka/Product.java|(5040,54,<92,1>,<93,29>))
-			, attr("linkUrl2", |project://OpenPM/src/main/java/org/tracka/Product.java|(5130,54,<95,1>,<96,29>))
-			, attr("linkUrl3", |project://OpenPM/src/main/java/org/tracka/Product.java|(5220,54,<98,1>,<99,29>))
-			, attr("linkUrl4", |project://OpenPM/src/main/java/org/tracka/Product.java|(5310,54,<101,1>,<102,29>))
 			, attr("name", |project://OpenPM/src/main/java/org/tracka/Product.java|(3952,56,<59,1>,<60,20>))
 			, attr("velocityPeriodInWeeks", |project://OpenPM/src/main/java/org/tracka/Product.java|(4011,116,<61,1>,<62,65>))
+			, attr("velocity", |project://OpenPM/src/main/java/org/tracka/Product.java|(14998,0,<464,0>,<464,0>))
 		],
 		[
 			asso("stateAnonymous", "TaskState", |project://OpenPM/src/main/java/org/tracka/Product.java|(4515,148,<74,1>,<79,33>))
 			, asso("stateDone", "TaskState", |project://OpenPM/src/main/java/org/tracka/Product.java|(4339,73,<67,1>,<69,28>))
 			, asso("typeAnonymous", "TaskType", |project://OpenPM/src/main/java/org/tracka/Product.java|(4666,145,<80,1>,<85,31>))
+			, asso("has", "Label", |project://OpenPM/src/main/java/org/tracka/Label.java|(2065,69,<46,1>,<48,24>))
+			, asso("has", "Links", |project://OpenPM/src/main/java/org/tracka/Product.java|(5007,30,<91,1>,<91,30>))
+			, asso("decomposed in", "Tasks", |project://OpenPM/src/main/java/org/tracka/Task.java|(8592,69,<125,1>,<127,24>))
 		],
 		|project://OpenPM/src/main/java/org/tracka/Product.java|(256,17698,<12,0>,<543,0>)
 		)
-	, class("Prop",
-		[
-			attr("id", |project://OpenPM/src/main/java/org/tracka/Prop.java|(1178,80,<33,1>,<36,16>))
-			, attr("name", |project://OpenPM/src/main/java/org/tracka/Prop.java|(1261,52,<38,1>,<39,20>))
-			, attr("value", |project://OpenPM/src/main/java/org/tracka/Prop.java|(1316,21,<41,1>,<41,21>))
-		],
-		[
-			
-		],
-		|project://OpenPM/src/main/java/org/tracka/Prop.java|(214,2495,<11,0>,<104,0>)
-		)
+	, class("Link", [attr("text"), attr("url")], |project://OpenPM/src/main/java/org/tracka/Product.java|(5007,30,<91,1>,<91,30>))
 	, class("Splitter",
 		[
 			attr("hideOlderThan", |project://OpenPM/src/main/java/org/tracka/Splitter.java|(1387,27,<36,1>,<36,27>))
@@ -224,43 +169,25 @@ public DomainModel openpm = {
 			, attr("showTouchedByMe", |project://OpenPM/src/main/java/org/tracka/Splitter.java|(1510,32,<39,1>,<39,32>))
 		],
 		[
-			asso("state", "TaskState", |project://OpenPM/src/main/java/org/tracka/Splitter.java|(1221,88,<31,1>,<33,24>))
+			asso("filters on", "TaskState", |project://OpenPM/src/main/java/org/tracka/Splitter.java|(1221,88,<31,1>,<33,24>))
 			, asso("tab", "Tab", |project://OpenPM/src/main/java/org/tracka/Splitter.java|(1158,60,<28,1>,<30,16>))
+			, asso("filters on", "TaskType",|project://OpenPM/src/main/java/org/tracka/TaskType2Splitter.java|(448,42,<18,0>,<18,0>))
 		],
 		|project://OpenPM/src/main/java/org/tracka/Splitter.java|(144,8666,<9,0>,<299,0>)
-		)
-	, class("Splitter.OlderThanDays",
-		[
-			attr("description", |project://OpenPM/src/main/java/org/tracka/Splitter.java|(8207,27,<275,2>,<275,28>))
-			, attr("milliseconds", |project://OpenPM/src/main/java/org/tracka/Splitter.java|(8177,26,<274,2>,<274,27>))
-		],
-		[
-			
-		],
-		|project://OpenPM/src/main/java/org/tracka/Splitter.java|(7954,853,<270,1>,<298,1>)
-		)
-	, class("Splitter.OlderThanWeeks",
-		[
-			attr("description", |project://OpenPM/src/main/java/org/tracka/Splitter.java|(7317,27,<244,2>,<244,28>))
-			, attr("milliseconds", |project://OpenPM/src/main/java/org/tracka/Splitter.java|(7287,26,<243,2>,<243,27>))
-		],
-		[
-			
-		],
-		|project://OpenPM/src/main/java/org/tracka/Splitter.java|(6842,1107,<237,1>,<268,1>)
 		)
 	, class("Sprint",
 		[
 			attr("endTime", |project://OpenPM/src/main/java/org/tracka/Sprint.java|(2631,25,<55,1>,<55,25>))
 			, attr("id", |project://OpenPM/src/main/java/org/tracka/Sprint.java|(2265,83,<43,1>,<46,16>))
-			, attr("number", |project://OpenPM/src/main/java/org/tracka/Sprint.java|(2351,205,<47,1>,<51,37>))
 			, attr("title", |project://OpenPM/src/main/java/org/tracka/Sprint.java|(2678,21,<56,1>,<56,21>))
 		],
 		[
 			asso("product", "Product", |project://OpenPM/src/main/java/org/tracka/Sprint.java|(2559,69,<52,1>,<54,24>))
+			, asso("next", "Sprint", |project://OpenPM/src/main/java/org/tracka/Sprint.java|(2351,205,<47,1>,<51,37>))
 		],
 		|project://OpenPM/src/main/java/org/tracka/Sprint.java|(233,9453,<12,0>,<282,0>)
 		)
+	, specialisation("Milestone", "Sprint", |project://OpenPM/src/main/java/org/tracka/Sprint.java|(558,69,<17,0>,<17,0>))
 	, class("Tab",
 		[
 			attr("id", |project://OpenPM/src/main/java/org/tracka/Tab.java|(1069,83,<29,1>,<32,16>))
@@ -280,18 +207,18 @@ public DomainModel openpm = {
 			, attr("id", |project://OpenPM/src/main/java/org/tracka/Task.java|(7884,83,<100,1>,<103,16>))
 			, attr("isDeleted", |project://OpenPM/src/main/java/org/tracka/Task.java|(8966,26,<139,1>,<139,26>))
 			, attr("modificationDate", |project://OpenPM/src/main/java/org/tracka/Task.java|(8933,30,<138,1>,<138,30>))
-			, attr("number", |project://OpenPM/src/main/java/org/tracka/Task.java|(7970,85,<104,1>,<107,37>))
 			, attr("title", |project://OpenPM/src/main/java/org/tracka/Task.java|(8465,21,<121,1>,<121,21>))
 		],
 		[
 			asso("creator", "User", |project://OpenPM/src/main/java/org/tracka/Task.java|(8664,69,<128,1>,<130,21>))
 			, asso("effort", "Effort", |project://OpenPM/src/main/java/org/tracka/Task.java|(8146,87,<111,1>,<113,22>))
 			, asso("owner", "User", |project://OpenPM/src/main/java/org/tracka/Task.java|(8736,65,<131,1>,<133,19>))
-			, asso("product", "Product", |project://OpenPM/src/main/java/org/tracka/Task.java|(8592,69,<125,1>,<127,24>))
 			, asso("state", "TaskState", |project://OpenPM/src/main/java/org/tracka/Task.java|(8236,88,<114,1>,<116,24>))
 			, asso("type", "TaskType", |project://OpenPM/src/main/java/org/tracka/Task.java|(8058,85,<108,1>,<110,22>))
 			, asso("has", "Attachment", |project://OpenPM/src/main/java/org/tracka/Attachment.java|(1394,48,<36,1>,<37,20>))
 			, asso("has", "Comment", |project://OpenPM/src/main/java/org/tracka/Comment.java|(1488,48,<39,1>,<40,20>))
+			, asso("has", "Label", |project://OpenPM/src/main/java/org/tracka/LabelTask.java|(1387,33,<35,1>,<36,20>))
+			, attr("next", "Task", |project://OpenPM/src/main/java/org/tracka/Task.java|(7970,85,<104,1>,<107,37>))
 		],
 		|project://OpenPM/src/main/java/org/tracka/Task.java|(442,56071,<17,0>,<1425,0>)
 		)
@@ -305,8 +232,9 @@ public DomainModel openpm = {
 			, attr("ownerUntouched", |project://OpenPM/src/main/java/org/tracka/TaskButton.java|(2747,39,<64,1>,<64,39>))
 		],
 		[
-			asso("taskStateFrom", "TaskState", |project://OpenPM/src/main/java/org/tracka/TaskButton.java|(2498,104,<55,1>,<57,32>))
-			, asso("taskStateTo", "TaskState", |project://OpenPM/src/main/java/org/tracka/TaskButton.java|(2607,100,<59,1>,<61,30>))
+			asso("from", "TaskState", |project://OpenPM/src/main/java/org/tracka/TaskButton.java|(2498,104,<55,1>,<57,32>))
+			, asso("to", "TaskState", |project://OpenPM/src/main/java/org/tracka/TaskButton.java|(2607,100,<59,1>,<61,30>))
+			, asso("for", "TaskType", |project://OpenPM/src/main/java/org/tracka/TaskType2TaskButton.java|(1205,19,<25,0>,<25,0>))
 		],
 		|project://OpenPM/src/main/java/org/tracka/TaskButton.java|(507,10002,<19,0>,<349,0>)
 		)
@@ -314,54 +242,23 @@ public DomainModel openpm = {
 		[
 			attr("id", |project://OpenPM/src/main/java/org/tracka/TaskState.java|(1945,83,<43,1>,<46,16>))
 			, attr("name", |project://OpenPM/src/main/java/org/tracka/TaskState.java|(2182,58,<53,1>,<54,20>))
-			, attr("number", |project://OpenPM/src/main/java/org/tracka/TaskState.java|(2033,144,<48,1>,<51,24>))
 		],
 		[
-			
+			asso("next", "TaskState", |project://OpenPM/src/main/java/org/tracka/TaskState.java|(2033,144,<48,1>,<51,24>))
 		],
 		|project://OpenPM/src/main/java/org/tracka/TaskState.java|(443,12645,<17,0>,<396,0>)
 		)
 	, class("TaskType",
 		[
 			attr("id", |project://OpenPM/src/main/java/org/tracka/TaskType.java|(1573,83,<37,1>,<40,16>))
-			, attr("image16", |project://OpenPM/src/main/java/org/tracka/TaskType.java|(1723,23,<45,1>,<45,23>))
-			, attr("image24", |project://OpenPM/src/main/java/org/tracka/TaskType.java|(1749,23,<46,1>,<46,23>))
+			, attr("image", {|project://OpenPM/src/main/java/org/tracka/TaskType.java|(1723,23,<45,1>,<45,23>), |project://OpenPM/src/main/java/org/tracka/TaskType.java|(1749,23,<46,1>,<46,23>)})
 			, attr("name", |project://OpenPM/src/main/java/org/tracka/TaskType.java|(1661,57,<42,1>,<43,20>))
 		],
 		[
 			asso("defaultState", "TaskState", |project://OpenPM/src/main/java/org/tracka/TaskType.java|(1777,103,<48,1>,<50,31>))
+			, asso("possible states", "TaskState", |project://OpenPM/src/main/java/org/tracka/TaskType2TaskState.java|(1103,18,<25,0>,<25,0>))
 		],
 		|project://OpenPM/src/main/java/org/tracka/TaskType.java|(484,5323,<18,0>,<201,0>)
-		)
-	, class("TaskType2Splitter",
-		[
-			attr("id", |project://OpenPM/src/main/java/org/tracka/TaskType2Splitter.java|(1418,83,<33,1>,<36,16>))
-		],
-		[
-			asso("splitter", "Splitter", |project://OpenPM/src/main/java/org/tracka/TaskType2Splitter.java|(1603,93,<41,1>,<43,26>))
-			, asso("taskType", "TaskType", |project://OpenPM/src/main/java/org/tracka/TaskType2Splitter.java|(1506,94,<38,1>,<40,26>))
-		],
-		|project://OpenPM/src/main/java/org/tracka/TaskType2Splitter.java|(443,3728,<17,0>,<132,0>)
-		)
-	, class("TaskType2TaskButton",
-		[
-			attr("id", |project://OpenPM/src/main/java/org/tracka/TaskType2TaskButton.java|(1634,40,<32,1>,<34,16>))
-		],
-		[
-			asso("taskButton", "TaskButton", |project://OpenPM/src/main/java/org/tracka/TaskType2TaskButton.java|(1776,100,<39,1>,<41,30>))
-			, asso("taskType", "TaskType", |project://OpenPM/src/main/java/org/tracka/TaskType2TaskButton.java|(1679,94,<36,1>,<38,26>))
-		],
-		|project://OpenPM/src/main/java/org/tracka/TaskType2TaskButton.java|(443,5076,<17,0>,<156,0>)
-		)
-	, class("TaskType2TaskState",
-		[
-			attr("id", |project://OpenPM/src/main/java/org/tracka/TaskType2TaskState.java|(1514,83,<32,1>,<35,16>))
-		],
-		[
-			asso("taskState", "TaskState", |project://OpenPM/src/main/java/org/tracka/TaskType2TaskState.java|(1697,97,<39,1>,<41,28>))
-			, asso("taskType", "TaskType", |project://OpenPM/src/main/java/org/tracka/TaskType2TaskState.java|(1600,94,<36,1>,<38,26>))
-		],
-		|project://OpenPM/src/main/java/org/tracka/TaskType2TaskState.java|(443,5428,<17,0>,<172,0>)
 		)
 	, class("User",
 		[
@@ -379,27 +276,8 @@ public DomainModel openpm = {
 		[
 			asso("currentProduct", "Product", |project://OpenPM/src/main/java/org/tracka/User.java|(3901,75,<65,1>,<67,31>))
 			, asso("currentTab", "Tab", |project://OpenPM/src/main/java/org/tracka/User.java|(3979,92,<68,1>,<70,23>))
+			, asso("participates in", "Product", |project://OpenPM/src/main/java/org/tracka/UserProduct.java|(173,5756,<10,0>,<183,0>))
 		],
 		|project://OpenPM/src/main/java/org/tracka/User.java|(293,14765,<13,0>,<459,0>)
-		)
-	, class("UserProduct",
-		[
-			attr("accessId", |project://OpenPM/src/main/java/org/tracka/UserProduct.java|(1480,22,<35,1>,<35,22>))
-			, attr("id", |project://OpenPM/src/main/java/org/tracka/UserProduct.java|(1318,83,<26,1>,<29,16>))
-		],
-		[
-			asso("product", "Product", |project://OpenPM/src/main/java/org/tracka/UserProduct.java|(1440,37,<33,1>,<34,24>))
-			, asso("user", "User", |project://OpenPM/src/main/java/org/tracka/UserProduct.java|(1406,31,<31,1>,<32,18>))
-		],
-		|project://OpenPM/src/main/java/org/tracka/UserProduct.java|(173,5756,<10,0>,<183,0>)
-		)
-	, class("Versioned",
-		[
-			
-		],
-		[
-			
-		],
-		|project://OpenPM/src/main/java/org/tracka/Versioned.java|(23,170,<3,0>,<7,0>)
 		)
 };
