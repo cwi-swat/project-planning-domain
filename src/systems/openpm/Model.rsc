@@ -218,7 +218,7 @@ public DomainModel openpm = {
 			, asso("has", "Attachment", |project://OpenPM/src/main/java/org/tracka/Attachment.java|(1394,48,<36,1>,<37,20>))
 			, asso("has", "Comment", |project://OpenPM/src/main/java/org/tracka/Comment.java|(1488,48,<39,1>,<40,20>))
 			, asso("has", "Label", |project://OpenPM/src/main/java/org/tracka/LabelTask.java|(1387,33,<35,1>,<36,20>))
-			, attr("next", "Task", |project://OpenPM/src/main/java/org/tracka/Task.java|(7970,85,<104,1>,<107,37>))
+			, asso("next", "Task", |project://OpenPM/src/main/java/org/tracka/Task.java|(7970,85,<104,1>,<107,37>))
 		],
 		|project://OpenPM/src/main/java/org/tracka/Task.java|(442,56071,<17,0>,<1425,0>)
 		)

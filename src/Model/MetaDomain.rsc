@@ -20,9 +20,14 @@ public Class specialisation(str name, str baseClass, list[Attribute] attributes)
 public Class specialisation(str name, str baseClass, list[Attribute] attributes, set[int] source) = specialisation(name, baseClass, attributes)[@source = source];
 public Class specialisation(str name, str baseClass, list[Attribute] attributes, list[Association] assocations, set[int] source) = specialisation(name, baseClass, attributes, assocations)[@source = source];
 
+public Class class(str name, list[Attribute] attributes, loc location) = class(name, attributes, [], location); 
+public Class class(str name, list[Attribute] attributes, set[loc] locations) = class(name, attributes, [], locations); 
 public Class class(str name, list[Attribute] attributes, list[Association] assocations, loc location) = class(name, attributes, assocations, {location}); 
 public Class class(str name, list[Attribute] attributes, list[Association] assocations, set[loc] locations) = class(name, attributes, assocations)[@location = locations];
 
+public Class specialisation(str name, str baseClass, loc location) = specialisation(name, baseClass, [], [], location); 
+public Class specialisation(str name, str baseClass, list[Attribute] attributes, loc location) = specialisation(name, baseClass, attributes, [], location); 
+public Class specialisation(str name, str baseClass, list[Attribute] attributes, set[loc] locations) = specialisation(name, baseClass, attributes, [], locations); 
 public Class specialisation(str name, str baseClass, list[Attribute] attributes, list[Association] assocations, loc location) = specialisation(name, baseClass, attributes, assocations, {location}); 
 public Class specialisation(str name, str baseClass, list[Attribute] attributes, list[Association] assocations, set[loc] locations) = specialisation(name, baseClass, attributes, assocations)[@location = locations];
 data Attribute = attr(str name);
