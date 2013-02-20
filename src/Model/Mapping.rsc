@@ -3,6 +3,7 @@ module Model::Mapping
 data ModelMapping
 	= equalName(str sourceName, str targetName, str reason = "", bool correct = true)
 	| synonym(str sourceName, str targetName, str reason = "", bool correct = true)
+	| extension(str sourceName, str targetName, str reason = "")
 	| specialisation(str sourceName, str targetName, str reason = "")
 	| specialisation(set[str] sourceNames, str targetName, str reason = "")
 	| implementationDetail(str sourceName, str targetName, str reason = "")
