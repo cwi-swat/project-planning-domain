@@ -153,6 +153,7 @@ public DomainModel openpm = {
 			, asso("typeAnonymous", "TaskType", |project://OpenPM/src/main/java/org/tracka/Product.java|(4666,145,<80,1>,<85,31>))
 			, asso("has", "Label", |project://OpenPM/src/main/java/org/tracka/Label.java|(2065,69,<46,1>,<48,24>))
 			, asso("has", "Link", |project://OpenPM/src/main/java/org/tracka/Product.java|(5007,30,<91,1>,<91,30>))
+			, asso("produced by", "Sprint", |project://OpenPM/src/main/java/org/tracka/Sprint.java|(2559,69,<52,1>,<54,24>))
 			, asso("decomposed in", "Task", |project://OpenPM/src/main/java/org/tracka/Task.java|(8592,69,<125,1>,<127,24>))
 		],
 		|project://OpenPM/src/main/java/org/tracka/Product.java|(256,17698,<12,0>,<543,0>)
@@ -182,8 +183,8 @@ public DomainModel openpm = {
 			, attr("title", |project://OpenPM/src/main/java/org/tracka/Sprint.java|(2678,21,<56,1>,<56,21>))
 		],
 		[
-			asso("product", "Product", |project://OpenPM/src/main/java/org/tracka/Sprint.java|(2559,69,<52,1>,<54,24>))
-			, asso("next", "Sprint", |project://OpenPM/src/main/java/org/tracka/Sprint.java|(2351,205,<47,1>,<51,37>))
+			asso("next", "Sprint", |project://OpenPM/src/main/java/org/tracka/Sprint.java|(2351,205,<47,1>,<51,37>))
+			, asso("contains", "Task", |project://OpenPM/src/main/java/org/tracka/Task.java|(513,0,<18,0>,<18,0>))
 		],
 		|project://OpenPM/src/main/java/org/tracka/Sprint.java|(233,9453,<12,0>,<282,0>)
 		)
@@ -274,9 +275,8 @@ public DomainModel openpm = {
 			, attr("showHistory", |project://OpenPM/src/main/java/org/tracka/User.java|(4205,35,<73,1>,<73,35>))
 		],
 		[
-			asso("currentProduct", "Product", |project://OpenPM/src/main/java/org/tracka/User.java|(3901,75,<65,1>,<67,31>))
-			, asso("currentTab", "Tab", |project://OpenPM/src/main/java/org/tracka/User.java|(3979,92,<68,1>,<70,23>))
-			, asso("participates in", "Product", |project://OpenPM/src/main/java/org/tracka/UserProduct.java|(173,5756,<10,0>,<183,0>))
+			asso("currentTab", "Tab", |project://OpenPM/src/main/java/org/tracka/User.java|(3979,92,<68,1>,<70,23>))
+			, asso("participates in", "Product", |project://OpenPM/src/main/java/org/tracka/UserProduct.java|(173,5756,<10,0>,<183,0>))[@class="Access"]
 		],
 		|project://OpenPM/src/main/java/org/tracka/User.java|(293,14765,<13,0>,<459,0>)
 		)
