@@ -11,6 +11,8 @@ import analysis::graphs::Graph;
 import Domain::Project;
 import systems::endeavour::Model;
 import systems::endeavour::Mapping;
+import systems::openpm::Model;
+import systems::openpm::Mapping;
 
 private map[str, str] getNameMappings(ModelMappings mappings) 
 	= (m.sourceName : m.targetName | m <- mappings, m has sourceName)
@@ -33,11 +35,14 @@ private void analyse(DomainModel target, ModelMappings mappings, ModelMappingFai
 	g_target = mapOntoReference(g_target, mappings);
 	mappedNames = getNameMappings(mappings);
 	e_target = (g_target<0> + g_target<1>) - ({mappedNames[f.sourceName]?f.sourceName | f <- failures} + {mappedNames[m.sourceName]?m.sourceName | m <- mappings, m has correct, !m.correct});
+	g_ref = {<f,t> | <f,t> <- g_ref, f in e_target, t in e_target};
+	g_target = {<f,t> | <f,t> <- g_target, f in e_target, t in e_target};
 	g_ref += g_ref<1,0>; // make the relations undirected
 	g_target += g_target<1,0>; // make the relations undirected
+	println("total simularity: <calculateSimularity(g_ref, g_target) *100>");
 	for (e <- e_target) {
-		assocs_ref = g_ref[e] & e_target;	
-		assocs_target = g_target[e] & e_target; // also filter out missing stuff
+		assocs_ref = g_ref[e];	
+		assocs_target = g_target[e]; // also filter out missing stuff
 		println(e);
 		println("  assoc simularity: <calculateSimularity(assocs_ref, assocs_target) *100>");
 		println("  assocs:");
@@ -52,5 +57,10 @@ private void analyse(DomainModel target, ModelMappings mappings, ModelMappingFai
 }
 
 public void main() {
+	println("Endeavour");
 	analyse(endeavour, endeavourMapping, endeavourFailures);
+	println("");
+	println("");
+	println("OpenPM");
+	analyse(openpm, openpmMapping, openpmFailures);
 }
