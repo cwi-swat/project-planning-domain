@@ -68,8 +68,8 @@ public void main() {
 	println();
 	println();
 	println();
-	<_, end> = analyse(endeavour, endeavourMapping, endeavourFailures);
-	<_, opm> = analyse(openpm, openpmMapping, openpmFailures);
+	<endSim, end> = analyse(endeavour, endeavourMapping, endeavourFailures);
+	<opmSim, opm> = analyse(openpm, openpmMapping, openpmFailures);
 	joined = [<e, e in end<0>, e in opm<0>, end[e], opm[e]> | e <- sort([*{*end<0>, *opm<0>}])];
 	joined = visit(joined) {
 		case real x => 0.0
