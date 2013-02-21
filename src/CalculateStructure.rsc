@@ -1,12 +1,14 @@
 module CalculateStructure
 
 import Set;
+import List;
 import IO;
 import util::Math;
 import Model::MetaDomain;
 import Model::Mapping;
 import Model::Simplify;
 import analysis::graphs::Graph;
+import lang::csv::IO;
 
 import Domain::Project;
 import systems::endeavour::Model;
@@ -26,10 +28,13 @@ private Graph[str] mapOntoReference(Graph[str] src, ModelMappings mappings) {
 	};
 }
 
+private real calculateSimularityUndirected(Graph[&T] a, Graph[&T] b)
+	= calculateSimularity({{t,f} | <t,f> <- a}, {{t,f} | <t,f> <- b});
+
 private real calculateSimularity(set[&T] a, set[&T] b)
 	= round((size(a & b) / toReal(size(a + b))) * 100)/100.0;
-
-private void analyse(DomainModel target, ModelMappings mappings, ModelMappingFailures failures){
+	
+private tuple[real globalsimularity, lrel[str entity, int overlap, int inreference, int intarget, real simularity] overlaps] analyse(DomainModel target, ModelMappings mappings, ModelMappingFailures failures) {
 	<g_ref,_,_> = extractGraphs(project);
 	<g_target,_,_> = extractGraphs(target);
 	g_target = mapOntoReference(g_target, mappings);
@@ -39,28 +44,43 @@ private void analyse(DomainModel target, ModelMappings mappings, ModelMappingFai
 	g_target = {<f,t> | <f,t> <- g_target, f in e_target, t in e_target};
 	g_ref += g_ref<1,0>; // make the relations undirected
 	g_target += g_target<1,0>; // make the relations undirected
-	println("total simularity: <calculateSimularity(g_ref, g_target) *100>");
-	for (e <- e_target) {
-		assocs_ref = g_ref[e];	
-		assocs_target = g_target[e]; // also filter out missing stuff
-		println(e);
-		println("  assoc simularity: <calculateSimularity(assocs_ref, assocs_target) *100>");
-		println("  assocs:");
-		for (a <- assocs_ref) {
-			println("    <a>: " + (a in assocs_target ? "\u2713": "\u2717"));	
-		}
-		println("  from target:");
-		for (a <- assocs_target - assocs_ref) {
-			println("    <a>");	
-		}
+	return <calculateSimularityUndirected(g_ref, g_target),
+		[<e, size(g_ref[e] & g_target[e]), size(g_ref[e]), size(g_target[e]), calculateSimularity(g_ref[e], g_target[e])>
+			| e <- sort([*e_target])]
+		>;
+}
+
+private void analyseResults(DomainModel target, ModelMappings mappings, ModelMappingFailures failures){
+	<total, details> = analyse(target, mappings, failures);
+	println("total simularity: <total *100>");
+	for (<e, overlap, _,_, s>  <- details) {
+		println(" <e>: <s*100> (<overlap>)");
 	}
 }
 
 public void main() {
 	println("Endeavour");
-	analyse(endeavour, endeavourMapping, endeavourFailures);
+	analyseResults(endeavour, endeavourMapping, endeavourFailures);
 	println("");
 	println("");
 	println("OpenPM");
-	analyse(openpm, openpmMapping, openpmFailures);
+	analyseResults(openpm, openpmMapping, openpmFailures);
+	println();
+	println();
+	println();
+	<_, end> = analyse(endeavour, endeavourMapping, endeavourFailures);
+	<_, opm> = analyse(openpm, openpmMapping, openpmFailures);
+	joined = [<e, e in end<0>, e in opm<0>, end[e], opm[e]> | e <- sort([*{*end<0>, *opm<0>}])];
+	joined = visit(joined) {
+		case real x => 0.0
+			when x == 0.0	
+	};
+	println(joined);
+	result = [<r[0], r[1], r[2], 
+			r[1] ? getOneFrom(r[3])[0] : 0, r[1] ? getOneFrom(r[3])[1] : 0, r[1] ? getOneFrom(r[3])[2] : 0, r[1] ? getOneFrom(r[3])[3] : 0.0,
+			r[2] ? getOneFrom(r[4])[0] : 0, r[2] ? getOneFrom(r[4])[1] : 0, r[2] ? getOneFrom(r[4])[2] : 0, r[2] ? getOneFrom(r[4])[3] : 0.0
+			>
+		| r <- joined
+	];
+	writeCSV(result, |rascal://src/results-details.csv|);
 }
