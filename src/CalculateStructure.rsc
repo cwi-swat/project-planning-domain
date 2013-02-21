@@ -75,7 +75,6 @@ public void main() {
 		case real x => 0.0
 			when x == 0.0	
 	};
-	println(joined);
 	result = [<r[0], r[1], r[2], 
 			r[1] ? getOneFrom(r[3])[0] : 0, r[1] ? getOneFrom(r[3])[1] : 0, r[1] ? getOneFrom(r[3])[2] : 0, r[1] ? getOneFrom(r[3])[3] : 0.0,
 			r[2] ? getOneFrom(r[4])[0] : 0, r[2] ? getOneFrom(r[4])[1] : 0, r[2] ? getOneFrom(r[4])[2] : 0, r[2] ? getOneFrom(r[4])[3] : 0.0
@@ -83,4 +82,5 @@ public void main() {
 		| r <- joined
 	];
 	writeCSV(result, |rascal://src/results-details.csv|);
+	writeFile(|rascal://src/result.tex|, ("" | it + "\\entityMapping<(""| it + "{<e>}" | e <- r)>\n" | r <- result));
 }

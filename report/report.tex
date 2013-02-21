@@ -11,6 +11,10 @@
 \usepackage{enumitem}
 
 
+\usepackage{booktabs}
+\usepackage{ifthen}
+\usepackage{siunitx}
+
 % font stuff
 \usepackage[T1]{fontenc}
 \usepackage{microtype}
@@ -19,6 +23,9 @@
 % related)
 \DeclareFontShape{T1}{lmr}{bx}{sc} { <-> ssub * cmr/bx/sc }{}
 \usepackage[scaled=0.75]{beramono} % monospace font with bold support
+\usepackage{pifont} % special chars
+\newcommand{\tick}{\ding{51}}
+\newcommand{\cross}{\ding{55}}
 
 
 % nicely formatted acronyms 
@@ -48,6 +55,52 @@
 \begin{document}
 \maketitle
 
+\newcommand\entityMapping[9]{%
+	\gdef\entityName{#1}%
+    \gdef\inEndeavour{#2}%
+    \gdef\inOpenPM{#3}%
+    \gdef\endOverlap{#4}%
+    \gdef\endReferenceSize{#5}%
+    \gdef\endTargetSize{#6}%
+    \gdef\endSimularity{#7}%
+    \gdef\opmOverlap{#8}%
+    \gdef\opmReferenceSize{#9}%
+	\entityMappingContinued
+}
+\newcommand{\entityMappingContinued}[2]{
+    \gdef\opmTargetSize{#1}%
+    \gdef\opmSimularity{#2}%
+	\entityName & %
+		\ifthenelse{\equal{true}{\inEndeavour}}{%
+			\tick & \endTargetSize & \endOverlap & \endReferenceSize &
+			\num{\endSimularity} & %
+		}{%
+			\cross & \multicolumn{4}{c}{--} &
+		}%
+		\ifthenelse{\equal{true}{\inOpenPM}}{%
+			\tick & \opmTargetSize & \opmOverlap & \opmReferenceSize & \opmSimularity \\ %
+		}{%
+			\cross & \multicolumn{4}{c}{--} \\
+		}%
+}
+\begin{table}
+	\caption{Model assocation similarity with reference model
+		\label{TableResultsChapter3}}
+	{\footnotesize
+	\begin{tabular}{l *{2}{c *{4}{r}}}\toprule
+		Entity & \multicolumn{5}{c}{Endeavour} & \multicolumn{5}{c}{OpenPM} \\ \cmidrule(l){2-10}
+		 & \textsmaller{Exists} & \textsmaller{Total \#} 
+		 	& \textsmaller{$\cap$ \#} & \textsmaller{Ref \#} 
+			& \textsmaller{Simularity}
+		 & \textsmaller{Exists} & \textsmaller{Total \#} 
+		 	& \textsmaller{$\cap$ \#} & \textsmaller{Ref \#} 
+			& \textsmaller{Simularity} \\
+		\midrule
 
+		\input{../src/result.tex}
 
+		\bottomrule
+	\end{tabular}
+	}
+\end{table}	
 \end{document}
