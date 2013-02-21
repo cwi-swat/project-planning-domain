@@ -14,6 +14,9 @@
 \usepackage{booktabs}
 \usepackage{ifthen}
 \usepackage{siunitx}
+\makeatletter
+\g@addto@macro\@floatboxreset\centering %make all the floats center by default, do not use {center} env
+\makeatother
 
 % font stuff
 \usepackage[T1]{fontenc}
@@ -55,6 +58,16 @@
 \begin{document}
 \maketitle
 
+\newcommand{\systemDetails}[5]{#1 & #2 & #3 & #4 & #5 \\}
+\begin{table}[htb]
+	\caption{System domain model size}
+	\begin{tabular}{l c c c c}\toprule
+		System & \# Entities & \# Mapped entities & \# missing & \# implementation \\ \midrule
+		\input{../src/systems.tex}
+		\bottomrule
+	\end{tabular}
+\end{table}
+
 \newcommand\entityMapping[9]{%
 	\gdef\entityName{#1}%
     \gdef\inEndeavour{#2}%
@@ -83,7 +96,7 @@
 			\cross & \multicolumn{4}{c}{--} \\
 		}%
 }
-\begin{table}
+\begin{table}[htb]
 	\caption{Model assocation similarity with reference model
 		\label{TableResultsChapter3}}
 	{\footnotesize

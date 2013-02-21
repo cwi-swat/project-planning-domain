@@ -83,4 +83,10 @@ public void main() {
 	];
 	writeCSV(result, |rascal://src/results-details.csv|);
 	writeFile(|rascal://src/result.tex|, ("" | it + "\\entityMapping<(""| it + "{<e>}" | e <- r)>\n" | r <- result));
+	
+	systems = [
+		<"Endeavour", size(endeavour), size(endeavourMapping), size({x | x <- endeavourFailures, x is missed}), size({x | x <- endeavourFailures, x is implementation})>,
+		<"OpenPM", size(openpm), size(openpmMapping), size({x | x <- openpmFailures, x is missed}), size({x | x <- openpmFailures, x is implementation})>
+	];
+	writeFile(|rascal://src/systems.tex|, ("" | it + "\\systemDetails<(""| it + "{<e>}" | e <- r)>\n" | r <- systems));
 }
