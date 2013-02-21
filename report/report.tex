@@ -58,11 +58,12 @@
 \begin{document}
 \maketitle
 
-\newcommand{\systemDetails}[5]{#1 & #2 & #3 & #4 & #5 \\}
+\newcommand{\systemDetails}[6]{#1 & #2 & #3 & #4 & #5 & #6 \\}
 \begin{table}[htb]
 	\caption{System domain model size}
-	\begin{tabular}{l c c c c}\toprule
-		System & \# Entities & \# Mapped entities & \# missing & \# implementation \\ \midrule
+	\begin{tabular}{l *{5}{c}}\toprule
+		System & \# Entities & \# Mapped entities & \# missing & \#
+		implementation & \# domain details \\ \midrule
 		\input{../src/systems.tex}
 		\bottomrule
 	\end{tabular}
