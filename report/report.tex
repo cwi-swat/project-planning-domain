@@ -1,0 +1,53 @@
+\RequirePackage[l2tabu, orthodox]{nag}
+\documentclass[a4paper, oneside, notitlepage]{article}
+
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{fullpage}
+\usepackage{fixltx2e}
+\usepackage{xspace}
+\usepackage{relsize}
+\usepackage{url}
+\usepackage{enumitem}
+
+
+% font stuff
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage{lmodern} \normalfont
+% lmodern has no smallcaps bold , so we replace it by computer-modern (closely
+% related)
+\DeclareFontShape{T1}{lmr}{bx}{sc} { <-> ssub * cmr/bx/sc }{}
+\usepackage[scaled=0.75]{beramono} % monospace font with bold support
+
+
+% nicely formatted acronyms 
+\newcommand{\Rascal}{\textsc{Rascal}\xspace}
+
+
+% todo marker
+\usepackage[svgnames]{xcolor}
+\usepackage{marginfix}
+\newcommand{\todo}[1]{%
+	\marginpar{%
+	\colorbox{yellow}{\parbox{0.9\marginparwidth}{%
+		\raggedright \footnotesize #1}}}}
+
+\title{Domain mapping analysis}
+\author{Davy Landman}
+
+\usepackage{doi}
+\usepackage{hyperref}
+%\usepackage[sortcites, url=false, doi=true, useprefix=true, maxbibnames = 999, maxcitenames = 2]{biblatex}
+%\bibliography{bibliography}
+
+%\renewcommand*{\mkcitation}[1]{ #1} % remove annoying brackets around cites
+
+%\newcommand{\citea}[1]{\citeauthor{#1}~\cite{#1}\xspace}
+
+\begin{document}
+\maketitle
+
+
+
+\end{document}

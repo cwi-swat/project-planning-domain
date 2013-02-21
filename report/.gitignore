@@ -1,0 +1,10 @@
+*.ltx
+*.aux
+*.log
+*.*_latexmk
+*.swp
+*.bbl
+*.blg
+*-blx.bib
+*.run.xml
+*.out
