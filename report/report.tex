@@ -71,6 +71,16 @@
 	\end{tabular}
 \end{table}
 
+
+\begin{table}[htb]
+	\caption{Domain Model entity mapping}
+	\begin{tabular}{l r r p{7cm}}\toprule
+		Mapping kind & Endeavour & OpenPM & Explanation \\ \midrule
+		\input{../src/systems-mapping.tex}
+		\bottomrule
+	\end{tabular}
+\end{table}
+
 \newcommand\entityMapping[9]{%
 	\gdef\entityName{#1}%
     \gdef\inEndeavour{#2}%
@@ -104,7 +114,7 @@
 		\label{TableResultsChapter3}}
 	{\footnotesize
 	\begin{tabular}{l *{2}{c *{4}{r}}}\toprule
-		Entity & \multicolumn{5}{c}{Endeavour} & \multicolumn{5}{c}{OpenPM} \\ \cmidrule(l){2-10}
+		Entity & \multicolumn{5}{c}{Endeavour} & \multicolumn{5}{c}{OpenPM} \\ \cmidrule(l){2-11}
 		 & \textsmaller{Exists} & \textsmaller{Total \#} 
 		 	& \textsmaller{$\cap$ \#} & \textsmaller{Ref \#} 
 			& \textsmaller{Simularity}
