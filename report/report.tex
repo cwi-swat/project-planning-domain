@@ -56,17 +56,14 @@
 %\newcommand{\citea}[1]{\citeauthor{#1}~\cite{#1}\xspace}
 
 \begin{document}
-\maketitle
 
-\newcommand{\systemDetails}[6]{#1 & #2 & #3 & #4 & #5 & #6 \\}
+\section{Data}
+\newcommand{\modelDetails}[4]{#1 & #2 & #3 & #4 \\}
 \begin{table}[htb]
-	\caption{Domain Model entity mapping}
-	\begin{tabular}{l *{5}{c}}\toprule
-		System & \# Entities & \# Mapped entities & \# missing & \#
-		implementation & \# domain details \\ \midrule
-		\input{../src/systems.tex}
-		\addlinespace
-		Reference & 74 & \multicolumn{4}{c}{--} \\
+	\caption{Domain Model details}
+	\begin{tabular}{l *{3}{r}}\toprule
+		Model source & \# Entities & \# assocations & \# attributes \\ \midrule
+		\input{../src/models.tex}
 		\bottomrule
 	\end{tabular}
 \end{table}
@@ -110,17 +107,17 @@
 		}%
 }
 \begin{table}[htb]
-	\caption{Model assocation similarity with reference model
+	\caption{Model association similarity with reference model
 		\label{TableResultsChapter3}}
 	{\footnotesize
 	\begin{tabular}{l *{2}{c *{4}{r}}}\toprule
 		Entity & \multicolumn{5}{c}{Endeavour} & \multicolumn{5}{c}{OpenPM} \\ \cmidrule(l){2-11}
 		 & \textsmaller{Exists} & \textsmaller{Total \#} 
 		 	& \textsmaller{$\cap$ \#} & \textsmaller{Ref \#} 
-			& \textsmaller{Simularity}
+			& \textsmaller{Similarity}
 		 & \textsmaller{Exists} & \textsmaller{Total \#} 
 		 	& \textsmaller{$\cap$ \#} & \textsmaller{Ref \#} 
-			& \textsmaller{Simularity} \\
+			& \textsmaller{Similarity} \\
 		\midrule
 
 		\input{../src/result.tex}
@@ -129,4 +126,22 @@
 	\end{tabular}
 	}
 \end{table}	
+
+\section{Observations}:
+
+\begin{itemize}
+	\item Most \textsmaller{OSS} systems used the \textsmaller{MVC} pattern,
+	which has an explicit model part.
+
+	\item About 85\% (estimated) of the model was recovered by automatic
+	extraction from \textsmaller{JDT} facts using \Rascal.
+
+	\item No process around the data was in the source code. But this might be
+	related that these systems are used for storing the results of planning, not
+	for performing the actual planning.
+
+	\item Endeavour global association similarity: \num{0.46}.
+	\item OpenPM global association similarity: \num{0.46}.
+
+\end{itemize}
 \end{document}

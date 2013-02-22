@@ -88,10 +88,11 @@ public void main() {
 	writeFile(|rascal://src/result.tex|, ("" | it + "\\entityMapping<(""| it + "{<e>}" | e <- r)>\n" | r <- result));
 	
 	systems = [
-		<"Endeavour", size(endeavour), size(endeavourMapping), size({x | x <- endeavourFailures, x is missing}), size({x | x <- endeavourFailures, x is implementation}), size({x | x <- endeavourFailures, x is domainDetail})>,
-		<"OpenPM", size(openpm), size(openpmMapping), size({x | x <- openpmFailures, x is missing}), size({x | x <- openpmFailures, x is implementation}), size({x | x <- openpmFailures, x is domainDetail})>
+		<"Endeavour", size(endeavour), size([s | /s:asso(_,_,_,_) <- endeavour]), size([s | /s:attr(_) <- endeavour])>
+		, <"OpenPM", size(openpm), size([s | /s:asso(_,_,_,_) <- openpm]), size([s | /s:attr(_) <- openpm])>
+		, <"Reference", size(project), size([s | /s:asso(_,_,_,_) <- project]), size([s | /s:attr(_) <- project])>
 	];
-	writeFile(|rascal://src/systems.tex|, ("" | it + "\\systemDetails<(""| it + "{<e>}" | e <- r)>\n" | r <- systems));
+	writeFile(|rascal://src/models.tex|, ("" | it + "\\modelDetails<(""| it + "{<e>}" | e <- r)>\n" | r <- systems));
 	
 	mappings = [
 		getMappingCounts("equalName", "The target has the same entity name as the reference model")
