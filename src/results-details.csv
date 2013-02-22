@@ -1,30 +1,18 @@
 field0,field1,field2,field3,field4,field5,field6,field7,field8,field9,field10
-Activity,true,true,3,3,7,0.43,5,6,6,0.71
+Activity,true,true,3,3,8,0.38,5,6,6,0.71
 Activity Attribute,true,true,1,1,1,1.,1,1,1,1.
 Activity Dependency,true,false,0,0,1,0.0,0,0,0,0.0
 Activity duration,false,true,0,0,0,0.0,1,2,1,0.5
-Actor,true,false,0,0,0,1.0,0,0,0,0.0
-Attachment,true,true,0,0,0,1.0,0,0,0,1.0
-ChangeRequest,true,false,0,0,0,1.0,0,0,0,0.0
+Change request,true,false,0,0,0,1.0,0,0,0,0.0
 Defect,true,false,0,1,0,0.0,0,0,0,0.0
 Deliverable,false,true,0,0,0,0.0,1,1,3,0.33
-Dependency,true,false,0,0,0,1.0,0,0,0,0.0
-Document,true,false,0,0,0,1.0,0,0,0,0.0
-Effort,false,true,0,0,0,0.0,0,0,0,1.0
+Documentation,true,false,0,0,2,0.0,0,0,0,0.0
 FinishFinish,true,false,0,0,0,1.0,0,0,0,0.0
 FinishStart,true,false,0,0,0,1.0,0,0,0,0.0
-Iteration,true,false,0,0,0,1.0,0,0,0,0.0
 Milestone,true,true,2,3,2,0.67,0,3,0,0.0
-Product,false,true,0,0,0,0.0,0,0,0,1.0
-Project,true,false,2,2,4,0.5,0,0,0,0.0
+Project,true,false,2,2,5,0.4,0,0,0,0.0
 Project schedule,false,true,0,0,0,0.0,2,4,3,0.4
-ProjectMember,true,false,0,0,0,1.0,0,0,0,0.0
 Requirement,true,false,2,3,3,0.5,0,0,0,0.0
-Sprint,false,true,0,0,0,0.0,0,0,0,1.0
 StartFinish,true,false,0,0,0,1.0,0,0,0,0.0
 StartStart,true,false,0,0,0,1.0,0,0,0,0.0
-Task,true,true,0,0,0,1.0,0,0,0,1.0
 Team Member,true,true,1,1,2,0.5,1,1,2,0.5
-UseCase,true,false,0,0,0,1.0,0,0,0,0.0
-User,false,true,0,0,0,0.0,0,0,0,1.0
-WorkProduct,true,false,0,0,0,1.0,0,0,0,0.0

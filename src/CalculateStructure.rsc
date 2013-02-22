@@ -42,7 +42,9 @@ private tuple[real globalsimularity, lrel[str entity, int overlap, int inreferen
 	g_target = mapOntoReference(g_target, mappings);
 	mappedNames = getNameMappings(mappings);
 	e_target = (g_target<0> + g_target<1>) - ({mappedNames[f.sourceName]?f.sourceName | f <- failures} + {mappedNames[m.sourceName]?m.sourceName | m <- mappings, m has correct, !m.correct});
-	e_target += mappedNames<0>;
+	println(e_target);
+	e_target += mappedNames<1>;
+	println(e_target);
 	g_ref = {<f,t> | <f,t> <- g_ref, f in e_target, t in e_target};
 	g_target = {<f,t> | <f,t> <- g_target, f in e_target, t in e_target};
 	g_ref += g_ref<1,0>; // make the relations undirected
@@ -73,7 +75,7 @@ public void main() {
 	println();
 	<endSim, end> = analyse(endeavour, endeavourMapping, endeavourFailures);
 	<opmSim, opm> = analyse(openpm, openpmMapping, openpmFailures);
-	joined = [<e, e in end<0>, e in opm<0>, end[e], opm[e]> | e <- sort([*{*end<0>, *opm<0>, *(getNameMappings(endeavourMapping)<0>), *(getNameMappings(openpmMapping)<0>)}])];
+	joined = [<e, e in end<0>, e in opm<0>, end[e], opm[e]> | e <- sort([*{*end<0>, *opm<0>, *(getNameMappings(endeavourMapping)<1>), *(getNameMappings(openpmMapping)<1>)}])];
 	joined = visit(joined) {
 		case real x => 0.0
 			when x == 0.0	
