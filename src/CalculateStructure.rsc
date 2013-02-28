@@ -2,6 +2,7 @@ module CalculateStructure
 
 import Set;
 import List;
+import Map;
 import IO;
 import Node;
 import util::Math;
@@ -55,6 +56,43 @@ private tuple[real globalsimularity, lrel[str entity, int overlap, int inreferen
 		>;
 }
 
+private set[set[&T]] makeUndirected(Graph[&T] src) = { {f,t} | <f,t> <- src};
+
+private tuple[real globalsimularity, lrel[str entity, str original, int overlap, int inreference, int intarget, real simularity] overlaps] analyse2(DomainModel target, ModelMappings mappings, ModelMappingFailures failures) {
+	<refAssocs,_,refSpecs> = extractGraphs(project);
+	<targetAssocs,_,targetSpecs> = extractGraphs(target);
+	targetAssocs = mapOntoReference(targetAssocs, mappings);
+	targetSpecs = mapOntoReference(targetSpecs, mappings);
+	mappedNames = getNameMappings(mappings);
+	
+	sharedEntities = (targetAssocs<0> + targetAssocs<1> + targetSpecs<0> + targetSpecs<1>) - ({mappedNames[f.sourceName]?f.sourceName | f <- failures} + {mappedNames[m.sourceName]?m.sourceName | m <- mappings, m has correct, !m.correct});
+	println("Shared entitities: <sort([*sharedEntities])>");
+	
+	// make subgraphs for the shared entities
+	refAssocs = refAssocs & (sharedEntities * sharedEntities); 
+	refSpecs = refSpecs & (sharedEntities * sharedEntities); 
+	targetAssocs = targetAssocs & (sharedEntities * sharedEntities); 
+	targetSpecs = targetSpecs & (sharedEntities * sharedEntities); 
+	
+	refAssocsUndirected = makeUndirected(refAssocs);	
+	targetAssocsUndirected = makeUndirected(targetAssocs);	
+	globalSimularity = calculateSimularity(refAssocsUndirected + refSpecs, targetAssocsUndirected + targetSpecs);
+
+	set[set[str]] getAssocs(set[set[str]] src, str ent)
+		= { x | x <- src, ent in x};
+
+	invertedMapping = invert(mappedNames);
+	result = for(e <- sort([*sharedEntities])) {
+		append <e, intercalate(", ", sort([*invertedMapping[e]]))
+			 , size((getAssocs(refAssocsUndirected, e) + refSpecs[e]) & (getAssocs(targetAssocsUndirected, e) + targetSpecs[e]))
+			 , size((getAssocs(refAssocsUndirected, e) + refSpecs[e]))
+			 , size((getAssocs(targetAssocsUndirected, e) + targetSpecs[e]))
+			 , calculateSimularity((getAssocs(refAssocsUndirected, e) + refSpecs[e]), (getAssocs(targetAssocsUndirected, e) + targetSpecs[e]))
+			>;
+	};
+	return <globalSimularity, result>;
+}
+
 private void analyseResults(DomainModel target, ModelMappings mappings, ModelMappingFailures failures){
 	<total, details> = analyse(target, mappings, failures);
 	println("total simularity: <total *100>");
@@ -63,7 +101,35 @@ private void analyseResults(DomainModel target, ModelMappings mappings, ModelMap
 	}
 }
 
+
 public void main() {
+	<endSim, endEnt> = analyse2(endeavour, endeavourMapping, endeavourFailures);
+	<opmSim, opmEnt> = analyse2(openpm, openpmMapping, openpmFailures);
+	endEnt = visit(endEnt) {
+		case real x => 0.0
+			when x == 0.0	
+	};
+	opmEnt = visit(opmEnt) {
+		case real x => 0.0
+			when x == 0.0	
+	};
+	println("Endeavour: <endSim>");
+	println("OpenPM: <opmSim>");
+	println();
+	println();
+	println("Endeavour");
+	for (r <- endEnt) {
+		println("\\relationMapping<(""| it + "{<e>}" | e <- r)>");
+	}
+	println();
+	println();
+	println("OpenPM");
+	for (r <- opmEnt) {
+		println("\\relationMapping<(""| it + "{<e>}" | e <- r)>");
+	}
+}
+
+public void main2() {
 	println("Endeavour");
 	analyseResults(endeavour, endeavourMapping, endeavourFailures);
 	println("");
