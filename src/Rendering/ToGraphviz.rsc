@@ -174,7 +174,7 @@ private str toGraphviz(BehaviorRelations behavior) {
 	entities += { "$_$" +output |n <- behavior, n[3]?, str output := n[3]};
 	entities += { "$_$" + s | n <- behavior, set[str] sources := n[2], s <- sources};
 	entityList = [*entities];
-	map[str, str] shortName = (entityList[n] : "e<n>" | n <- [0..size(entityList) - 1]);
+	map[str, str] shortName = (entityList[n] : "e<n>" | n <- [0..size(entityList)]);
 	
 	str printBehavior(Behavior b) {
 		if (str input := b[0], str name := b[1], str activity := b[2], str output := b[3]) {
