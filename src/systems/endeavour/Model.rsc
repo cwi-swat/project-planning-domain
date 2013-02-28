@@ -65,7 +65,7 @@ public DomainModel endeavour = {
 		],
 		|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Dependency.java|(1153,2379,<28,0>,<125,0>)
 		)
-	, specialisation("FinishedStart", "Dependency", [ ], [ ], {|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Task.java|(6387,0,<197,0>,<197,0>),|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Task.java|(6387,0,<197,0>,<197,0>)})
+	, specialisation("FinishStart", "Dependency", [ ], [ ], {|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Task.java|(6387,0,<197,0>,<197,0>),|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Task.java|(6387,0,<197,0>,<197,0>)})
 	, specialisation("StartStart", "Dependency", [ ], [ ], {|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Task.java|(6387,0,<197,0>,<197,0>),|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Task.java|(6387,0,<197,0>,<197,0>)})
 	, specialisation("FinishFinish", "Dependency", [ ], [ ], {|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Task.java|(6387,0,<197,0>,<197,0>),|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Task.java|(6387,0,<197,0>,<197,0>)})
 	, specialisation("StartFinish", "Dependency", [ ], [ ], {|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Task.java|(6387,0,<197,0>,<197,0>),|project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Task.java|(6387,0,<197,0>,<197,0>)})

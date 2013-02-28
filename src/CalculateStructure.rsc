@@ -121,6 +121,23 @@ public void main() {
 	);
 }
 
+
+public void checkEverythingIsMapped() {
+	bool isMapped(DomainModel dm,  ModelMappings mm, ModelMappingFailures mmf) {
+		ents = { c.name | Class c <- dm};
+		maps =  (getMappedNames(mm) + getMappedNames(mmf));
+		println((ents-maps) + (maps-ents));
+		return ents == maps;
+	}	
+	println("endeavour: <isMapped(endeavour, endeavourMapping, endeavourFailures)>");
+	println("openpm: <isMapped(openpm, openpmMapping, openpmFailures)>");
+}
+
+private set[str] getMappedNames(set[node] target)
+	= {src | n <- target, n has sourceName, str src := getChildren(n)[0]}
+		+ {*src | n <- target, n has sourceNames,  set[str] src := getChildren(n)[0] }
+	;
+
 private int getEntityCount(set[node] target) 
 	= size(
 		{src | n <- target, n has sourceName, str src := getChildren(n)[0]}
