@@ -33,7 +33,7 @@ public set[str] getRelatedTo(DomainModel model, str root, int levels) {
 	set[str] result = {root};
 	<assocs, assocClasses, specs> = extractGraphs(model);
 	extends = specs<1,0>;
-	for (i <- [0..(levels - 1)]) {
+	for (i <- [0..levels]) {
 		as = assocs[result];
 		asClasses = assocClasses[as * result];
 		result += as + asClasses;

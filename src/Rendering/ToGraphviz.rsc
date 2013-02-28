@@ -13,11 +13,13 @@ import Model::MetaDomain;
 public void renderGraphviz(loc target, DomainModel model) {
 	writeFile(target, toGraphviz(model));
 }
-public void renderGraphvizv2(loc target, DomainModel model) {
-	writeFile(target, toGraphvizv2(model));
+public void renderGraphvizv2(loc target, DomainModel model, str params ="  nodesep=0.25;
+	'	ranksep=0.5;
+	'	ratio=0.7;", str font="Helvetica") {
+	writeFile(target, toGraphvizv2(model, params, font));
 }
 
-private str toGraphvizv2(DomainModel model) {
+private str toGraphvizv2(DomainModel model, str params, str font) {
 	map[str, str] shortName = ();
 	rel[str, str] sameRank = {};
 	//sameRank += {*{<c.name, aso.otherClass> | aso <- c.assocations, aso@class?} | c <- model};
@@ -33,8 +35,8 @@ private str toGraphvizv2(DomainModel model) {
 			cCount += 1;
 		}
 	}
-	str getClass(Class c) {
-		return "<shortName[c.name]> [label=\<<table(c)>\> fontname=\"Helvetica\", fontcolor=\"black\", fontsize=10.0];";
+	str getClass(Class c, font) {
+		return "<shortName[c.name]> [label=\<<table(c)>\> fontname=\"<font>\", fontcolor=\"black\", fontsize=10.0];";
 	}
 	
 	str getAssocation(str from, str to, str label) {
@@ -63,24 +65,22 @@ private str toGraphvizv2(DomainModel model) {
 		sameCluster = rankClusters[c.name];
 		if (sameCluster != {}) {
 			classes += "{ rank=same;\n";
-			classes += getClass(c) + "\n";
+			classes += getClass(c, font) + "\n";
 			for(co <- todo, co.name in sameCluster) {
 				todo -= {co};
-				classes += getClass(co) + "\n";
+				classes += getClass(co, font) + "\n";
 			}
 			classes += "}\n";
 		}
 		else {
-			classes += getClass(c) + "\n";
+			classes += getClass(c, font) + "\n";
 		}
 	} 
 	return 
 	"digraph G {
-	'	edge [fontname=\"Helvetica\",fontsize=10,labelfontname=\"Helvetica\",labelfontsize=10];
-	'	node [fontname=\"Helvetica\",fontsize=10,shape=plaintext];
-	'	nodesep=0.25;
-	'	ranksep=0.5;
-	'	ratio=0.7;
+	'	edge [fontname=\"<font>\",fontsize=10,labelfontname=\"<font>\",labelfontsize=10];
+	'	node [fontname=\"<font>\",fontsize=10,shape=plaintext];
+	'	<params>
 	'	minlen=2;
 	'	rankdir=BT;
 	'	<classes>
