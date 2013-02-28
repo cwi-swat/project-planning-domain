@@ -63,7 +63,7 @@ public DomainModel openpm = {
 		],
 		|project://OpenPM/src/main/java/org/tracka/EmailSubscription.java|(1581,637,<75,1>,<104,1>)
 		)
-	/*, class("FieldVersion",
+	, class("FieldVersion",
 		[
 			attr("id", |project://OpenPM/src/main/java/org/tracka/FieldVersion.java|(1489,83,<40,1>,<43,16>))
 			, attr("oldValue", |project://OpenPM/src/main/java/org/tracka/FieldVersion.java|(1693,103,<50,1>,<54,24>))
@@ -136,7 +136,6 @@ public DomainModel openpm = {
 		],
 		|project://OpenPM/src/main/java/org/tracka/ObjectVersion.java|(1594,1161,<33,1>,<64,1>)
 		)
-	*/
 	, class("Product",
 		[
 			attr("anonymousCanSubmit", |project://OpenPM/src/main/java/org/tracka/Product.java|(4415,97,<70,1>,<73,43>))
@@ -152,7 +151,7 @@ public DomainModel openpm = {
 			asso("stateAnonymous", "TaskState", |project://OpenPM/src/main/java/org/tracka/Product.java|(4515,148,<74,1>,<79,33>))
 			, asso("stateDone", "TaskState", |project://OpenPM/src/main/java/org/tracka/Product.java|(4339,73,<67,1>,<69,28>))
 			, asso("typeAnonymous", "TaskType", |project://OpenPM/src/main/java/org/tracka/Product.java|(4666,145,<80,1>,<85,31>))
-			//, asso("has", "Label", |project://OpenPM/src/main/java/org/tracka/Label.java|(2065,69,<46,1>,<48,24>))
+			, asso("has", "Label", |project://OpenPM/src/main/java/org/tracka/Label.java|(2065,69,<46,1>,<48,24>))
 			, asso("has", "Link", |project://OpenPM/src/main/java/org/tracka/Product.java|(5007,30,<91,1>,<91,30>))
 			, asso("produced by", "Sprint", |project://OpenPM/src/main/java/org/tracka/Sprint.java|(2559,69,<52,1>,<54,24>))
 			, asso("decomposed in", "Task", |project://OpenPM/src/main/java/org/tracka/Task.java|(8592,69,<125,1>,<127,24>))
@@ -160,7 +159,6 @@ public DomainModel openpm = {
 		|project://OpenPM/src/main/java/org/tracka/Product.java|(256,17698,<12,0>,<543,0>)
 		)
 	, class("Link", [attr("text"), attr("url")], |project://OpenPM/src/main/java/org/tracka/Product.java|(5007,30,<91,1>,<91,30>))
-	/*
 	, class("Splitter",
 		[
 			attr("hideOlderThan", |project://OpenPM/src/main/java/org/tracka/Splitter.java|(1387,27,<36,1>,<36,27>))
@@ -178,7 +176,6 @@ public DomainModel openpm = {
 		],
 		|project://OpenPM/src/main/java/org/tracka/Splitter.java|(144,8666,<9,0>,<299,0>)
 		)
-	*/
 	, class("Sprint",
 		[
 			attr("endTime", |project://OpenPM/src/main/java/org/tracka/Sprint.java|(2631,25,<55,1>,<55,25>))
@@ -192,7 +189,6 @@ public DomainModel openpm = {
 		|project://OpenPM/src/main/java/org/tracka/Sprint.java|(233,9453,<12,0>,<282,0>)
 		)
 	, specialisation("Milestone", "Sprint", |project://OpenPM/src/main/java/org/tracka/Sprint.java|(558,69,<17,0>,<17,0>))
-	/*
 	, class("Tab",
 		[
 			attr("id", |project://OpenPM/src/main/java/org/tracka/Tab.java|(1069,83,<29,1>,<32,16>))
@@ -204,7 +200,6 @@ public DomainModel openpm = {
 		],
 		|project://OpenPM/src/main/java/org/tracka/Tab.java|(413,5796,<16,0>,<227,0>)
 		)
-	*/
 	, class("Task",
 		[
 			attr("description", |project://OpenPM/src/main/java/org/tracka/Task.java|(8489,75,<122,1>,<123,32>))
@@ -223,12 +218,11 @@ public DomainModel openpm = {
 			, asso("type", "TaskType", |project://OpenPM/src/main/java/org/tracka/Task.java|(8058,85,<108,1>,<110,22>))
 			, asso("has", "Attachment", |project://OpenPM/src/main/java/org/tracka/Attachment.java|(1394,48,<36,1>,<37,20>))
 			, asso("has", "Comment", |project://OpenPM/src/main/java/org/tracka/Comment.java|(1488,48,<39,1>,<40,20>))
-			//, asso("has", "Label", |project://OpenPM/src/main/java/org/tracka/LabelTask.java|(1387,33,<35,1>,<36,20>))
+			, asso("has", "Label", |project://OpenPM/src/main/java/org/tracka/LabelTask.java|(1387,33,<35,1>,<36,20>))
 			, asso("next", "Task", |project://OpenPM/src/main/java/org/tracka/Task.java|(7970,85,<104,1>,<107,37>))
 		],
 		|project://OpenPM/src/main/java/org/tracka/Task.java|(442,56071,<17,0>,<1425,0>)
 		)
-	/*
 	, class("TaskButton",
 		[
 			attr("id", |project://OpenPM/src/main/java/org/tracka/TaskButton.java|(2165,83,<42,1>,<45,16>))
@@ -245,7 +239,6 @@ public DomainModel openpm = {
 		],
 		|project://OpenPM/src/main/java/org/tracka/TaskButton.java|(507,10002,<19,0>,<349,0>)
 		)
-	*/
 	, class("TaskState",
 		[
 			attr("id", |project://OpenPM/src/main/java/org/tracka/TaskState.java|(1945,83,<43,1>,<46,16>))
@@ -282,8 +275,8 @@ public DomainModel openpm = {
 			, attr("showHistory", |project://OpenPM/src/main/java/org/tracka/User.java|(4205,35,<73,1>,<73,35>))
 		],
 		[
-			//asso("currentTab", "Tab", |project://OpenPM/src/main/java/org/tracka/User.java|(3979,92,<68,1>,<70,23>))
-			asso("participates in", "Product", |project://OpenPM/src/main/java/org/tracka/UserProduct.java|(173,5756,<10,0>,<183,0>))[@class="Access"]
+			asso("currentTab", "Tab", |project://OpenPM/src/main/java/org/tracka/User.java|(3979,92,<68,1>,<70,23>))
+			, asso("participates in", "Product", |project://OpenPM/src/main/java/org/tracka/UserProduct.java|(173,5756,<10,0>,<183,0>))[@class="Access"]
 		],
 		|project://OpenPM/src/main/java/org/tracka/User.java|(293,14765,<13,0>,<459,0>)
 		)

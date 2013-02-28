@@ -17,7 +17,10 @@ public ModelMappings openpmMapping = {
 public ModelMappingFailures openpmFailures = {
 	tooDetailed("Comment", "Comments on tasks are very low level and perhaps even an implementation detail.")
 	, tooDetailed("Link", "Links on products are very low level and perhaps even an implementation detail.")
+	, implementation("Access","Access is a implementation detail of the kind of security role a user has in a system")
 	, *implementation({"EmailSubscription", "EmailSubscriptionType"},"Sending emails to users is implementation details of a electronic systeSending emails to users is implementation details of a electronic systemm")
+	, *implementation({"Event", "Update", "Create", "Remove", "Add", "Delete", "ObjectVersion", "FieldVersion", "ObjectType","FieldType"},"Part of the Temporal Object/Property pattern, is not related to the domain.")
+	, *implementation({"Splitter", "Tab", "TaskButton"}, "These are UI concepts, the progress of the user through the UI has been made part of the model, but is not related to the domain.")
 	, missing("TaskState", "Activities in the reference model do not contain any state tracking.")
 	, missing("TaskType", "Activities in the reference model are not subtyped.")
 };
