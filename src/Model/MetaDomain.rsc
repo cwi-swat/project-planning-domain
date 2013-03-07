@@ -30,6 +30,20 @@ public Class specialisation(str name, str baseClass, list[Attribute] attributes,
 public Class specialisation(str name, str baseClass, list[Attribute] attributes, set[loc] locations) = specialisation(name, baseClass, attributes, [], locations); 
 public Class specialisation(str name, str baseClass, list[Attribute] attributes, list[Association] assocations, loc location) = specialisation(name, baseClass, attributes, assocations, {location}); 
 public Class specialisation(str name, str baseClass, list[Attribute] attributes, list[Association] assocations, set[loc] locations) = specialisation(name, baseClass, attributes, assocations)[@location = locations];
+
+
+public Class class(str name, set[str] uiscreen) = class(name)[@uiscreen = uiscreen];
+public Class class(str name, str uiscreen) = class(name, {uiscreen});
+public Class class(str name, list[Association] assocations, set[str] uiscreen) = class(name, [], assocations)[@uiscreen = uiscreen];
+public Class class(str name, list[Association] assocations, str uiscreen) = class(name, assocations, {uiscreen});
+
+
+public Class specialisation(str name, str baseClass, set[str] uiscreen) = specialisation(name, baseClass)[@uiscreen = uiscreen];
+public Class specialisation(str name, str baseClass, str uiscreen) = specialisation(name, baseClass, {uiscreen});
+public Class specialisation(str name, str baseClass, list[Association] assocations, set[str] uiscreen) = specialisation(name, baseClass, [], assocations)[@uiscreen = uiscreen];
+public Class specialisation(str name, str baseClass, list[Association] assocations, str uiscreen) = specialisation(name, baseClass, assocations, {uiscreen});
+
+
 data Attribute = attr(str name);
 
 public Attribute attr(str name, set[int] source) = attr(name)[@source = source];
@@ -46,6 +60,11 @@ public Association asso(str label, str otherClass, Cardinality from, Cardinality
 public Association asso(str label, str otherClass, set[loc] locations) = asso(label, otherClass)[@location= locations];
 public Association asso(str label, str otherClass, loc location) = asso(label, otherClass)[@location= {location}];
 
+
+public Association asso(str label, str otherClass, set[str] uiscreen) = asso(label, otherClass)[@uiscreen= uiscreen];
+public Association asso(str label, str otherClass, str uiscreen) = asso(label, otherClass, {uiscreen});
+
+
 anno str Association@class;
 
 data Cardinality = none() | \one() | oneOrMore() | noneOrMore();
@@ -60,6 +79,10 @@ anno set[loc] Class@location;
 anno set[loc] Attribute@location;
 anno set[loc] Association@location;
 anno set[loc] Cardinality@location;
+
+anno set[str] Class@uiscreen;
+anno set[str] Attribute@uiscreen;
+anno set[str] Association@uiscreen;
 
 alias DomainModel = set[Class];
 
