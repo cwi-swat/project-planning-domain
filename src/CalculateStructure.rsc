@@ -70,9 +70,10 @@ private set[set[&T]] makeUndirected(Graph[&T] src) = { {f,t} | <f,t> <- src};
 private Graph[&T] inheritRelations(Graph[&T] src, Graph[&T] spec) {
 	parents = spec;
 	newRelations ={ *{<s, t> | p <- parents[s], t<- src[p]} | s <- domain(spec)}; 
-	println(newRelations);
+//	println(newRelations);
 	return src + newRelations;
 }
+
 
 private tuple[real globalsimularity, lrel[str entity, str original, int overlap, int inreference, int intarget, real simularity] overlaps] analyse2(DomainModel ref, DomainModel target, ModelMappings mappings, ModelMappingFailures failures) {
 	<refAssocs,_,refSpecs> = extractGraphs(ref);
@@ -84,14 +85,19 @@ private tuple[real globalsimularity, lrel[str entity, str original, int overlap,
 	refAssocs = inheritRelations(refAssocs, refSpecs);
 	targetAssocs = inheritRelations(targetAssocs, targetSpecs);
 	
-	sharedEntities = (targetAssocs<0> + targetAssocs<1> + targetSpecs<0> + targetSpecs<1>) - ({mappedNames[f.sourceName]?f.sourceName | f <- failures} + {mappedNames[m.sourceName]?m.sourceName | m <- mappings, m has correct, !m.correct});
-	println("Shared entitities: <sort([*sharedEntities])>");
+	ignoreEntities =({mappedNames[f.sourceName]?f.sourceName | f <- failures} 
+			+ {mappedNames[m.sourceName]?m.sourceName | m <- mappings, m has correct, !m.correct});
+	sharedEntities = (targetAssocs<0> + targetAssocs<1> + targetSpecs<0> + targetSpecs<1>) - ignoreEntities;
 	
 	// make subgraphs for the shared entities
 	refAssocs = refAssocs & (sharedEntities * sharedEntities); 
 	refSpecs = refSpecs & (sharedEntities * sharedEntities); 
 	targetAssocs = targetAssocs & (sharedEntities * sharedEntities); 
 	targetSpecs = targetSpecs & (sharedEntities * sharedEntities); 
+	
+	println(refAssocs);
+	println(targetAssocs);
+	
 	
 	refAssocsUndirected = makeUndirected(refAssocs);	
 	targetAssocsUndirected = makeUndirected(targetAssocs);	
@@ -100,8 +106,9 @@ private tuple[real globalsimularity, lrel[str entity, str original, int overlap,
 	set[set[str]] getAssocs(set[set[str]] src, str ent)
 		= { x | x <- src, ent in x};
 
-	println(getAssocs(targetAssocsUndirected, "Defect"));
 
+	println(sharedEntities);
+	println(mappedNames);
 	invertedMapping = invert(mappedNames);
 	result = for(e <- sort([*sharedEntities])) {
 		append <e, intercalate(", ", sort([*invertedMapping[e]]))

@@ -4,6 +4,7 @@ data ModelMapping
 	= equalName(str sourceName, str targetName, str reason = "", bool correct = true)
 	| synonym(str sourceName, str targetName, str reason = "", bool correct = true)
 	| synonym(str sourceName, set[str] targetNames, str reason = "", bool correct = true)
+	| synonym(set[str] sourceNames, str targetName, str reason = "", bool correct = true)
 	| extension(str sourceName, str targetName, str reason = "")
 	| specialisation(str sourceName, str targetName, str reason = "")
 	| specialisation(set[str] sourceNames, str targetName, str reason = "")
