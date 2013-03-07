@@ -2,29 +2,30 @@ module systems::endeavour::UIInternalMapping
 
 import Model::Mapping;
 
+// SRC -> UI
 public ModelMappings endeavourUIInternalMapping = {
-	equalName("ProjectMember/Stakeholder", "Project Member")
+	equalName("ProjectMember", "ProjectMember/Stakeholder")
 	, equalName("Project", "Project")
 	, equalName("Iteration", "Iteration")
 	, equalName("Task", "Task")
-	, synonym("X", "WorkProduct", reason = "The speciality is not exactly clear in the UI, but in source it is.")
-	, equalName("Task Dependency", "Dependency")
+	, synonym("WorkProduct", "X", reason = "The speciality is not exactly clear in the UI, but in source it is.")
+	, equalName("Dependency", "Task Dependency")
 	, equalName("StartStart", "StartStart")
 	, equalName("StartFinish", "StartFinish")
 	, equalName("FinishStart", "FinishStart")
 	, equalName("FinishFinish", "FinishFinish")
 	, equalName("Document", "Document")
-	, equalName("Change Request", "ChangeRequest")
+	, equalName("ChangeRequest", "Change Request")
 	, equalName("Attachment", "Attachment")
 	, equalName("Actor", "Actor")
-	, equalName("Use Case", "UseCase")
+	, equalName("UseCase", "Use Case")
 	, equalName("Defect", "Defect")
 	, equalName("Comment", "Comment")
-	, equalName("Glossary", "GlossaryTerm")
-	, equalName("Security Group", "SecurityGroup")
-	, equalName("Test Plan", "TestPlan")
-	, synonym("Test Folder", {"TestFolder", "TestRun"}, reason="In implementation this is split, while UI this split is not that clear.")
-	, equalName("Test Case", "TestCase")
+	, equalName("GlossaryTerm", "Glossary")
+	, equalName("SecurityGroup", "Security Group")
+	, equalName("TestPlan", "Test Plan")
+	, synonym({"TestFolder", "TestRun"}, "Test Folder",  reason="In implementation this is split, while UI this split is not that clear.")
+	, equalName("TestCase", "Test Case")
 	, equalName("Event", "Event")
 };
 
@@ -32,5 +33,5 @@ public ModelMappings endeavourUIInternalMapping = {
 
 public ModelMappingFailures endeavourUIInternalFailures = {
 	implementation("Version", "Implementation details how versions are kept for the document.")
-	, implementation("Privelege", "Implementation details of the user login.")
+	, implementation("Privilege", "Implementation details of the user login.")
 };

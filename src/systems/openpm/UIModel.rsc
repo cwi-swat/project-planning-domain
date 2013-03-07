@@ -35,7 +35,7 @@ public DomainModel openpmUI = {
 		asso("has", "Task", "Task-Details")	
 		, asso("part of", "Iteration", "Product-new")	
 		, asso("has", "Link", "Product-new")	
-		, asso("access", "user", "Product-new")[@class="Access Right"]	
+		, asso("access", "User", "Product-new")[@class="Access Right"]	
 		, asso("has", "ObjectHistory", "Recyclebin")
 		], {"Task-Details", "Product-new"})
 		
