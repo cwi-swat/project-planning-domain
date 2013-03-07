@@ -80,4 +80,6 @@ public DomainModel endeavourUI = {
 		], "Project document")
 	
 	, class("Security Group", "Security Groups")
+	
+	, class("Attachment", {"Project Documentation", "Home-Task details" }) 
 };
