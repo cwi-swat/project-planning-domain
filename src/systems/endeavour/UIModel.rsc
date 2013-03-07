@@ -22,6 +22,10 @@ public DomainModel endeavourUI = {
 		], "Home-Use Case details")
 		
 	, specialisation("Task", "X",[
+		asso("has", "Task Dependency", "Home-Task details")
+		], "Home-Task details")
+		
+	, class("Task Dependency", [
 		asso("depends on", "Task", "Home-Task details")
 		], "Home-Task details")
 		
@@ -45,6 +49,9 @@ public DomainModel endeavourUI = {
 	, class("Project", [
 		asso("has", "ProjectMember/Stakeholder", "Home-Project details")
 		, asso("has", "Glossary", "Project Glossary")
+		, asso("has", "Iteration", "Iterations")
+		, asso("has", "X", "Home-Task details")
+		, asso("has", "Actor", "Actors")
 		], "Home-Project details")
 	
 	, class("Glossary", "Project Glossary")
