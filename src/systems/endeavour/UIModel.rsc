@@ -28,6 +28,10 @@ public DomainModel endeavourUI = {
 	, class("Task Dependency", [
 		asso("depends on", "Task", "Home-Task details")
 		], "Home-Task details")
+	, specialisation("FinishStart", "Task Dependency", "Home-Task details")
+	, specialisation("StartStart", "Task Dependency", "Home-Task details")
+	, specialisation("FinishFinish", "Task Dependency", "Home-Task details")
+	, specialisation("StartFinish", "Task Dependency", "Home-Task details")
 		
 	, specialisation("Use Case", "X", [
 		asso("include", "Use Case", "Home-Use Case details")		
