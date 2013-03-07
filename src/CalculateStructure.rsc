@@ -6,6 +6,7 @@ import Relation;
 import Map;
 import IO;
 import Node;
+import String;
 import util::Math;
 import Model::MetaDomain;
 import Model::Mapping;
@@ -16,11 +17,18 @@ import lang::csv::IO;
 import Domain::Project;
 import systems::endeavour::Model;
 import systems::endeavour::Mapping;
+import systems::endeavour::UIModel;
+import systems::endeavour::UIMapping;
+import systems::endeavour::UIInternalMapping;
 import systems::openpm::Model;
 import systems::openpm::Mapping;
+import systems::openpm::UIModel;
+import systems::openpm::UIMapping;
+import systems::openpm::UIInternalMapping;
 
 private map[str, str] getNameMappings(ModelMappings mappings) 
-	= (m.sourceName : m.targetName | m <- mappings, m has sourceName)
+	= (m.sourceName : m.targetName | m <- mappings, m has targetName, m has sourceName)
+	+ (m.sourceName : tm | m <- mappings, m has targetNames, tm <- m.targetNames, m has sourceName)
 	+ (ms : m.targetName | m <- mappings, m has sourceNames, ms <- m.sourceNames)
 	;
 
@@ -66,8 +74,8 @@ private Graph[&T] inheritRelations(Graph[&T] src, Graph[&T] spec) {
 	return src + newRelations;
 }
 
-private tuple[real globalsimularity, lrel[str entity, str original, int overlap, int inreference, int intarget, real simularity] overlaps] analyse2(DomainModel target, ModelMappings mappings, ModelMappingFailures failures) {
-	<refAssocs,_,refSpecs> = extractGraphs(project);
+private tuple[real globalsimularity, lrel[str entity, str original, int overlap, int inreference, int intarget, real simularity] overlaps] analyse2(DomainModel ref, DomainModel target, ModelMappings mappings, ModelMappingFailures failures) {
+	<refAssocs,_,refSpecs> = extractGraphs(ref);
 	<targetAssocs,_,targetSpecs> = extractGraphs(target);
 	targetAssocs = mapOntoReference(targetAssocs, mappings);
 	targetSpecs = mapOntoReference(targetSpecs, mappings);
@@ -115,31 +123,34 @@ private void analyseResults(DomainModel target, ModelMappings mappings, ModelMap
 }
 
 
+private void printRelationMapping(str name, DomainModel ref, DomainModel target, ModelMappings mappings, ModelMappingFailures failures) {
+	<sim, ent> = analyse2(ref, target, mappings, failures);
+	println("<name>: <sim>");
+	
+	ent = visit(ent) {
+		case real x => 0.0
+			when x == 0.0	
+	};
+	
+	str printFixed(int n) = "<n>";
+	str printFixed(real n) = left("<n>", 4, "0");
+	str printFixed(str n) = n;
+	
+	for (r <- ent) {
+		println("\\relationMapping<(""| it + "{<printFixed(e)>}" | e <- r)>");
+	}
+	println();
+	println();
+}
+
 public void main() {
-	<endSim, endEnt> = analyse2(endeavour, endeavourMapping, endeavourFailures);
-	<opmSim, opmEnt> = analyse2(openpm, openpmMapping, openpmFailures);
-	endEnt = visit(endEnt) {
-		case real x => 0.0
-			when x == 0.0	
-	};
-	opmEnt = visit(opmEnt) {
-		case real x => 0.0
-			when x == 0.0	
-	};
-	println("Endeavour: <endSim>");
-	println("OpenPM: <opmSim>");
-	println();
-	println();
-	println("Endeavour");
-	for (r <- endEnt) {
-		println("\\relationMapping<(""| it + "{<e>}" | e <- r)>");
-	}
-	println();
-	println();
-	println("OpenPM");
-	for (r <- opmEnt) {
-		println("\\relationMapping<(""| it + "{<e>}" | e <- r)>");
-	}
+	printRelationMapping("Endeavour UI -\> Reference", project, endeavourUI, endeavourUIMapping, endeavourUIFailures);
+	printRelationMapping("Endeavour UI -\> Endeavour SRC", endeavourUI, endeavour, endeavourUIInternalMapping, endeavourUIInternalFailures);
+	printRelationMapping("Endeavour SRC -\> Reference", project, endeavour, endeavourMapping, endeavourFailures);
+	
+	printRelationMapping("OpenPM UI -\> Reference", project, openpmUI, openpmUIMapping, openpmUIFailures);
+	printRelationMapping("OpenPM UI -\> OpenPM SRC", openpmUI, openpm, openpmUIInternalMapping, openpmUIInternalFailures);
+	printRelationMapping("OpenPM SRC -\> Reference", project, openpm, openpmMapping, openpmFailures);
 }
 
 public void main2() {
