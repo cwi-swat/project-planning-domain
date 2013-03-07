@@ -11,12 +11,14 @@ public DomainModel openpmUI = {
 		, asso("has", "User", "Task-Details")
 		, asso("has", "Attachment", "Task-Details")
 		, asso("has", "TaskHistory", "Task-Details")
-			
+		, asso("has", "Comment", "Task-Details")
 		], "Task-Details")
 	, class("Label", "Label-New")
+	, class("Comment", "Task-Details")
 	
 	, class("TaskHistory", [
 		asso("has", "FieldHistory", "Task-Details")	
+		, asso("by", "User", "Task-Details")	
 	], "Task-Details")
 	
 	, class("FieldHistory", [
@@ -29,11 +31,10 @@ public DomainModel openpmUI = {
 		asso("has", "Task", "Task-Details")	
 		, asso("part of", "Iteration", "Product-new")	
 		, asso("has", "Link", "Product-new")	
-		, asso("has", "Access Right", "Product-new")	
+		, asso("access", "user", "Product-new")[@class="Access Right"]	
 		], {"Task-Details", "Product-new"})
 		
 	, class("Access Right", [
-		asso("for", "User", "Product-new")
 		], "Product-new")
 		
 	, class("User", [
@@ -42,7 +43,7 @@ public DomainModel openpmUI = {
 		
 	, class("Email Notification", "User-new")
 		
-	, class("Splitter", "Splitter-Edit")
+	, class("Splitter", [asso("for", "Type", "Splitter-Edit")], "Splitter-Edit")
 	, class("Tab", [
 			asso("has", "Splitter", "Splitter-Edit")	
 		], {"Splitter-Edit", "Tab-Edit"})

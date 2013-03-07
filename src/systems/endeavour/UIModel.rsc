@@ -52,6 +52,7 @@ public DomainModel endeavourUI = {
 		, asso("has", "Iteration", "Iterations")
 		, asso("has", "X", "Home-Task details")
 		, asso("has", "Actor", "Actors")
+		, asso("has", "Test Case", "Test Case")
 		], "Home-Project details")
 	
 	, class("Glossary", "Project Glossary")
@@ -60,10 +61,6 @@ public DomainModel endeavourUI = {
 		asso("has", "X", "Iteration-details")	
 		], {"Iteration", "Home-Task details"})
 		
-		
-	, class("ProjectView", "Project Plan")
-	, specialisation("Project Plan", "ProjectView","Project Plan")
-	, specialisation("Project Schedule", "ProjectView","Project Plan")
 	
 	
 	, class("Test Case", [
