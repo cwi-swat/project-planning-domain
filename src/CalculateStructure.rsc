@@ -2,6 +2,7 @@ module CalculateStructure
 
 import Set;
 import List;
+import Relation;
 import Map;
 import IO;
 import Node;
@@ -58,12 +59,22 @@ private tuple[real globalsimularity, lrel[str entity, int overlap, int inreferen
 
 private set[set[&T]] makeUndirected(Graph[&T] src) = { {f,t} | <f,t> <- src};
 
+private Graph[&T] inheritRelations(Graph[&T] src, Graph[&T] spec) {
+	parents = spec;
+	newRelations ={ *{<s, t> | p <- parents[s], t<- src[p]} | s <- domain(spec)}; 
+	println(newRelations);
+	return src + newRelations;
+}
+
 private tuple[real globalsimularity, lrel[str entity, str original, int overlap, int inreference, int intarget, real simularity] overlaps] analyse2(DomainModel target, ModelMappings mappings, ModelMappingFailures failures) {
 	<refAssocs,_,refSpecs> = extractGraphs(project);
 	<targetAssocs,_,targetSpecs> = extractGraphs(target);
 	targetAssocs = mapOntoReference(targetAssocs, mappings);
 	targetSpecs = mapOntoReference(targetSpecs, mappings);
 	mappedNames = getNameMappings(mappings);
+	
+	refAssocs = inheritRelations(refAssocs, refSpecs);
+	targetAssocs = inheritRelations(targetAssocs, targetSpecs);
 	
 	sharedEntities = (targetAssocs<0> + targetAssocs<1> + targetSpecs<0> + targetSpecs<1>) - ({mappedNames[f.sourceName]?f.sourceName | f <- failures} + {mappedNames[m.sourceName]?m.sourceName | m <- mappings, m has correct, !m.correct});
 	println("Shared entitities: <sort([*sharedEntities])>");
@@ -80,6 +91,8 @@ private tuple[real globalsimularity, lrel[str entity, str original, int overlap,
 
 	set[set[str]] getAssocs(set[set[str]] src, str ent)
 		= { x | x <- src, ent in x};
+
+	println(getAssocs(targetAssocsUndirected, "Defect"));
 
 	invertedMapping = invert(mappedNames);
 	result = for(e <- sort([*sharedEntities])) {
