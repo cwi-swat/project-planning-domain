@@ -70,10 +70,10 @@ public DomainModel endeavourUI = {
 	, class("Test Case", [
 		asso("created by", "ProjectMember/Stakeholder", "Test cases")
 		, asso("has", "ProjectMember/Stakeholder", "Test cases")
-		, asso("has", "Test Step", "Test cases")
+		, asso("has", "Event", "Test cases")
 		, asso("has", "Comment", "Test cases")
 		], "Test cases")
-	, class("Test Step", "Test cases")
+	, class("Event", "Test cases")
 	
 	, class("Test Plan", [
 		asso("contains", "Test Folder", "Test plan")	

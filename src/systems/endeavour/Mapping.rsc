@@ -3,7 +3,7 @@ module systems::endeavour::Mapping
 import Model::Mapping;
 
 public ModelMappings endeavourMapping = {
-	synonym("ProjectMember", "Team Member", reason = "Team is in the context of a project, therefore it is also a project member")
+	synonym("ProjectMember", {"Team Member", "Stakeholder"}, reason = "Team is in the context of a project, therefore it is also a project member, also it is used as a stakeholder")
 	
 	, equalName("Project", "Project")
 		[@attrs={

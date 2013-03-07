@@ -20,11 +20,11 @@ public ModelMappings endeavourUIMapping = {
 	
 	, equalName("Document", "Documentation", reason = "Same term, but different context", correct = false)
 	
-	, equalName("ChangeRequest", "Change request")
+	, equalName("Change Request", "Change request")
 		
 	, implementationDetail("Attachment", "Activity Attribute", reason = "Attachments contain extra attributes for a work product, but in a special kind of form.")
 	
-	, specialisation({"UseCase", "Actor"}, "Requirement", reason = "Use cases and actors are a software project specific technique to document requirements, note, actors are not stakeholders, since a stakeholder does not need to interact with the system.")
+	, specialisation({"Use Case", "Actor"}, "Requirement", reason = "Use cases and actors are a software project specific technique to document requirements, note, actors are not stakeholders, since a stakeholder does not need to interact with the system.")
 	
 	, equalName("Defect", "Defect")
 };
@@ -33,6 +33,6 @@ public ModelMappings endeavourUIMapping = {
 
 public ModelMappingFailures endeavourUIFailures = {
 	missing("Glossary", "The glossary might be part of project specific documentation such as the scope or the project plan, but missing in the reference model due to level of detail differences")
-	, *implementation("SecurityGroup", "Implementation details of the user login.")
-	, *domainDetail({"Test Plan", "Test Folder", "Test Step", "Comment", "TestCase"}, "Testing is something more specific to the software domain, it is not part of the generic project planning domain model, but it is mentioned in the book as an example process, and it is related to the quality plan")
+	, implementation("Security Group", "Implementation details of the user login.")
+	, *domainDetail({"Test Plan", "Test Folder", "Event", "Comment", "TestCase"}, "Testing is something more specific to the software domain, it is not part of the generic project planning domain model, but it is mentioned in the book as an example process, and it is related to the quality plan")
 };
