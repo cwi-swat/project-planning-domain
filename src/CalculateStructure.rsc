@@ -95,8 +95,8 @@ private tuple[real globalsimularity, lrel[str entity, str original, int overlap,
 	targetAssocs = targetAssocs & (sharedEntities * sharedEntities); 
 	targetSpecs = targetSpecs & (sharedEntities * sharedEntities); 
 	
-	println(refAssocs);
-	println(targetAssocs);
+	//println(refAssocs);
+	//println(targetAssocs);
 	
 	
 	refAssocsUndirected = makeUndirected(refAssocs);	
@@ -107,8 +107,6 @@ private tuple[real globalsimularity, lrel[str entity, str original, int overlap,
 		= { x | x <- src, ent in x};
 
 
-	println(sharedEntities);
-	println(mappedNames);
 	invertedMapping = invert(mappedNames);
 	result = for(e <- sort([*sharedEntities])) {
 		append <e, intercalate(", ", sort([*invertedMapping[e]]))
@@ -150,14 +148,54 @@ private void printRelationMapping(str name, DomainModel ref, DomainModel target,
 	println();
 }
 
+private void printMappingUsage(lrel[str name, ModelMappings mm, ModelMappingFailures mf] mappingCombos) {
+	successful = ["equalName", "synonym", "extension", "specialisation", "implementationDetail"];
+	failures = ["missing", "implementation", "domainDetail", "tooDetailed", "differentDesign"];
+	println(("Category" | it + " & " + name | name <- mappingCombos.name) + " \\\\");	
+	list[int] totals;
+	void resetTotals() {
+		totals = [ 0 | n <- mappingCombos.name];
+	}
+	void printTotals() {
+		println("\\addlinespace");
+		println(("Total" | "<it> & <t>" | t <- totals) + "\\\\ \\midrule");
+	}
+	void printMappedLine(str n, list[set[node]] ts) {
+		println((n | "<it> & <getMappingCount(n, t)>" | t <- ts) + "\\\\");
+		for (i <- [0..size(totals)]) {
+			totals[i] = totals[i] + getMappingCount(n, ts[i]);	
+		}	
+	}
+	resetTotals();
+	for (s <- successful) {
+		printMappedLine(s, mappingCombos.mm);
+	}
+	printTotals();
+	resetTotals();
+	for (s <- failures) {
+		printMappedLine(s, mappingCombos.mf);
+	}
+	printTotals();
+}
+
+
 public void main() {
 	printRelationMapping("Endeavour UI -\> Reference", project, endeavourUI, endeavourUIMapping, endeavourUIFailures);
-	printRelationMapping("Endeavour UI -\> Endeavour SRC", endeavourUI, endeavour, endeavourUIInternalMapping, endeavourUIInternalFailures);
+	printRelationMapping("Endeavour SRC -\> Endeavour UI", endeavourUI, endeavour, endeavourUIInternalMapping, endeavourUIInternalFailures);
 	printRelationMapping("Endeavour SRC -\> Reference", project, endeavour, endeavourMapping, endeavourFailures);
 	
 	printRelationMapping("OpenPM UI -\> Reference", project, openpmUI, openpmUIMapping, openpmUIFailures);
-	printRelationMapping("OpenPM UI -\> OpenPM SRC", openpmUI, openpm, openpmUIInternalMapping, openpmUIInternalFailures);
+	printRelationMapping("OpenPM SRC -\> OpenPM UI", openpmUI, openpm, openpmUIInternalMapping, openpmUIInternalFailures);
 	printRelationMapping("OpenPM SRC -\> Reference", project, openpm, openpmMapping, openpmFailures);
+	
+	printMappingUsage([
+		<"Endeavour UI \\& Reference", endeavourUIMapping, endeavourUIFailures>
+		, <"Endeavour SRC \\& UI", endeavourUIInternalMapping, endeavourUIInternalFailures>
+		, <"Endeavour SRC \\& Reference", endeavourMapping, endeavourFailures>
+		, <"OpenPM UI \\& Reference", openpmUIMapping, openpmUIFailures>
+		, <"OpenPM SRC \\& UI", openpmUIInternalMapping, openpmUIInternalFailures>
+		, <"OpenPM SRC \\& Reference", openpmMapping, openpmFailures>
+		]);
 }
 
 public void main2() {
