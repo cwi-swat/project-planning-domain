@@ -34,5 +34,5 @@ public ModelMappings endeavourUIMapping = {
 public ModelMappingFailures endeavourUIFailures = {
 	missing("Glossary", "The glossary might be part of project specific documentation such as the scope or the project plan, but missing in the reference model due to level of detail differences")
 	, implementation("Security Group", "Implementation details of the user login.")
-	, *domainDetail({"Test Plan", "Test Folder", "Event", "Comment", "TestCase"}, "Testing is something more specific to the software domain, it is not part of the generic project planning domain model, but it is mentioned in the book as an example process, and it is related to the quality plan")
+	, *domainDetail({"Test Plan", "Test Folder", "Event", "Comment", "Test Case"}, "Testing is something more specific to the software domain, it is not part of the generic project planning domain model, but it is mentioned in the book as an example process, and it is related to the quality plan")
 };
