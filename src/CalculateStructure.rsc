@@ -28,9 +28,9 @@ import systems::openpm::UIMapping;
 import systems::openpm::UIInternalMapping;
 
 private rel[str, str] getNameMappingsRelation(ModelMappings mappings) 
-	= {<m.sourceName,  m.targetName> | m <- mappings, m has targetName, m has sourceName}
-	+ {<m.sourceName, tm> | m <- mappings, m has targetNames, tm <- m.targetNames, m has sourceName}
-	+ {<ms, m.targetName> | m <- mappings, m has sourceNames, ms <- m.sourceNames}
+	= {<m.sourceName,  m.targetName> | m <- mappings, m has targetName, m has sourceName, !(m has correct) || ( m has correct &&  m.correct)}
+	+ {<m.sourceName, tm> | m <- mappings, m has targetNames, tm <- m.targetNames, m has sourceName, !(m has correct) || ( m has correct &&  m.correct)}
+	+ {<ms, m.targetName> | m <- mappings, m has sourceNames, ms <- m.sourceNames, !(m has correct) || ( m has correct &&  m.correct)}
 	;
 /*
 private map[str, str] getNameMappings(ModelMappings mappings) 
@@ -261,13 +261,70 @@ public void main() {
 		, <"OpenPM SRC \\& Reference", openpmMapping, openpmFailures>
 		]);
 		
-	<assocs, _, specs> = extractGraphs(project);
+	/*<assocs, _, specs> = extractGraphs(project);
 	assocs = inheritRelations(assocs, specs);
 	assocs = assocs + assocs<1,0>;
 	println("public Graph[str] reference = <assocs>;");
 	printGraphVars("endeavour", endeavourUI, endeavour, endeavourUIMapping, endeavourMapping, endeavourUIInternalMapping);
 	printGraphVars("openPM", openpmUI, openpm, openpmUIMapping, openpmMapping, openpmUIInternalMapping);
+	*/
+	printRecallPrecision(getMappedGraphs());
 }
+
+alias MappedGraphs = lrel[str name, set[str] uiEntities, Graph[str] ui, set[str] srcEntities, Graph[str] src];
+
+
+private Graph[&T] makeUndirected2(Graph[&T] inp) = inp + inp<1,0>;
+
+private Graph[str] getMappedGraph(DomainModel target, ModelMappings mm)
+	= makeUndirected2(mapGraph(project, target, mm));
+	
+private set[str] getMappedEntities(DomainModel target, ModelMappings mm) 
+	= mapOntoReference(getEntities(target), mm);
+
+private MappedGraphs getMappedGraphs() {
+	return [
+		<"Endeavour", getMappedEntities(endeavourUI, endeavourUIMapping), getMappedGraph(endeavourUI, endeavourUIMapping), getMappedEntities(endeavour, endeavourMapping), getMappedGraph(endeavour, endeavourMapping)>
+		, <"OpenPM", getMappedEntities(openpmUI, openpmUIMapping), getMappedGraph(openpmUI, openpmUIMapping), getMappedEntities(openpm, openpmMapping), getMappedGraph(openpm, openpmMapping)>
+	];
+}
+
+private Graph[str] getFlatGraph(DomainModel dm) {
+	<assocs, _, specs> = extractGraphs(dm);
+	return makeUndirected2(inheritRelations(assocs, specs));
+}
+
+private str getRecallPrecision(set[&T] expected, set[&T] found)
+	= "<getRecall(expected, found)> (<getPrecision(expected, found)>)";
+private real getRecall(set[&T] expected, set[&T] found)
+	= (0.0+ size(expected & found)) / size(expected);
+
+private real getPrecision(set[&T] expected, set[&T] found)
+	= (0.0+ size(expected & found)) / size(found);
+	
+private void printRecallPrecision(MappedGraphs mg) {
+	referenceGraph = getFlatGraph(project);
+	referenceEntities = getEntities(project);
+	for (<nm, uients, ui, srcents, src> <- mg) {
+		println(nm);	
+		observedEntities = referenceEntities & uients;
+		recoveredEntities = referenceEntities & srcents;
+		observedRelations = referenceGraph & ui;
+		recoveredRelations = referenceGraph & src;
+		println(recoveredEntities == observedEntities);
+		println(recoveredRelations == observedRelations);
+		print("recall: <getRecallPrecision(observedEntities + recoveredEntities, recoveredEntities )>");	
+		print("\t and: <getRecallPrecision(observedRelations + recoveredRelations, recoveredRelations )>");	
+		println("\t and: <1- distance(observedRelations + recoveredRelations, recoveredRelations )>");	
+		
+		print("precision: <getPrecision(referenceEntities, srcents)>");	
+		print("\t and: <getPrecision(referenceGraph, src)>");	
+		println("\t and: <1- distance(referenceGraph, src)>");	
+	}
+}
+
+
+
 
 
 
