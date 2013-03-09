@@ -47,7 +47,7 @@ private set[str] mapOntoReference(str src, rel[str, str] mappings) {
 
 private set[str] mapOntoReference(set[str] src, ModelMappings mappings) {
 	mappedNames = getNameMappingsRelation(mappings);
-	return { *mapOntoReference(s, mappedNames) | s <- src, set[str] maps :=  mappedNames[s]};
+	return { *mapOntoReference(s, mappedNames) | s <- src};
 }
 
 private Graph[str] mapOntoReference(Graph[str] src, ModelMappings mappings) {
@@ -271,7 +271,9 @@ public void main() {
 	printRecallPrecision(getMappedGraphs());
 }
 
-alias MappedGraphs = lrel[str name, set[str] uiEntities, Graph[str] ui, set[str] srcEntities, Graph[str] src];
+alias MappedDomain = tuple[set[str] entities, Graph[str] relations];
+
+alias MappedGraphs = lrel[str name, MappedDomain ui, MappedDomain src, MappedDomain srcui, MappedDomain uiClean];
 
 
 private Graph[&T] makeUndirected2(Graph[&T] inp) = inp + inp<1,0>;
@@ -281,11 +283,17 @@ private Graph[str] getMappedGraph(DomainModel target, ModelMappings mm)
 	
 private set[str] getMappedEntities(DomainModel target, ModelMappings mm) 
 	= mapOntoReference(getEntities(target), mm);
+	
+private MappedDomain getMappedDomain(DomainModel target, ModelMappings mm)
+	= <getMappedEntities(target,mm), getMappedGraph(target, mm)>;
+	
+private MappedDomain getCleanDomain(DomainModel target)
+	= <getEntities(target), getFlatGraph(target)>;
 
 private MappedGraphs getMappedGraphs() {
 	return [
-		<"Endeavour", getMappedEntities(endeavourUI, endeavourUIMapping), getMappedGraph(endeavourUI, endeavourUIMapping), getMappedEntities(endeavour, endeavourMapping), getMappedGraph(endeavour, endeavourMapping)>
-		, <"OpenPM", getMappedEntities(openpmUI, openpmUIMapping), getMappedGraph(openpmUI, openpmUIMapping), getMappedEntities(openpm, openpmMapping), getMappedGraph(openpm, openpmMapping)>
+		<"Endeavour", getMappedDomain(endeavourUI, endeavourUIMapping), getMappedDomain(endeavour, endeavourMapping), getMappedDomain(endeavour, endeavourUIInternalMapping), getCleanDomain(endeavourUI)>
+		, <"OpenPM", getMappedDomain(openpmUI, openpmUIMapping), getMappedDomain(openpm, openpmMapping), getMappedDomain(openpm, openpmUIInternalMapping), getCleanDomain(openpmUI)>
 	];
 }
 
@@ -302,24 +310,66 @@ private real getRecall(set[&T] expected, set[&T] found)
 private real getPrecision(set[&T] expected, set[&T] found)
 	= (0.0+ size(expected & found)) / size(found);
 	
+private real getSimilarity(Graph[str] expected, Graph[str] found) 
+	= (1.0 - distance(expected, found));
+	
 private void printRecallPrecision(MappedGraphs mg) {
 	referenceGraph = getFlatGraph(project);
 	referenceEntities = getEntities(project);
-	for (<nm, uients, ui, srcents, src> <- mg) {
-		println(nm);	
-		observedEntities = referenceEntities & uients;
-		recoveredEntities = referenceEntities & srcents;
-		observedRelations = referenceGraph & ui;
-		recoveredRelations = referenceGraph & src;
-		println(recoveredEntities == observedEntities);
-		println(recoveredRelations == observedRelations);
-		print("recall: <getRecallPrecision(observedEntities + recoveredEntities, recoveredEntities )>");	
-		print("\t and: <getRecallPrecision(observedRelations + recoveredRelations, recoveredRelations )>");	
-		println("\t and: <1- distance(observedRelations + recoveredRelations, recoveredRelations )>");	
+	for (<str nm, MappedDomain ui, MappedDomain src, MappedDomain srcui, MappedDomain uiclean> <- mg) {
+		observedEntities = referenceEntities & ui.entities;
+		recoveredEntities = referenceEntities & src.entities;
+		observedRelations = ui.relations & (observedEntities * observedEntities);
+		recoveredRelations = src.relations & (recoveredEntities * recoveredEntities);
 		
-		print("precision: <getPrecision(referenceEntities, srcents)>");	
-		print("\t and: <getPrecision(referenceGraph, src)>");	
-		println("\t and: <1- distance(referenceGraph, src)>");	
+		rowResult = [
+			<"UI \\& Reference", "precision"
+				, getPrecision(referenceEntities, ui.entities)
+				, getPrecision(referenceGraph, ui.relations)
+			>
+			, <"UI \\& Reference", "similarity"
+				, getSimilarity(referenceGraph, ui.relations)
+				, 2.0
+			>
+			, <"Source code \\& Reference", "precision"
+				, getPrecision(referenceEntities, src.entities)
+				, getPrecision(referenceGraph, src.relations)
+			>
+			, <"Source code \\& Reference", "similarity"
+				, getSimilarity(referenceGraph, src.relations)
+				, 2.0
+			>
+			, <"Source code \\& UI", "precision"
+				, getPrecision(uiclean.entities, srcui.entities)
+				, getPrecision(uiclean.relations, srcui.relations)
+			>
+			, <"Source code \\& UI", "recall"
+				, getRecall(uiclean.entities, srcui.entities)
+				, getRecall(uiclean.relations, srcui.relations)
+			>
+			, <"Source code \\& UI", "similarity"
+				, getSimilarity(uiclean.relations, srcui.relations)
+				, 2.0
+			>
+			, <"Recovered \\& Observed", "recall"
+				, getRecall(observedEntities + recoveredEntities, recoveredEntities)
+				, getRecall(observedRelations + recoveredRelations, recoveredRelations)
+			>
+		];
+		str printFixed(real n) = left("<n>", 4, "0");
+		str roundCustom(real n) = printFixed(round(n * 100) / 100.0);
+		println("\\recallPrecisionResult{<nm>}{");
+		for (<n,k,e,r> <- rowResult, r != 2.0) {
+			println("\t<n> & <k> & <roundCustom(e)> & <roundCustom(r)> \\\\");
+		} 	
+		println("}");
+		println("");
+		println("\\similarityResult{<nm>}{");
+		for (<n,k,e,r> <- rowResult, r == 2.0) {
+			println("\t<n> & <roundCustom(e)>  \\\\");
+		} 	
+		println("}");
+		
 	}
 }
 
