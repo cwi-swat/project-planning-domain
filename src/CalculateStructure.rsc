@@ -211,22 +211,29 @@ private void printRelationMapping(str name, DomainModel ref, DomainModel target,
 }
 
 
-private void printMappingUsage(lrel[str name, ModelMappings mm, ModelMappingFailures mf] mappingCombos) {
-	successful = ["equalName", "synonym", "extension", "specialisation"];
+private void printMappingUsage(lrel[str from, str to, ModelMappings mm, ModelMappingFailures mf] mappingCombos) {
+	successful = ["equalName", "synonym", "extension", "implementationDetail", "specialisation"];
 	failures = ["missing", "implementation", "domainDetail", "tooDetailed"];
-	println(("Category" | it + " & " + name | name <- mappingCombos.name) + " \\\\");	
+	println(("Category" | "<it> & \\multicolumn{2}{c}{\\mappedOnto{<from>}{<to>}}"  | <from, to, _, _> <- mappingCombos) + " \\\\");	
+	println("\\cmidrule(l){2-<1+size(mappingCombos)*2>}");
+	println(("" | "<it> & <from> & <to>"  | <from, to, _, _> <- mappingCombos) + " \\\\ \\midrule");	
 	list[int] totals;
+	list[int] targetTotals;
 	void resetTotals() {
-		totals = [ 0 | n <- mappingCombos.name];
+		totals = [ 0 | n <- mappingCombos.from];
+		targetTotals = totals;
 	}
-	void printTotals() {
+	void printTotals(bool doTarget = true) {
 		println("\\addlinespace");
-		println(("Total" | "<it> & <t>" | t <- totals) + "\\\\ \\midrule");
+		println(("Total" | "<it> & <totals[i]> & <doTarget ? "<targetTotals[i]>": "-">" | i <- [0..size(totals)]) + "\\\\ \\midrule");
 	}
-	void printMappedLine(str n, list[set[node]] ts) {
-		println((n | "<it> & <getMappingCount(n, t)>" | t <- ts) + "\\\\");
+	void printMappedLine(str n, list[set[node]] ts, bool doTarget = true) {
+		println((n | "<it> & <getMappingCount(n, t)> & <doTarget ? "<getMappingTargetCount(n,t)>": "-">" | t <- ts) + "\\\\");
 		for (i <- [0..size(totals)]) {
 			totals[i] = totals[i] + getMappingCount(n, ts[i]);	
+			if (doTarget) {
+				targetTotals[i] = targetTotals[i] + getMappingTargetCount(n, ts[i]);	
+			}
 		}	
 	}
 	resetTotals();
@@ -236,14 +243,15 @@ private void printMappingUsage(lrel[str name, ModelMappings mm, ModelMappingFail
 	printTotals();
 	resetTotals();
 	for (s <- failures) {
-		printMappedLine(s, mappingCombos.mf);
+		printMappedLine(s, mappingCombos.mf, doTarget = false);
 	}
-	printTotals();
+	printTotals(doTarget = false);
 	
 }
 
 
 public void main() {
+/*
 	printRelationMapping("Endeavour UI -\> Reference", project, endeavourUI, endeavourUIMapping, endeavourUIFailures);
 	printRelationMapping("Endeavour SRC -\> Endeavour UI", endeavourUI, endeavour, endeavourUIInternalMapping, endeavourUIInternalFailures);
 	printRelationMapping("Endeavour SRC -\> Reference", project, endeavour, endeavourMapping, endeavourFailures);
@@ -251,15 +259,20 @@ public void main() {
 	printRelationMapping("OpenPM UI -\> Reference", project, openpmUI, openpmUIMapping, openpmUIFailures);
 	printRelationMapping("OpenPM SRC -\> OpenPM UI", openpmUI, openpm, openpmUIInternalMapping, openpmUIInternalFailures);
 	printRelationMapping("OpenPM SRC -\> Reference", project, openpm, openpmMapping, openpmFailures);
+*/
 	
 	printMappingUsage([
-		<"Endeavour UI \\& Reference", endeavourUIMapping, endeavourUIFailures>
-		, <"Endeavour SRC \\& UI", endeavourUIInternalMapping, endeavourUIInternalFailures>
-		, <"Endeavour SRC \\& Reference", endeavourMapping, endeavourFailures>
-		, <"OpenPM UI \\& Reference", openpmUIMapping, openpmUIFailures>
-		, <"OpenPM SRC \\& UI", openpmUIInternalMapping, openpmUIInternalFailures>
-		, <"OpenPM SRC \\& Reference", openpmMapping, openpmFailures>
-		]);
+		<"USR", "REF", endeavourUIMapping, endeavourUIFailures>
+		, <"SRC","REF", endeavourMapping, endeavourFailures>
+		, <"SRC", "USR", endeavourUIInternalMapping, endeavourUIInternalFailures>
+	]);
+	println();	
+	
+	printMappingUsage([
+		<"USR", "REF", openpmUIMapping, openpmUIFailures>
+		, <"SRC","REF", openpmMapping, openpmFailures>
+		, <"SRC", "USR", openpmUIInternalMapping, openpmUIInternalFailures>
+	]);
 		
 	/*<assocs, _, specs> = extractGraphs(project);
 	assocs = inheritRelations(assocs, specs);
@@ -302,11 +315,14 @@ private Graph[str] getFlatGraph(DomainModel dm) {
 	return makeUndirected2(inheritRelations(assocs, specs));
 }
 
-private str getRecallPrecision(set[&T] expected, set[&T] found)
-	= "<getRecall(expected, found)> (<getPrecision(expected, found)>)";
+private real getRecall(Graph[&T] expected, Graph[&T] found)
+	= getRecall(makeUndirected(expected), makeUndirected(found));
 private real getRecall(set[&T] expected, set[&T] found)
 	= (0.0+ size(expected & found)) / size(expected);
 
+private real getPrecision(Graph[&T] expected, Graph[&T] found)
+	= getPrecision(makeUndirected(expected), makeUndirected(found));
+	
 private real getPrecision(set[&T] expected, set[&T] found)
 	= (0.0+ size(expected & found)) / size(found);
 	
@@ -322,36 +338,37 @@ private void printRecallPrecision(MappedGraphs mg) {
 		observedRelations = ui.relations & (observedEntities * observedEntities);
 		recoveredRelations = src.relations & (recoveredEntities * recoveredEntities);
 		
+		println(referenceEntities & ui.entities);
 		rowResult = [
-			<"UI \\& Reference", "precision"
+			<"\\mappedOnto{USR}{REF}", "precision"
 				, getPrecision(referenceEntities, ui.entities)
 				, getPrecision(referenceGraph, ui.relations)
 			>
-			, <"UI \\& Reference", "similarity"
+			, <"\\mappedOnto{USR}{REF}", "similarity"
 				, getSimilarity(referenceGraph, ui.relations)
 				, 2.0
 			>
-			, <"Source code \\& Reference", "precision"
+			, <"\\mappedOnto{SRC}{REF}", "precision"
 				, getPrecision(referenceEntities, src.entities)
 				, getPrecision(referenceGraph, src.relations)
 			>
-			, <"Source code \\& Reference", "similarity"
+			, <"\\mappedOnto{SRC}{REF}", "similarity"
 				, getSimilarity(referenceGraph, src.relations)
 				, 2.0
 			>
-			, <"Source code \\& UI", "precision"
+			, <"\\mappedOnto{SRC}{USR}", "precision"
 				, getPrecision(uiclean.entities, srcui.entities)
 				, getPrecision(uiclean.relations, srcui.relations)
 			>
-			, <"Source code \\& UI", "recall"
+			, <"\\mappedOnto{SRC}{USR}", "recall"
 				, getRecall(uiclean.entities, srcui.entities)
 				, getRecall(uiclean.relations, srcui.relations)
 			>
-			, <"Source code \\& UI", "similarity"
+			, <"\\mappedOnto{SRC}{USR}", "similarity"
 				, getSimilarity(uiclean.relations, srcui.relations)
 				, 2.0
 			>
-			, <"Recovered \\& Observed", "recall"
+			, <"\\mappedOnto{REC}{\\ensuremath{\\text{OBS}\\cup\\text{REC}}}", "recall"
 				, getRecall(observedEntities + recoveredEntities, recoveredEntities)
 				, getRecall(observedRelations + recoveredRelations, recoveredRelations)
 			>
@@ -408,6 +425,12 @@ private int getMappingCount(str nm, set[node] target)
 	= size(
 		{src | n <- target, getName(n) == nm,  n has sourceName, str src := getChildren(n)[0], n has correct ==> (getChildren(n)[-1] == true) }
 		+ {*src | n <- target, getName(n) == nm, n has sourceNames, set[str] src := getChildren(n)[0], n has correct ==> (getChildren(n)[-1] == true) }
+	);
+
+private int getMappingTargetCount(str nm, set[node] target) 
+	= size(
+		{tar | n <- target, getName(n) == nm,  n has targetName, str tar := getChildren(n)[1], n has correct ==> (getChildren(n)[-1] == true) }
+		+ {*tar | n <- target, getName(n) == nm,  n has targetNames, set[str] tar := getChildren(n)[1], n has correct ==> (getChildren(n)[-1] == true) }
 	);
 
 private tuple[str,int,int,str] getMappingCounts(str nm, str expl)
