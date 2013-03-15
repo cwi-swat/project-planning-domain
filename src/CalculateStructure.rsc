@@ -338,54 +338,46 @@ private void printRecallPrecision(MappedGraphs mg) {
 		observedRelations = ui.relations & (observedEntities * observedEntities);
 		recoveredRelations = src.relations & (recoveredEntities * recoveredEntities);
 		
-		println(referenceEntities & ui.entities);
 		rowResult = [
-			<"\\mappedOnto{USR}{REF}", "precision"
+			<"\\OBS" ,"\\mappedOnto{\\USR}{\\REF}" 
+				, 2.0
+				, 2.0
 				, getPrecision(referenceEntities, ui.entities)
 				, getPrecision(referenceGraph, ui.relations)
-			>
-			, <"\\mappedOnto{USR}{REF}", "similarity"
 				, getSimilarity(referenceGraph, ui.relations)
-				, 2.0
 			>
-			, <"\\mappedOnto{SRC}{REF}", "precision"
+			, <"\\REC", "\\mappedOnto{\\SRC}{\\REF}"
+				, 2.0
+				, 2.0
 				, getPrecision(referenceEntities, src.entities)
 				, getPrecision(referenceGraph, src.relations)
-			>
-			, <"\\mappedOnto{SRC}{REF}", "similarity"
 				, getSimilarity(referenceGraph, src.relations)
-				, 2.0
 			>
-			, <"\\mappedOnto{SRC}{USR}", "precision"
-				, getPrecision(uiclean.entities, srcui.entities)
-				, getPrecision(uiclean.relations, srcui.relations)
-			>
-			, <"\\mappedOnto{SRC}{USR}", "recall"
+			, <"\\INT", "\\mappedOnto{\\SRC}{\\USR}"
 				, getRecall(uiclean.entities, srcui.entities)
 				, getRecall(uiclean.relations, srcui.relations)
-			>
-			, <"\\mappedOnto{SRC}{USR}", "similarity"
+				, getPrecision(uiclean.entities, srcui.entities)
+				, getPrecision(uiclean.relations, srcui.relations)
 				, getSimilarity(uiclean.relations, srcui.relations)
-				, 2.0
 			>
-			, <"\\mappedOnto{REC}{\\ensuremath{\\text{OBS}\\cup\\text{REC}}}", "recall"
+			, <"\\LIM", "\\mappedOnto{\\REC}{\\ensuremath{\\text{\\OBS}\\cup\\text{\\REC}}}"
 				, getRecall(observedEntities + recoveredEntities, recoveredEntities)
 				, getRecall(observedRelations + recoveredRelations, recoveredRelations)
+				, 2.0
+				, 2.0
+				, getSimilarity(observedRelations + recoveredRelations, recoveredRelations)
 			>
 		];
 		str printFixed(real n) = left("<n>", 4, "0");
-		str roundCustom(real n) = printFixed(round(n * 100) / 100.0);
+		str roundCustom(real n) = n == 2.0 ? "-" : printFixed(round(n * 100) / 100.0);
+		str roundCustom(str n) = n;
 		println("\\recallPrecisionResult{<nm>}{");
-		for (<n,k,e,r> <- rowResult, r != 2.0) {
-			println("\t<n> & <k> & <roundCustom(e)> & <roundCustom(r)> \\\\");
+		for (r <- rowResult) {
+			rlist = [c | c <-r ];
+			println(("\t<r[0]>" | "<it> & <roundCustom(c)>" | c <- rlist[1..]) + "\\\\");
 		} 	
 		println("}");
 		println("");
-		println("\\similarityResult{<nm>}{");
-		for (<n,k,e,r> <- rowResult, r == 2.0) {
-			println("\t<n> & <roundCustom(e)>  \\\\");
-		} 	
-		println("}");
 		
 	}
 }
