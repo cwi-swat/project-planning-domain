@@ -1,13 +1,52 @@
-module Model::MetaDomain
+module Meta::Domain
 
+
+// domain model
+
+alias DomainModel = set[Class];
 
 data Class 
 	= class(str name, list[Attribute] attributes, list[Association] assocations)
 	| specialisation(str name, str baseClass, list[Attribute] attributes, list[Association] assocations)
 	;
 	
-public anno set[str] Class@alternativeNames;
+data Attribute = attr(str name);
+data Association = asso(str label, str otherClass);
 
+anno str Association@class;
+anno set[str] Class@alternativeNames;
+
+
+// Glossary
+
+data DictionaryWord = term(str name, set[int] descriptions);
+alias Dictionary = set[DictionaryWord];
+
+// Process
+
+data Behavior 
+	= actorActivity(str input, str name, str activity, str entity)
+	| processActivity(str input, str name, str activity, str entity)
+	| composedOutOf(str input, str entity, set[str] sourceEntities)
+	;
+
+// traceability
+anno set[int] Class@source;
+anno set[int] Attribute@source;
+anno set[int] Association@source;
+
+anno set[loc] Class@location;
+anno set[loc] Attribute@location;
+anno set[loc] Association@location;
+
+anno set[str] Class@uiscreen;
+anno set[str] Attribute@uiscreen;
+anno set[str] Association@uiscreen;
+
+anno set[int] Behavior@source;
+
+
+// with newer version of rascal, we would have used optional arguments feature
 public Class class(str name) = class(name, [],[]);
 public Class class(str name, set[int] source) = class(name)[@source = source];
 public Class class(str name, list[Attribute] attributes) = class(name, attributes, []);
@@ -44,57 +83,20 @@ public Class specialisation(str name, str baseClass, list[Association] assocatio
 public Class specialisation(str name, str baseClass, list[Association] assocations, str uiscreen) = specialisation(name, baseClass, assocations, {uiscreen});
 
 
-data Attribute = attr(str name);
 
 public Attribute attr(str name, set[int] source) = attr(name)[@source = source];
-
 public Attribute attr(str name, set[loc] locations) = attr(name)[@location = locations];
 public Attribute attr(str name, loc location) = attr(name)[@location = {location}];
 
-data Association = asso(str label, str otherClass, Cardinality from, Cardinality to);
 
-public Association asso(str label, str otherClass) = asso(label, otherClass, none(), none());
 public Association asso(str label, str otherClass, set[int] source) = asso(label, otherClass)[@source= source];
-public Association asso(str label, str otherClass, Cardinality from, Cardinality to, set[int] source) = asso(label, otherClass, from, to)[@source= source];
-
 public Association asso(str label, str otherClass, set[loc] locations) = asso(label, otherClass)[@location= locations];
 public Association asso(str label, str otherClass, loc location) = asso(label, otherClass)[@location= {location}];
-
-
 public Association asso(str label, str otherClass, set[str] uiscreen) = asso(label, otherClass)[@uiscreen= uiscreen];
 public Association asso(str label, str otherClass, str uiscreen) = asso(label, otherClass, {uiscreen});
 
 
-anno str Association@class;
 
-data Cardinality = none() | \one() | oneOrMore() | noneOrMore();
-
-
-anno set[int] Class@source;
-anno set[int] Attribute@source;
-anno set[int] Association@source;
-anno set[int] Cardinality@source;
-
-anno set[loc] Class@location;
-anno set[loc] Attribute@location;
-anno set[loc] Association@location;
-anno set[loc] Cardinality@location;
-
-anno set[str] Class@uiscreen;
-anno set[str] Attribute@uiscreen;
-anno set[str] Association@uiscreen;
-
-alias DomainModel = set[Class];
-
-data DictionaryWord = term(str name, set[int] descriptions);
-alias Dictionary = set[DictionaryWord];
-
-data Behavior 
-	= actorActivity(str input, str name, str activity, str entity)
-	| processActivity(str input, str name, str activity, str entity)
-	| composedOutOf(str input, str entity, set[str] sourceEntities)
-	;
-anno set[int] Behavior@source;
 
 public Behavior actorActivity(str input, str name, str activity, str entity, set[int] source)
 	= actorActivity(input, name, activity, entity)[@source=source];
