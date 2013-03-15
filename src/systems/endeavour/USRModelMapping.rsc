@@ -1,8 +1,8 @@
-module systems::endeavour::UIMapping
+module systems::endeavour::USRModelMapping
 
-import Model::Mapping;
+import Meta::Mapping;
 
-public ModelMappings endeavourUIMapping = {
+public ModelMappings endeavourUSRMapping = {
 	synonym("ProjectMember/Stakeholder", {"Team Member", "Stakeholder"}, reason = "Team is in the context of a project, therefore it is also a project member, but it is also used as stakeholder")
 	
 	, equalName("Project", "Project")
@@ -31,7 +31,7 @@ public ModelMappings endeavourUIMapping = {
 
 
 
-public ModelMappingFailures endeavourUIFailures = {
+public ModelMappingFailures endeavourUSRMappingFailures = {
 	missing("Glossary", "The glossary might be part of project specific documentation such as the scope or the project plan, but missing in the reference model due to level of detail differences")
 	, implementation("Security Group", "Implementation details of the user login.")
 	, *domainDetail({"Test Plan", "Test Folder", "Event", "Comment", "Test Case"}, "Testing is something more specific to the software domain, it is not part of the generic project planning domain model, but it is mentioned in the book as an example process, and it is related to the quality plan")

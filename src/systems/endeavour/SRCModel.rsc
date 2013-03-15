@@ -1,7 +1,8 @@
-module systems::endeavour::Model
+module systems::endeavour::SRCModel
 
-import Model::MetaDomain;
-public DomainModel endeavour = {
+import Meta::Domain;
+
+public DomainModel endeavourSRC = {
 	class("Actor",
 		[
 			attr("description", |project://Endeavour-Mgmt/model/org/endeavour/mgmt/model/Actor.java|(1316,34,<34,1>,<34,34>))

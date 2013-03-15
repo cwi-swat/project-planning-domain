@@ -1,8 +1,8 @@
-module systems::openpm::Model
+module systems::openpm::SRCModel
 
-import Model::MetaDomain;
+import Meta::Domain;
 
-public DomainModel openpm = {
+public DomainModel openpmSRC = {
 	class("Access", 
 		[
 			attr("name", |project://OpenPM/src/main/java/org/tracka/Access.java|(161,4,<7,0>,<7,0>))

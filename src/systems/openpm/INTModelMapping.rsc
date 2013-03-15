@@ -1,9 +1,8 @@
-module systems::openpm::UIInternalMapping
+module systems::openpm::INTModelMapping
 
-import Model::Mapping;
+import Meta::Mapping;
 
-// SRC -> UI
-public ModelMappings openpmUIInternalMapping = {
+public ModelMappings openpmINTMapping = {
 	equalName("User", "User")
 	, equalName("Product", "Product")
 	, equalName("Task", "Task")
@@ -30,7 +29,7 @@ public ModelMappings openpmUIInternalMapping = {
 
 
 
-public ModelMappingFailures openpmUIInternalFailures = {
+public ModelMappingFailures openpmINTMappingFailures = {
 	missing("Milestone", "In the source a milestone was explained, but not in the UI")
 	, implementation("EmailSubscriptionType","Sending emails to users is implementation details of a electronic systeSending emails to users is implementation details of a electronic systemm")
 	, *implementation({"Add", "Remove",  "ObjectType", "FieldType"},"This part of the Temporal Object/Property pattern, was not visible.")

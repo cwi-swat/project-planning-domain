@@ -1,9 +1,8 @@
-module systems::endeavour::UIInternalMapping
+module systems::endeavour::INTModelMapping
 
-import Model::Mapping;
+import Meta::Mapping;
 
-// SRC -> UI
-public ModelMappings endeavourUIInternalMapping = {
+public ModelMappings endeavourINTMapping = {
 	equalName("ProjectMember", "ProjectMember/Stakeholder")
 	, equalName("Project", "Project")
 	, equalName("Iteration", "Iteration")
@@ -31,7 +30,7 @@ public ModelMappings endeavourUIInternalMapping = {
 
 
 
-public ModelMappingFailures endeavourUIInternalFailures = {
+public ModelMappingFailures endeavourINTFailures = {
 	implementation("Version", "Implementation details how versions are kept for the document.")
 	, implementation("Privilege", "Implementation details of the user login.")
 };

@@ -1,4 +1,4 @@
-module Model::Mapping
+module Meta::Mapping
 
 data ModelMapping
 	= equalName(str sourceName, str targetName, str reason = "", bool correct = true)

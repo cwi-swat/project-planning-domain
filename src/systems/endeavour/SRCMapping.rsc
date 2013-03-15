@@ -1,8 +1,8 @@
-module systems::endeavour::Mapping
+module systems::endeavour::SRCMapping
 
-import Model::Mapping;
+import Meta::Mapping;
 
-public ModelMappings endeavourMapping = {
+public ModelMappings endeavourSRCMapping = {
 	synonym("ProjectMember", {"Team Member", "Stakeholder"}, reason = "Team is in the context of a project, therefore it is also a project member, also it is used as a stakeholder")
 	
 	, equalName("Project", "Project")
@@ -71,7 +71,7 @@ public ModelMappings endeavourMapping = {
 
 
 
-public ModelMappingFailures endeavourFailures = {
+public ModelMappingFailures endeavourSRCFailures = {
 	missing("Version", "Just like Document which is actually missing in the model but overlaps with a wrong term, version is missing")
 	, missing("GlossaryTerm", "The glossary terms might be part of project specific documentation such as the scope or the project plan, but missing in the reference model due to level of detail differences")
 	, *implementation({"SecurityGroup", "Privilege"}, "Implementation details of the user login.")

@@ -1,8 +1,8 @@
-module systems::openpm::UIModel
+module systems::openpm::USRModel
 
-import Model::MetaDomain;
+import Meta::Domain;
 
-public DomainModel openpmUI = {
+public DomainModel openpmUSR = {
 	class("Task", [
 		asso("has", "State", "Task-Details")
 		, asso("has", "Type", "Task-Details")

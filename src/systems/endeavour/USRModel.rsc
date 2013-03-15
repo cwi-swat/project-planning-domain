@@ -1,8 +1,8 @@
-module systems::endeavour::UIModel
+module systems::endeavour::USRModel
 
-import Model::MetaDomain;
+import Meta::Domain;
 
-public DomainModel endeavourUI = {
+public DomainModel endeavourUSR = {
 	class("ProjectMember/Stakeholder", [
 		asso("assigned", "X", "Home")
 		, asso("part of", "Project", "Home")
