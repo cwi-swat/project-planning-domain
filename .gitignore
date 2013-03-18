@@ -6,10 +6,8 @@ bin
 *.*~
 .DS_Store
 
-*.dot
 *.eps
 *.pdf
-*.html
 *.png
 *.xlsx
 *.cache

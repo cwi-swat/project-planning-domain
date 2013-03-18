@@ -1,0 +1,96 @@
+digraph G {
+	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
+	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	  nodesep=0.25;
+		ranksep=0.5;
+		ratio=0.7;
+	minlen=2;
+	rankdir=BT;
+	c1 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Button</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c21 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>User</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c10 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>State</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c18 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Effort</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	{ rank=same;
+	c19 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Update</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c16 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Delete</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c11 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Create</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	}
+	c0 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Label</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c9 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Type</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c3 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Tab</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c5 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Comment</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c15 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Access Right</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c8 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Link</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c13 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>HistoryEvent</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c2 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Product</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c17 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Email Notification</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c7 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>FieldHistory</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c6 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Iteration</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c14 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Attachment</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c4 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Splitter</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c12 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Task</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c20 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>ObjectHistory</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	
+	// regular assocations
+	
+	c1 -> c10 [label="from"];	
+	
+	c1 -> c10 [label="to"];	
+	
+	c1 -> c9 [label="valid for"];	
+	
+	c2 -> c12 [label="has"];	
+	
+	c2 -> c6 [label="part of"];	
+	
+	c2 -> c8 [label="has"];	
+	
+	c2 -> c20 [label="has"];	
+	
+	c3 -> c4 [label="has"];	
+	
+	c4 -> c9 [label="for"];	
+	
+	c7 -> c13 [label="happend"];	
+	
+	c10 -> c9 [label="valid for"];	
+	
+	c12 -> c10 [label="has"];	
+	
+	c12 -> c9 [label="has"];	
+	
+	c12 -> c0 [label="has"];	
+	
+	c12 -> c18 [label="has"];	
+	
+	c12 -> c21 [label="has"];	
+	
+	c12 -> c14 [label="has"];	
+	
+	c12 -> c20 [label="has"];	
+	
+	c12 -> c5 [label="has"];	
+	
+	c20 -> c7 [label="has"];	
+	
+	c20 -> c21 [label="by"];	
+	
+	c21 -> c17 [label="member of"];	
+	
+	c21 -> c20 [label="has"];	
+	
+	// assocations with classes on them
+	
+	ac0 [label="", shape="circle", width=0.01, height=0.01 ];
+	c2 -> ac0 [label="access", dir="none"];
+	ac0 -> c21 [label=""];
+	ac0 -> c15 [label="access", dir="none", style="dashed"]	
+	
+	
+	c11 -> c13 [arrowhead="empty"];
+	
+	c16 -> c13 [arrowhead="empty"];
+	
+	c19 -> c13 [arrowhead="empty"];
+	
+}

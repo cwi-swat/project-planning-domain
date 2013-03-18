@@ -1,10 +1,10 @@
-module ViewProject
+module Rendering::ViewProject
 
 
-import Domain::Project;
+import Reference::Model;
 import Rendering::ToGraph;
 
 public void main() {
-	renderGraph(project);
+	renderGraph(Reference);
 
 }

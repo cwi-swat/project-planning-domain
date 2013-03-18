@@ -6,10 +6,12 @@ import util::Math;
 import vis::Figure;
 import vis::Render;
 
-import Model::MetaDomain;
+import Meta::Domain;
 
 private str getAttrText([]) = "";
-private str getAttrText([Attribute first, list[Attribute] rest]) = (first.name | it + "\n" + at.name | at <- rest);
+private str getAttrText([Attribute single]) = single.name;
+private default str getAttrText(list[Attribute] lst) 
+	=(lst[0].name | it + "\n" + at.name | at <- lst[1..]);
 
 private Figure getNode(Class cl) {
 	str attrText = getAttrText(cl.attributes);

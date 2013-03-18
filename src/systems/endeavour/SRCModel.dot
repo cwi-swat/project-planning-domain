@@ -1,0 +1,163 @@
+digraph G {
+	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
+	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	  nodesep=0.25;
+		ranksep=0.5;
+		ratio=0.7;
+	minlen=2;
+	rankdir=BT;
+	c18 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>WorkProduct</td></tr><tr><td balign="left" align="left">+createdBy<br />+description<br />+endDate<br />+id<br />+label<br />+name<br />+priority<br />+progress<br />+startDate<br />+status</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	{ rank=same;
+	c17 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Defect</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c3 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>UseCase</td></tr><tr><td balign="left" align="left">+postconditions<br />+preconditions<br />+type</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c5 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>ChangeRequest</td></tr><tr><td balign="left" align="left">+type</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c10 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Task</td></tr><tr><td balign="left" align="left">+is orphan</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	}
+	c7 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Attachment</td></tr><tr><td balign="left" align="left">+file<br />+id<br />+name</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c12 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>TestFolder</td></tr><tr><td balign="left" align="left">+id<br />+name</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c1 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Comment</td></tr><tr><td balign="left" align="left">+date<br />+id<br />+text</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	{ rank=same;
+	c4 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>StartFinish</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c14 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>FinishStart</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c20 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>FinishFinish</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c22 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>StartStart</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	}
+	c15 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Actor</td></tr><tr><td balign="left" align="left">+description<br />+id<br />+name</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c2 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Iteration</td></tr><tr><td balign="left" align="left">+createdBy<br />+startDate<br />+endDate<br />+id<br />+name<br />+progress</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c25 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Document</td></tr><tr><td balign="left" align="left">+description<br />+fileName<br />+id</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c19 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Version</td></tr><tr><td balign="left" align="left">+file<br />+id<br />+number</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c0 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Privilege</td></tr><tr><td balign="left" align="left">+id<br />+value</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c24 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>TestCase</td></tr><tr><td balign="left" align="left">+createdBy<br />+id<br />+name<br />+prerequisites<br />+purpose<br />+testData</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c13 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>TestRun</td></tr><tr><td balign="left" align="left">+executionDate<br />+folder<br />+id<br />+status</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c21 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>SecurityGroup</td></tr><tr><td balign="left" align="left">+id<br />+name</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c6 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Project</td></tr><tr><td balign="left" align="left">+createdBy<br />+description<br />+startDate<br />+endDate<br />+id<br />+name<br />+status</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c9 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>ProjectMember</td></tr><tr><td balign="left" align="left">+acceptNotifications<br />+email<br />+firstName<br />+id<br />+lastName<br />+role<br />+status<br />+statusDate</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c11 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Event</td></tr><tr><td balign="left" align="left">+id<br />+index<br />+text</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c16 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>TestPlan</td></tr><tr><td balign="left" align="left">+createdBy<br />+folders<br />+id<br />+name</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c8 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Dependency</td></tr><tr><td balign="left" align="left">+id</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c23 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>GlossaryTerm</td></tr><tr><td balign="left" align="left">+createdBy<br />+description<br />+id<br />+name</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	
+	// regular assocations
+	
+	c0 -> c21 [label="securityGroup"];	
+	
+	c1 -> c24 [label="for"];	
+	
+	c1 -> c13 [label="during"];	
+	
+	c1 -> c18 [label="on"];	
+	
+	c1 -> c9 [label="owned by"];	
+	
+	c2 -> c18 [label="has"];	
+	
+	c3 -> c3 [label="extend"];	
+	
+	c3 -> c3 [label="include"];	
+	
+	c3 -> c15 [label="assigns"];	
+	
+	c3 -> c11 [label="events"];	
+	
+	c3 -> c10 [label="defines"];	
+	
+	c6 -> c15 [label="has"];	
+	
+	c6 -> c25 [label="has"];	
+	
+	c6 -> c23 [label="defines"];	
+	
+	c6 -> c2 [label="contains"];	
+	
+	c6 -> c9 [label="has"];	
+	
+	c6 -> c24 [label="has"];	
+	
+	c6 -> c16 [label="has"];	
+	
+	c6 -> c3 [label="has"];	
+	
+	c6 -> c10 [label="has"];	
+	
+	c7 -> c18 [label="workProduct"];	
+	
+	c8 -> c10 [label="predecessor"];	
+	
+	c8 -> c10 [label="sucessor"];	
+	
+	c9 -> c21 [label="privileges"];	
+	
+	c9 -> c13 [label="testRuns"];	
+	
+	c9 -> c18 [label="is assigned to"];	
+	
+	c10 -> c18 [label="workProduct"];	
+	
+	c10 -> c8 [label="has"];	
+	
+	c11 -> c11 [label="parent"];	
+	
+	c11 -> c24 [label="testCase"];	
+	
+	c11 -> c18 [label="workProduct"];	
+	
+	c11 -> c11 [label="extensions"];	
+	
+	c12 -> c13 [label="has"];	
+	
+	c13 -> c1 [label="comments"];	
+	
+	c13 -> c9 [label="has"];	
+	
+	c16 -> c12 [label="has"];	
+	
+	c18 -> c2 [label="part of"];	
+	
+	c18 -> c6 [label="project"];	
+	
+	c18 -> c7 [label="has"];	
+	
+	c18 -> c1 [label="comments"];	
+	
+	c18 -> c25 [label="documents"];	
+	
+	c18 -> c9 [label="stakeholders"];	
+	
+	c19 -> c25 [label="document"];	
+	
+	c21 -> c0 [label="allows"];	
+	
+	c23 -> c6 [label="for"];	
+	
+	c24 -> c1 [label="comments"];	
+	
+	c24 -> c11 [label="steps"];	
+	
+	c25 -> c6 [label="part of"];	
+	
+	c25 -> c19 [label="has"];	
+	
+	c25 -> c19 [label="current"];	
+	
+	c25 -> c18 [label="assigned to"];	
+	
+	// assocations with classes on them
+	
+	
+	c3 -> c18 [arrowhead="empty"];
+	
+	c4 -> c8 [arrowhead="empty"];
+	
+	c5 -> c18 [arrowhead="empty"];
+	
+	c10 -> c18 [arrowhead="empty"];
+	
+	c14 -> c8 [arrowhead="empty"];
+	
+	c17 -> c18 [arrowhead="empty"];
+	
+	c20 -> c8 [arrowhead="empty"];
+	
+	c22 -> c8 [arrowhead="empty"];
+	
+}

@@ -1,0 +1,458 @@
+digraph G {
+	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
+	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	//nodesep=0.25;
+	//ranksep=0.5;
+	//ratio=0.95;
+	ranksep=2.0;
+	//minlen=2;
+	rankdir=LR;
+	
+	subgraph cluster_e0 {
+	 style=invis;
+		
+		e0 [label="Estimate Activity Durations", shape="box"];
+		
+		e54 [label="Estimate Activity Durations", shape="box"];
+		
+							}
+							
+	
+	e1 [label="resource requirement", shape="box"];
+	
+	e2 [label="activity resource requirement", shape="box"];
+	
+	e3 [label="schedule constraints", shape="box"];
+	
+	e4 [label="work performance information", shape="box"];
+	
+	e5 [label="team competencies", shape="box"];
+	
+	subgraph cluster_e6 {
+	 style=invis;
+		
+		e6 [label="Planning Process Group", shape="box"];
+		
+		e82 [label="Planning Process Group", shape="box"];
+		
+							}
+							
+	
+	e7 [label="needs", shape="box"];
+	
+	e8 [label="project documentation updates", shape="box"];
+	
+	subgraph cluster_e9 {
+	 style=invis;
+		
+		e9 [label="Project Management", shape="box"];
+		
+		e43 [label="Project Management", shape="box"];
+		
+							}
+							
+	
+	
+	
+	e11 [label="performance measurements", shape="box"];
+	
+	e12 [label="organizational process assets", shape="box"];
+	
+	e13 [label="activity definition process", shape="box"];
+	
+	e14 [label="reality", shape="box"];
+	
+	e15 [label="resource calendar", shape="box"];
+	
+	e16 [label="estimate review", shape="box"];
+	
+	e17 [label="activity list", shape="box"];
+	
+	e18 [label="quality control measurements", shape="box"];
+	
+	e19 [label="schedule", shape="box"];
+	
+	e20 [label="human resource plan", shape="box"];
+	
+	subgraph cluster_e21 {
+	 style=invis;
+		
+		e21 [label="Develop Schedule", shape="box"];
+		
+		e53 [label="Develop Schedule", shape="box"];
+		
+		e56 [label="Develop Schedule", shape="box"];
+		
+		e83 [label="Develop Schedule", shape="box"];
+		
+							}
+							
+	
+	e22 [label="quantitative analysis", shape="box"];
+	
+	e23 [label="activity duration", shape="box"];
+	
+	e24 [label="qualitative analysis", shape="box"];
+	
+	e25 [label="requirement", shape="box"];
+	
+	e26 [label="estimated resources", shape="box"];
+	
+	e27 [label="activity", shape="box"];
+	
+	e28 [label="milestone list", shape="box"];
+	
+	e29 [label="activity resource", shape="box"];
+	
+	e30 [label="activity attribute", shape="box"];
+	
+	e31 [label="quality audit", shape="box"];
+	
+	e32 [label="schedule development", shape="box"];
+	
+	e33 [label="estimated work effort", shape="box"];
+	
+	e34 [label="Control Schedule", shape="box"];
+	
+	e35 [label="feedback", shape="box"];
+	
+	e36 [label="budget", shape="box"];
+	
+	e37 [label="risk management", shape="box"];
+	
+	e38 [label="risk responses", shape="box"];
+	
+	e39 [label="", shape="box"];
+	
+	e40 [label="project schedule network diagram", shape="box"];
+	
+	e41 [label="procurement", shape="box"];
+	
+	subgraph cluster_e42 {
+	 style=invis;
+		
+		e10 [label="control schedule", shape="box"];
+		
+		e42 [label="control schedule", shape="box"];
+		
+							}
+							
+	
+	
+	
+	e44 [label="project plan updates", shape="box"];
+	
+	e45 [label="information", shape="box"];
+	
+	e46 [label="project performance", shape="box"];
+	
+	e47 [label="initiate phase", shape="box"];
+	
+	e48 [label="stakeholder", shape="box"];
+	
+	e49 [label="previous project", shape="box"];
+	
+	e50 [label="change", shape="box"];
+	
+	e51 [label="staff", shape="box"];
+	
+	e52 [label="team performance", shape="box"];
+	
+	subgraph cluster_e53 {
+	 style=invis;
+		
+		e21 [label="Develop Schedule", shape="box"];
+		
+		e53 [label="Develop Schedule", shape="box"];
+		
+		e56 [label="Develop Schedule", shape="box"];
+		
+		e83 [label="Develop Schedule", shape="box"];
+		
+							}
+							
+	
+	subgraph cluster_e54 {
+	 style=invis;
+		
+		e0 [label="Estimate Activity Durations", shape="box"];
+		
+		e54 [label="Estimate Activity Durations", shape="box"];
+		
+							}
+							
+	
+	e55 [label="project scope statement", shape="box"];
+	
+	subgraph cluster_e56 {
+	 style=invis;
+		
+		e21 [label="Develop Schedule", shape="box"];
+		
+		e53 [label="Develop Schedule", shape="box"];
+		
+		e56 [label="Develop Schedule", shape="box"];
+		
+		e83 [label="Develop Schedule", shape="box"];
+		
+							}
+							
+	
+	e57 [label="issue", shape="box"];
+	
+	e58 [label="project", shape="box"];
+	
+	e59 [label="Risk monitoring", shape="box"];
+	
+	e60 [label="scope of the effort", shape="box"];
+	
+	e61 [label="previous project history", shape="box"];
+	
+	e62 [label="enterprise environmental factors", shape="box"];
+	
+	e63 [label="scope", shape="box"];
+	
+	e64 [label="estimate revision", shape="box"];
+	
+	e65 [label="change request", shape="box"];
+	
+	e66 [label="Procurement", shape="box"];
+	
+	e67 [label="communications plan", shape="box"];
+	
+	e68 [label="course of action", shape="box"];
+	
+	e69 [label="estimates", shape="box"];
+	
+	e70 [label="performance previous tasks", shape="box"];
+	
+	e71 [label="allowed result", shape="box"];
+	
+	e72 [label="Stakeholder", shape="box"];
+	
+	e73 [label="costs", shape="box"];
+	
+	e74 [label="Change Control Board", shape="box"];
+	
+	e75 [label="expected result", shape="box"];
+	
+	e76 [label="Schedule development", shape="box"];
+	
+	e77 [label="team environment", shape="box"];
+	
+	e78 [label="risk", shape="box"];
+	
+	e79 [label="team interaction", shape="box"];
+	
+	e80 [label="quality", shape="box"];
+	
+	e81 [label="Human resource planning", shape="box"];
+	
+	
+	
+	subgraph cluster_e83 {
+	 style=invis;
+		
+		e21 [label="Develop Schedule", shape="box"];
+		
+		e53 [label="Develop Schedule", shape="box"];
+		
+		e56 [label="Develop Schedule", shape="box"];
+		
+		e83 [label="Develop Schedule", shape="box"];
+		
+							}
+							
+	
+	e84 [label="objective", shape="box"];
+	
+	e85 [label="activity sequence", shape="box"];
+	
+	e86 [label="change process", shape="box"];
+	
+	e87 [label="activity duration estimates", shape="box"];
+	
+	
+			e9 -> e8 [label="generates"];
+	
+			e26 -> e0 [style=dashed];
+e0 -> e23 [label="estimates"];
+	
+			e2 -> e81 [style=dashed];
+e81 -> e20 [label=" determine"];
+	
+			e13 -> e28 [label="define"];
+	
+			e6 -> e23 [label="define"];
+	
+			e9 -> e5 [label="develops"];
+	
+			e9 -> e46 [label="optimize"];
+	
+			e9 -> e4 [label="generates"];
+	
+			e9 -> e45 [label="distribute"];
+	
+			e76 -> e64 [label="causes"];
+	
+			e6 -> e38 [label="plans"];
+	
+			e42 -> e11 [label="generate"];
+	
+			e9 -> e31 [label="performs"];
+	
+			e42 -> e65 [label="generate"];
+	
+			e9 -> e48 [label="work with"];
+	
+			e6 -> e78 [label="identifies"];
+	
+			e9 -> e65 [label="approve/reject"];
+	
+			e6 -> e73 [label="estimate"];
+	
+			e66 -> e65 [label="create"];
+	
+			e9 -> e79 [label="develops"];
+	
+			e9 -> e65 [label="generates"];
+	
+			e6 -> e22 [label="performs"];
+	
+			e74 -> e65 [label="approve/reject"];
+	
+			e6 -> e85 [label="define"];
+	
+			e33 -> e54 [style=dashed];
+e54 -> e23 [label="estimates"];
+	
+			e9 -> e48 [label="communicate with"];
+	
+			
+e19 -> e40 [dir=back,arrowtail=empty, style=dotted];
+
+e19 -> e17 [dir=back,arrowtail=empty, style=dotted];
+
+e19 -> e55 [dir=back,arrowtail=empty, style=dotted];
+
+e19 -> e30 [dir=back,arrowtail=empty, style=dotted];
+
+e19 -> e12 [dir=back,arrowtail=empty, style=dotted];
+
+e19 -> e62 [dir=back,arrowtail=empty, style=dotted];
+
+e19 -> e2 [dir=back,arrowtail=empty, style=dotted];
+
+e19 -> e87 [dir=back,arrowtail=empty, style=dotted];
+
+e19 -> e15 [dir=back,arrowtail=empty, style=dotted];
+
+				
+	
+			e6 -> e27 [label="define"];
+	
+			e9 -> e52 [label="track"];
+	
+			e9 -> e77 [label="develops"];
+	
+			e47 -> e71 [label="specify"];
+	
+			e6 -> e68 [label="develop"];
+	
+			e13 -> e30 [label="define"];
+	
+			e6 -> e60 [label="establish"];
+	
+			e72 -> e7 [label="express"];
+	
+			e72 -> e57 [label="express"];
+	
+			e9 -> e44 [label="generates"];
+	
+			e59 -> e65 [label="create"];
+	
+			e23 -> e21 [style=dashed];
+e21 -> e19 [label="develops"];
+	
+			
+e58 -> e61 [dir=back,arrowtail=empty, style=dotted];
+
+				
+	
+			e30 -> e32 [style=dashed];
+e32 -> e69 [label="review/revision"];
+	
+			e6 -> e37 [label="plans"];
+	
+			
+e19 -> e3 [dir=back,arrowtail=empty, style=dotted];
+
+e19 -> e23 [dir=back,arrowtail=empty, style=dotted];
+
+e19 -> e85 [dir=back,arrowtail=empty, style=dotted];
+
+e19 -> e1 [dir=back,arrowtail=empty, style=dotted];
+
+				
+	
+			e72 -> e25 [label="influence"];
+	
+			e6 -> e80 [label="plans"];
+	
+			e6 -> e29 [label="define"];
+	
+			e6 -> e24 [label="performs"];
+	
+			e6 -> e67 [label="plans"];
+	
+			e9 -> e51 [label="assigns"];
+	
+			
+e17 -> e49 [dir=back,arrowtail=empty, style=dotted];
+
+				
+	
+			e6 -> e41 [label="plans"];
+	
+			e6 -> e19 [label="define"];
+	
+			e70 -> e34 [style=dashed];
+e34 -> e19 [label="changes"];
+	
+			e6 -> e36 [label="estimate"];
+	
+			e25 -> e82 [style=dashed];
+e82 -> e63 [label="define"];
+	
+			e47 -> e75 [label="specify"];
+	
+			e13 -> e17 [label="define"];
+	
+			e50 -> e43 [style=dashed];
+e43 -> e86 [label="implement"];
+	
+			e3 -> e53 [style=dashed];
+e53 -> e19 [label="develops"];
+	
+			e85 -> e83 [style=dashed];
+e83 -> e19 [label="develops"];
+	
+			e9 -> e35 [label="provide"];
+	
+			e1 -> e56 [style=dashed];
+e56 -> e19 [label="develops"];
+	
+			e9 -> e57 [label="solve"];
+	
+			e76 -> e16 [label="causes"];
+	
+			e14 -> e10 [style=dashed];
+e10 -> e19 [label="improve/adjust"];
+	
+			e6 -> e84 [label="(re)define"];
+	
+			e9 -> e18 [label="performs"];
+	
+			e9 -> e15 [label="arranges"];
+	
+}

@@ -1,0 +1,344 @@
+digraph G {
+	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
+	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	  nodesep=0.25;
+		ranksep=0.5;
+		ratio=0.7;
+	minlen=2;
+	rankdir=BT;
+	{ rank=same;
+	c36 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>FinishStart</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c1 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>StartStart</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c40 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>StartFinish</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c63 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>FinishFinish</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	}
+	c68 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Phase</td></tr><tr><td balign="left" align="left">+focus</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c62 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Resource calendar availability</td></tr><tr><td balign="left" align="left">+when<br />+how long<br />+type<br />+capabilities</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c22 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Milestone</td></tr><tr><td balign="left" align="left">+mandatory<br />+lag time<br />+lead time</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	{ rank=same;
+	c33 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Organizing</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c9 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Preparing</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c39 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Main</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c69 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Closing</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	}
+	c32 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Result</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c35 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Project plan</td></tr><tr><td balign="left" align="left">+version</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c17 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Schedule Dates</td></tr><tr><td balign="left" align="left">+begin<br />+end</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	{ rank=same;
+	c16 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Service</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c52 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Product</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	}
+	c28 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Constrain</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c25 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Activity duration</td></tr><tr><td balign="left" align="left">+is estimation<br />+duration</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c29 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Composite resource calendar</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c10 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Project schedule</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c15 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Objective</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c67 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Approver</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c42 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Work Breakdown Structure Component</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c18 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Life cycle</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	{ rank=same;
+	c48 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Resource</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c2 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Risk</td></tr><tr><td balign="left" align="left">+characteristics<br />+probability<br />+impact</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c8 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Budget</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c57 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Schedule</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c60 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Scope</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c38 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Quality</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	}
+	{ rank=same;
+	c7 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Equipment</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c51 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>People</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c11 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Supplies</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c24 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Material</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	}
+	{ rank=same;
+	c23 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Corrective action</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c21 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Defect repair</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c61 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Preventive action</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	}
+	{ rank=same;
+	c45 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Project management</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c27 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Change Control Board</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	}
+	{ rank=same;
+	c49 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Action</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c56 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Activity</td></tr><tr><td balign="left" align="left">+identifier<br />+scope of work description<br />+name<br />+lag time<br />+lead time</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	}
+	c14 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Activity Attribute</td></tr><tr><td balign="left" align="left">+name<br />+value</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c47 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Resource calendar</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c12 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Work Breakdown Structure</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	{ rank=same;
+	c4 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>External</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c41 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Internal</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	}
+	c5 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Process</td></tr><tr><td balign="left" align="left">+input<br />+tools<br />+technique</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c30 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Activity list</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c70 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Defect</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c46 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Human Resource Plan</td></tr><tr><td balign="left" align="left">+project roles<br />+responsibilities<br />+required skills<br />+reporting relationships<br />+staffing management plan<br />+authority<br />+training needs</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c53 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Communications plan</td></tr><tr><td balign="left" align="left">+strategy</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c34 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Schedule data</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c0 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Project schedule network diagram</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c65 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Activity Dependency</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c31 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Team Member</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c72 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Activity sequence</td></tr><tr><td balign="left" align="left">+mandatory</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c20 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Planned work</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c3 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Stakeholder</td></tr><tr><td balign="left" align="left">+identity<br />+needs<br />+concerns<br />+expectations</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c50 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Deliverable</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c37 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Schedule baseline</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c13 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Documentation</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c64 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Risk management plan</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c71 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Requirement</td></tr><tr><td balign="left" align="left">+version</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c54 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Environment</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c19 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Information</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c58 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Composite resource calendar availability</td></tr><tr><td balign="left" align="left">+capabilities<br />+skills</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	{ rank=same;
+	c66 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Organisation</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c73 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Person</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	}
+	c44 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Change request</td></tr><tr><td balign="left" align="left">+state</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c43 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Portfolio</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c6 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Work Package</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c59 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Activity template</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c26 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Project</td></tr><tr><td balign="left" align="left">+name<br />+number<br />+begin<br />+end</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c55 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Activity resource</td></tr><tr><td balign="left" align="left">+is estimation<br />+quantity</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	
+	// regular assocations
+	
+	c0 -> c72 [label="contains"];	
+	
+	c0 -> c72 [label="dependents on"];	
+	
+	c2 -> c26 [label="affects"];	
+	
+	c2 -> c15 [label="affects"];	
+	
+	c3 -> c28 [label="priority"];	
+	
+	c3 -> c71 [label="objective"];	
+	
+	c5 -> c5 [label="related to"];	
+	
+	c5 -> c32 [label="achieves"];	
+	
+	c6 -> c20 [label="plans"];	
+	
+	c6 -> c56 [label="consists of"];	
+	
+	c10 -> c72 [label="based on"];	
+	
+	c10 -> c25 [label="based on"];	
+	
+	c10 -> c55 [label="based on"];	
+	
+	c10 -> c57 [label="based on"];	
+	
+	c10 -> c10 [label="previous version"];	
+	
+	c10 -> c13 [label="includes"];	
+	
+	c12 -> c42 [label="decomposed in"];	
+	
+	c18 -> c68 [label="composed of"];	
+	
+	c21 -> c70 [label="repairs"];	
+	
+	c22 -> c22 [label="previous"];	
+	
+	c22 -> c22 [label="following"];	
+	
+	c26 -> c32 [label="creates"];	
+	
+	c26 -> c15 [label="has"];	
+	
+	c26 -> c71 [label="has"];	
+	
+	c26 -> c3 [label="has"];	
+	
+	c26 -> c28 [label="balances"];	
+	
+	c26 -> c18 [label="follows"];	
+	
+	c26 -> c35 [label="follows"];	
+	
+	c26 -> c12 [label="subdivided in"];	
+	
+	c26 -> c22 [label="has"];	
+	
+	c28 -> c28 [label="competes with"];	
+	
+	c28 -> c28 [label="related to"];	
+	
+	c30 -> c56 [label="lists"];	
+	
+	c34 -> c55 [label="requires"];	
+	
+	c34 -> c10 [label="alternatives"];	
+	
+	c35 -> c35 [label="previous"];	
+	
+	c37 -> c10 [label="based on"];	
+	
+	c42 -> c15 [label="accomplishes"];	
+	
+	c42 -> c50 [label="creates"];	
+	
+	c42 -> c42 [label="consists out of"];	
+	
+	c43 -> c26 [label="contains"];	
+	
+	c44 -> c67 [label="approved by"];	
+	
+	c44 -> c67 [label="rejected by"];	
+	
+	c44 -> c72 [label="influences"];	
+	
+	c44 -> c57 [label="influences"];	
+	
+	c44 -> c64 [label="influences"];	
+	
+	c46 -> c47 [label="plans"];	
+	
+	c54 -> c26 [label="influences"];	
+	
+	c56 -> c50 [label="produce"];	
+	
+	c56 -> c25 [label="takes"];	
+	
+	c56 -> c12 [label="consists of"];	
+	
+	c56 -> c14 [label="described by"];	
+	
+	c56 -> c31 [label="assigned to"];	
+	
+	c56 -> c22 [label="previous"];	
+	
+	c56 -> c22 [label="next"];	
+	
+	c56 -> c72 [label="depends on"];	
+	
+	c57 -> c10 [label="consists of"];	
+	
+	c57 -> c37 [label="consists of"];	
+	
+	c57 -> c34 [label="consists of"];	
+	
+	c60 -> c26 [label="describes"];	
+	
+	c60 -> c52 [label="describes"];	
+	
+	c64 -> c2 [label="manages"];	
+	
+	c68 -> c50 [label="completes"];	
+	
+	c68 -> c68 [label="previous"];	
+	
+	c68 -> c68 [label="following"];	
+	
+	c70 -> c71 [label="mismatches"];	
+	
+	c70 -> c32 [label="related to"];	
+	
+	c71 -> c71 [label="previous"];	
+	
+	// assocations with classes on them
+	
+	ac0 [label="", shape="circle", width=0.01, height=0.01 ];
+	c3 -> ac0 [label="needs", dir="none"];
+	ac0 -> c19 [label=""];
+	ac0 -> c53 [label="needs", dir="none", style="dashed"]	
+	
+	ac1 [label="", shape="circle", width=0.01, height=0.01 ];
+	c10 -> ac1 [label="schedules", dir="none"];
+	ac1 -> c22 [label=""];
+	ac1 -> c17 [label="schedules", dir="none", style="dashed"]	
+	
+	ac2 [label="", shape="circle", width=0.01, height=0.01 ];
+	c10 -> ac2 [label="schedules", dir="none"];
+	ac2 -> c56 [label=""];
+	ac2 -> c17 [label="schedules", dir="none", style="dashed"]	
+	
+	ac3 [label="", shape="circle", width=0.01, height=0.01 ];
+	c29 -> ac3 [label="available", dir="none"];
+	ac3 -> c51 [label=""];
+	ac3 -> c58 [label="available", dir="none", style="dashed"]	
+	
+	ac4 [label="", shape="circle", width=0.01, height=0.01 ];
+	c47 -> ac4 [label="available", dir="none"];
+	ac4 -> c48 [label=""];
+	ac4 -> c62 [label="available", dir="none", style="dashed"]	
+	
+	ac5 [label="", shape="circle", width=0.01, height=0.01 ];
+	c56 -> ac5 [label="requires", dir="none"];
+	ac5 -> c48 [label=""];
+	ac5 -> c55 [label="requires", dir="none", style="dashed"]	
+	
+	ac6 [label="", shape="circle", width=0.01, height=0.01 ];
+	c72 -> ac6 [label="sequence", dir="none"];
+	ac6 -> c56 [label=""];
+	ac6 -> c65 [label="sequence", dir="none", style="dashed"]	
+	
+	
+	c1 -> c65 [arrowhead="empty"];
+	
+	c2 -> c28 [arrowhead="empty"];
+	
+	c4 -> c54 [arrowhead="empty"];
+	
+	c6 -> c42 [arrowhead="empty"];
+	
+	c7 -> c48 [arrowhead="empty"];
+	
+	c8 -> c28 [arrowhead="empty"];
+	
+	c9 -> c68 [arrowhead="empty"];
+	
+	c11 -> c48 [arrowhead="empty"];
+	
+	c16 -> c32 [arrowhead="empty"];
+	
+	c21 -> c44 [arrowhead="empty"];
+	
+	c23 -> c44 [arrowhead="empty"];
+	
+	c24 -> c48 [arrowhead="empty"];
+	
+	c27 -> c67 [arrowhead="empty"];
+	
+	c33 -> c68 [arrowhead="empty"];
+	
+	c36 -> c65 [arrowhead="empty"];
+	
+	c38 -> c28 [arrowhead="empty"];
+	
+	c39 -> c68 [arrowhead="empty"];
+	
+	c40 -> c65 [arrowhead="empty"];
+	
+	c41 -> c54 [arrowhead="empty"];
+	
+	c45 -> c67 [arrowhead="empty"];
+	
+	c48 -> c28 [arrowhead="empty"];
+	
+	c49 -> c5 [arrowhead="empty"];
+	
+	c51 -> c48 [arrowhead="empty"];
+	
+	c52 -> c32 [arrowhead="empty"];
+	
+	c56 -> c5 [arrowhead="empty"];
+	
+	c57 -> c28 [arrowhead="empty"];
+	
+	c60 -> c28 [arrowhead="empty"];
+	
+	c61 -> c44 [arrowhead="empty"];
+	
+	c63 -> c65 [arrowhead="empty"];
+	
+	c66 -> c3 [arrowhead="empty"];
+	
+	c69 -> c68 [arrowhead="empty"];
+	
+	c73 -> c3 [arrowhead="empty"];
+	
+}

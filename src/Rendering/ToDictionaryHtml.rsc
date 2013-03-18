@@ -6,11 +6,11 @@ import Integer;
 import List;
 import Set;
 
-import Data::Facts;
-import Model::MetaDomain;
+import Reference::Facts;
+import Meta::Domain;
 
-private str tb(str s) = "\<<s>\>";
-private str te(str s) = "\</<s>\>";
+private str tb(str s) = "\<<s>\>"; // tag begin
+private str te(str s) = "\</<s>\>"; // tag end
 private str makeRow(list[str] dt) = "<tb("tr")><for (d <- dt){><tb("td")><d><te("td")><}><te("tr")>";
 private str makeList(list[str] ls) =
 	"<tb("ul")>

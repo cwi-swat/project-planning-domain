@@ -1,0 +1,148 @@
+digraph G {
+	edge [fontname="Helvetica",fontsize=10,labelfontname="Helvetica",labelfontsize=10];
+	node [fontname="Helvetica",fontsize=10,shape=plaintext];
+	  nodesep=0.25;
+		ranksep=0.5;
+		ratio=0.7;
+	minlen=2;
+	rankdir=BT;
+	c12 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Comment</td></tr><tr><td balign="left" align="left">+creationDate<br />+id<br />+text</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	{ rank=same;
+	c14 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Remove</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c8 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Create</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c17 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Add</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c23 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Update</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c27 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Delete</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	}
+	c0 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Access</td></tr><tr><td balign="left" align="left">+name<br />+id</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c16 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>FieldType</td></tr><tr><td balign="left" align="left">+description</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c22 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Event</td></tr><tr><td balign="left" align="left">+description</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c1 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>TaskState</td></tr><tr><td balign="left" align="left">+id<br />+name</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c13 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>EmailSubscription</td></tr><tr><td balign="left" align="left">+id</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c18 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>EmailSubscriptionType</td></tr><tr><td balign="left" align="left">+code<br />+description</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c2 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Sprint</td></tr><tr><td balign="left" align="left">+endTime<br />+id<br />+title</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c25 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>TaskType</td></tr><tr><td balign="left" align="left">+id<br />+image<br />+name</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c19 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>ObjectType</td></tr><tr><td balign="left" align="left">+description</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c9 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>TaskButton</td></tr><tr><td balign="left" align="left">+id<br />+name<br />+number<br />+ownerSet<br />+ownerUnset<br />+ownerUntouched</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c4 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Link</td></tr><tr><td balign="left" align="left">+text<br />+url</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c20 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Label</td></tr><tr><td balign="left" align="left">+bgColor<br />+id<br />+number<br />+textColor<br />+title</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c21 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Effort</td></tr><tr><td balign="left" align="left">+id<br />+title<br />+value</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c24 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>User</td></tr><tr><td balign="left" align="left">+email<br />+firstName<br />+id<br />+initials<br />+isAppAdmin<br />+isDeleted<br />+lastName<br />+login<br />+passwordDigest<br />+showHistory</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c15 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Attachment</td></tr><tr><td balign="left" align="left">+clientFileName<br />+id<br />+number</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c26 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Tab</td></tr><tr><td balign="left" align="left">+id<br />+name<br />+number</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c6 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Milestone</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c3 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Splitter</td></tr><tr><td balign="left" align="left">+hideOlderThan<br />+id<br />+isExpanded<br />+isFilterOn<br />+isVertical<br />+showAssignedToMe<br />+showTouchedByMe</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c11 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Task</td></tr><tr><td balign="left" align="left">+description<br />+doneDate<br />+hours<br />+id<br />+isDeleted<br />+modificationDate<br />+title</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c10 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>FieldVersion</td></tr><tr><td balign="left" align="left">+id<br />+oldValue</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c5 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>ObjectVersion</td></tr><tr><td balign="left" align="left">+children<br />+creationDate<br />+id<br />+objectId</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	c7 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p"><tr><td>Product</td></tr><tr><td balign="left" align="left">+anonymousCanSubmit<br />+id<br />+isDeleted<br />+iterationEnd<br />+iterationLengthInWeeks<br />+name<br />+velocityPeriodInWeeks<br />+velocity</td></tr></table>> fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	
+	// regular assocations
+	
+	c1 -> c1 [label="next"];	
+	
+	c2 -> c2 [label="next"];	
+	
+	c2 -> c11 [label="contains"];	
+	
+	c3 -> c1 [label="filters on"];	
+	
+	c3 -> c26 [label="tab"];	
+	
+	c3 -> c25 [label="filters on"];	
+	
+	c5 -> c5 [label="children"];	
+	
+	c5 -> c24 [label="creator"];	
+	
+	c5 -> c22 [label="eventType"];	
+	
+	c5 -> c10 [label="fields"];	
+	
+	c5 -> c19 [label="objectType"];	
+	
+	c5 -> c5 [label="parent"];	
+	
+	c5 -> c7 [label="taskCurrentTarget"];	
+	
+	c5 -> c7 [label="taskChangeTarget"];	
+	
+	c7 -> c1 [label="stateAnonymous"];	
+	
+	c7 -> c1 [label="stateDone"];	
+	
+	c7 -> c25 [label="typeAnonymous"];	
+	
+	c7 -> c20 [label="has"];	
+	
+	c7 -> c4 [label="has"];	
+	
+	c7 -> c2 [label="produced by"];	
+	
+	c7 -> c11 [label="decomposed in"];	
+	
+	c9 -> c1 [label="from"];	
+	
+	c9 -> c1 [label="to"];	
+	
+	c9 -> c25 [label="for"];	
+	
+	c10 -> c16 [label="fieldType"];	
+	
+	c11 -> c24 [label="creator"];	
+	
+	c11 -> c21 [label="effort"];	
+	
+	c11 -> c24 [label="owner"];	
+	
+	c11 -> c1 [label="state"];	
+	
+	c11 -> c25 [label="type"];	
+	
+	c11 -> c15 [label="has"];	
+	
+	c11 -> c12 [label="has"];	
+	
+	c11 -> c20 [label="has"];	
+	
+	c11 -> c11 [label="next"];	
+	
+	c12 -> c24 [label="made by"];	
+	
+	c12 -> c12 [label="next"];	
+	
+	c13 -> c24 [label="target"];	
+	
+	c13 -> c18 [label="kind"];	
+	
+	c19 -> c16 [label="fieldTypes"];	
+	
+	c24 -> c26 [label="currentTab"];	
+	
+	c25 -> c1 [label="defaultState"];	
+	
+	c25 -> c1 [label="possible states"];	
+	
+	c26 -> c24 [label="user"];	
+	
+	// assocations with classes on them
+	
+	ac0 [label="", shape="circle", width=0.01, height=0.01 ];
+	c24 -> ac0 [label="participates in", dir="none"];
+	ac0 -> c7 [label=""];
+	ac0 -> c0 [label="participates in", dir="none", style="dashed"]	
+	
+	
+	c6 -> c2 [arrowhead="empty"];
+	
+	c8 -> c22 [arrowhead="empty"];
+	
+	c14 -> c22 [arrowhead="empty"];
+	
+	c17 -> c22 [arrowhead="empty"];
+	
+	c23 -> c22 [arrowhead="empty"];
+	
+	c27 -> c22 [arrowhead="empty"];
+	
+}

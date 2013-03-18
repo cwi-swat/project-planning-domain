@@ -7,7 +7,7 @@ import List;
 import Relation;
 import Set;
 
-import Model::MetaDomain;
+import Meta::Domain;
 
 
 public void renderGraphviz(loc target, DomainModel model) {
