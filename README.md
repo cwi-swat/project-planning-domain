@@ -26,3 +26,4 @@ The following structure is used:
 - ``src/compare/``: Scripts to calculate results based on the mapping
 
 
+Make sure to use the [unstable-updates](http://www.rascal-mpl.org/unstable-updates/) site to install Rascal, since that contains features used in this project.
