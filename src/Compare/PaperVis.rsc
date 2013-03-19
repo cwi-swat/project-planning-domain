@@ -1,36 +1,28 @@
-module PaperVis
+module Compare::PaperVis
 
 import IO;
 import Set;
 import List;
 import Node;
-import Model::MetaDomain;
-import Model::Mapping;
-import Model::ExtractSubset;
+import Meta::Domain;
+import Meta::Mapping;
 import Rendering::ToGraphviz;
-import Domain::Project;
-import systems::endeavour::Model;
-import systems::endeavour::UIModel;
-import systems::endeavour::Mapping;
-import systems::endeavour::UIMapping;
-import systems::openpm::Model;
-import systems::openpm::UIModel;
-import systems::openpm::Mapping;
-import systems::openpm::UIMapping;
+import Reference::Model;
+import systems::endeavour::SRCModel;
+import systems::endeavour::USRModel;
+import systems::endeavour::SRCMapping;
+import systems::endeavour::USRMapping;
+import systems::openpm::SRCModel;
+import systems::openpm::USRModel;
+import systems::openpm::SRCMapping;
+import systems::openpm::USRMapping;
 
-public void subsetReferenceModel() {
-	rl = getRelatedTo(project, "Activity", 1);
-	dm = getSubset(project, rl);
-	renderGraphvizv2(|rascal://src/referenceSubset.dot|, dm, params= "\tnodesep=0.2;
-	'\tranksep=0.2;
-	'\tratio=0.3;", font="Times");
-}
 
 public void printSizes() {
-	printSizes(endeavourUI, "Endeavour");
-	printSizes(endeavour, "Endeavour");
-	printSizes(openpmUI, "OpenPM");
-	printSizes(openpm, "OpenPM");
+	printSizes(endeavourUSR, "Endeavour");
+	printSizes(endeavourSRC, "Endeavour");
+	printSizes(openpmUSR, "OpenPM");
+	printSizes(openpmSRC, "OpenPM");
 }
 
 private set[str] getMappedNames(set[node] target)
@@ -47,22 +39,22 @@ private set[str] getEntityNames(DomainModel target)
 		+ {*src | n <- target, n has sourceNames,  set[str] src := getChildren(n)[0] }
 	;
 public void printUsageTable() {
-	domainClasses = { n.name | n <- project, n has name};	
-	endClasses = { n.name | n <- endeavour, n has name};	
-	endUIClasses = { n.name | n <- endeavourUI, n has name};	
-	opmClasses = { n.name | n <- openpm, n has name};	
-	opmUIClasses = { n.name | n <- openpmUI, n has name};	
+	domainClasses = { n.name | n <- Reference, n has name};	
+	endClasses = { n.name | n <- endeavourSRC, n has name};	
+	endUIClasses = { n.name | n <- endeavourUSR, n has name};	
+	opmClasses = { n.name | n <- openpmSRC, n has name};	
+	opmUIClasses = { n.name | n <- openpmUSR, n has name};	
 	
-	endMapping = getMappedNames(endeavourMapping);
-	endUIMapping = getMappedNames(endeavourUIMapping);
-	opmMapping = getMappedNames(openpmMapping);
-	opmUIMapping = getMappedNames(openpmUIMapping);
+	endMapping = getMappedNames(endeavourSRCMapping);
+	endUIMapping = getMappedNames(endeavourUSRMapping);
+	opmMapping = getMappedNames(openpmSRCMapping);
+	opmUIMapping = getMappedNames(openpmUSRMapping);
 	
 	
-	mappingTargets = getMappedNamesTargets(endeavourMapping)
-		+ getMappedNamesTargets(endeavourUIMapping)
-		+ getMappedNamesTargets(openpmMapping)
-		+ getMappedNamesTargets(openpmUIMapping)
+	mappingTargets = getMappedNamesTargets(endeavourSRCMapping)
+		+ getMappedNamesTargets(endeavourUSRMapping)
+		+ getMappedNamesTargets(openpmSRCMapping)
+		+ getMappedNamesTargets(openpmUSRMapping)
 		;
 	print("\\mappingUsage{\\PMBOK}{\\REF}{");
 	bool first = true;
@@ -101,7 +93,7 @@ private void printSizes(DomainModel dm, str name) {
 	dm = visit(dm) { case list[Attribute] x => emptyAttrs when x != [] };
 	println("\\systemModelSize{<name>}");	
 	print("\t{<size(dm)>}");
-	print("{<size([a | /a:asso(_,_,_,_) := dm])>}");
+	print("{<size([a | /a:asso(_,_) := dm])>}");
 	print("{<size([s | s:specialisation(_,_,_,_) <- dm])>}");
 	println("{<size({*n@location | /node n := dm, n@location?} + {*n@uiscreen | /node n := dm, n@uiscreen?})>}");
 }

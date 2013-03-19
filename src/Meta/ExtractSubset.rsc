@@ -1,7 +1,7 @@
-module Model::ExtractSubset
+module Meta::ExtractSubset
 
-import Model::MetaDomain;
-import Model::Simplify;
+import Meta::Domain;
+import Meta::Simplify;
 import Set;
 
 public set[str] getAllClassNames(DomainModel model)
@@ -9,14 +9,14 @@ public set[str] getAllClassNames(DomainModel model)
 	
 public DomainModel getSubset(DomainModel model, set[str] subsetClasses) {
 	result = { c | c <- model, c.name in subsetClasses};
-	assocClasses = {aso@class | /aso:asso(_,t,_,_) := result, t in subsetClasses, aso@class?};
+	assocClasses = {aso@class | /aso:asso(_,t) := result, t in subsetClasses, aso@class?};
 	result += {c | c <- model, c.name in assocClasses};
 	
 	Class cleanup(Class c) {
 		newAsso = [];
 		newAttr = c.attributes;
 		for (a <- c.assocations) {
-			if (asso(l,t,_,_) := a, !(t  in subsetClasses)) {
+			if (asso(l,t) := a, !(t  in subsetClasses)) {
 				newAttr += attr("<l> : <t>", a@source? ? a@source: {});
 			}
 			else {

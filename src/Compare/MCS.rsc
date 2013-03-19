@@ -1,4 +1,4 @@
-module MCS
+module Compare::MCS
 
 /*
 @article{Bunke1998255,
