@@ -1,4 +1,4 @@
-module systems::endeavour::INTModelMapping
+module systems::endeavour::INTMapping
 
 import Meta::Mapping;
 

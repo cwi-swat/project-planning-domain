@@ -1,4 +1,4 @@
-module systems::openpm::INTModelMapping
+module systems::openpm::INTMapping
 
 import Meta::Mapping;
 

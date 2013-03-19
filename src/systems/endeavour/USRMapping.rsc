@@ -1,4 +1,4 @@
-module systems::endeavour::USRModelMapping
+module systems::endeavour::USRMapping
 
 import Meta::Mapping;
 

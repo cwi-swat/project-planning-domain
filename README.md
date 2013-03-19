@@ -16,11 +16,11 @@ The following structure is used:
 - ``src/systems/{Endeavour,OpenPM}/``: models extracted from applications
 	- ``USRModel.rsc``: Model extracted by observing UI (USR)
 	- ``USRModel.dot``: USR Model as a Graphviz file.
-	- ``USRModelMapping.rsc``: USR mapped onto REF
+	- ``USRModel.rsc``: USR mapped onto REF
 	- ``SRCModel.rsc``: Model extracted by observing source code (SRC)
 	- ``SRCModel.dot``: SRC Model as a Graphviz file.
-	- ``SRCModelMapping.rsc``: SRC mapped onto REF
-	- ``INTModelMapping.rsc``: SRC mapped onto USR
+	- ``SRCModel.rsc``: SRC mapped onto REF
+	- ``INTModel.rsc``: SRC mapped onto USR
 - ``src/rendering/``: Rendering a model into a graphviz file / Rascal Figure Library
 - ``src/analysis/``: Scripts used to analyze the applications
 - ``src/compare/``: Scripts to calculate results based on the mapping

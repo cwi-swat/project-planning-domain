@@ -1,4 +1,4 @@
-module systems::openpm::USRModelMapping
+module systems::openpm::USRMapping
 
 import Meta::Mapping;
 
