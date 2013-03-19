@@ -30,7 +30,7 @@ public ModelMappings endeavourINTMapping = {
 
 
 
-public ModelMappingFailures endeavourINTFailures = {
+public ModelMappingFailures endeavourINTMappingFailures = {
 	implementation("Version", "Implementation details how versions are kept for the document.")
 	, implementation("Privilege", "Implementation details of the user login.")
 };

@@ -14,7 +14,7 @@ public ModelMappings openpmSRCMapping = {
 
 
 
-public ModelMappingFailures openpmSRCFailures = {
+public ModelMappingFailures openpmSRCMappingFailures = {
 	tooDetailed("Comment", "Comments on tasks are very low level and perhaps even an implementation detail.")
 	, tooDetailed("Link", "Links on products are very low level and perhaps even an implementation detail.")
 	, implementation("Access","Access is a implementation detail of the kind of security role a user has in a system")

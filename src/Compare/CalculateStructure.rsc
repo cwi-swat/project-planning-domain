@@ -1,4 +1,4 @@
-module CalculateStructure
+module Compare::CalculateStructure
 
 import Set;
 import List;
@@ -8,34 +8,30 @@ import IO;
 import Node;
 import String;
 import util::Math;
-import Model::MetaDomain;
-import Model::Mapping;
-import Model::Simplify;
+import Meta::Domain;
+import Meta::Mapping;
+import Meta::Simplify;
 import analysis::graphs::Graph;
 import lang::csv::IO;
 
-import MCS;
-import Domain::Project;
-import systems::endeavour::Model;
-import systems::endeavour::Mapping;
-import systems::endeavour::UIModel;
-import systems::endeavour::UIMapping;
-import systems::endeavour::UIInternalMapping;
-import systems::openpm::Model;
-import systems::openpm::Mapping;
-import systems::openpm::UIModel;
-import systems::openpm::UIMapping;
-import systems::openpm::UIInternalMapping;
+import Compare::MCS;
+import Reference::Model;
+import systems::endeavour::SRCModel;
+import systems::endeavour::SRCMapping;
+import systems::endeavour::USRModel;
+import systems::endeavour::USRMapping;
+import systems::endeavour::INTMapping;
+import systems::openpm::SRCModel;
+import systems::openpm::SRCMapping;
+import systems::openpm::USRModel;
+import systems::openpm::USRMapping;
+import systems::openpm::INTMapping;
 
 private rel[str, str] getNameMappingsRelation(ModelMappings mappings) 
 	= {<m.sourceName,  m.targetName> | m <- mappings, m has targetName, m has sourceName, !(m has correct) || ( m has correct &&  m.correct)}
 	+ {<m.sourceName, tm> | m <- mappings, m has targetNames, tm <- m.targetNames, m has sourceName, !(m has correct) || ( m has correct &&  m.correct)}
 	+ {<ms, m.targetName> | m <- mappings, m has sourceNames, ms <- m.sourceNames, !(m has correct) || ( m has correct &&  m.correct)}
 	;
-/*
-private map[str, str] getNameMappings(ModelMappings mappings) 
-	= ( f : t | <f,t> <- getNameMappingsRelation(mappings));
-*/
 
 private set[str] mapOntoReference(str src, rel[str, str] mappings) {
 	if (mappings[src] != {})
@@ -81,134 +77,8 @@ private Graph[str] mapGraph(DomainModel ref, DomainModel target, ModelMappings m
 	return targetAssocs + targetAssocs<1,0>;
 }
 
-private void printGraphVars(str prefix, DomainModel ui, DomainModel src, ModelMappings uiMapping, ModelMappings srcMapping, ModelMappings internalMapping) {
-	<assocs, _, specs> = extractGraphs(ui);
-	assocs = inheritRelations(assocs, specs);
-	assocs = assocs + assocs<1,0>;
-	println("public Graph[str] <prefix>_UI = <assocs>;");
-	println("public Graph[str] <prefix>_UI_Reference = <mapGraph(project, ui, uiMapping)>;");
-	println("public Graph[str] <prefix>_SRC_Reference = <mapGraph(project, src, srcMapping)>;");
-	println("public Graph[str] <prefix>_SRC_UI = <mapGraph(ui, src, internalMapping)>;");
-}
-
-
-private tuple[real entityRecall, real entityPrecision, real relationRecall, real relationPrecision] calculateGlobalRecallPrecision(DomainModel ref, DomainModel target, ModelMappings mappings) {
-	<refAssocs,_,refSpecs> = extractGraphs(ref);
-	<targetAssocs,_,targetSpecs> = extractGraphs(target);
-	targetAssocs = mapOntoReference(targetAssocs, mappings);
-	targetSpecs = mapOntoReference(targetSpecs, mappings);
-	mappedNames = getNameMappingsRelation(mappings);
-	
-	refAssocs = inheritRelations(refAssocs, refSpecs);
-	targetAssocs = inheritRelations(targetAssocs, targetSpecs);
-	
-	relRecall = (0.0+size(refAssocs & targetAssocs))/size(refAssocs);
-	relPrecision = (0.0+size(refAssocs & targetAssocs))/size(targetAssocs);
-	
-	refEntities = getEntities(ref);
-	targetEntities = getEntities(target);
-	targetEntities = mapOntoReference(targetEntities, mappings);
-	
-	entRecall = (0.0+size(refEntities & targetEntities))/size(refEntities);
-	entPrecision = (0.0+size(refEntities & targetEntities))/size(targetEntities);
-	return <entRecall, entPrecision, relRecall, relPrecision>;
-}
-
 private set[str] getEntities(DomainModel dm) 
 	= {m.name | m <- dm};
-
-
-private tuple[real globalsimularity, lrel[str entity, str original, int overlap, int inreference, int intarget, real simularity] overlaps] analyse2(DomainModel ref, DomainModel target, ModelMappings mappings, ModelMappingFailures failures) {
-	<refAssocs,_,refSpecs> = extractGraphs(ref);
-	<targetAssocs,_,targetSpecs> = extractGraphs(target);
-	targetAssocs = mapOntoReference(targetAssocs, mappings);
-	targetSpecs = mapOntoReference(targetSpecs, mappings);
-	mappedNames = getNameMappingsRelation(mappings);
-	
-	refAssocs = inheritRelations(refAssocs, refSpecs);
-	targetAssocs = inheritRelations(targetAssocs, targetSpecs);
-	
-	ignoreEntities =({ *mapOntoReference(f.sourceName, mappedNames) | f <- failures} 
-			+ {*mapOntoReference(m.sourceName, mappedNames) | m <- mappings, m has correct, !m.correct});
-	sharedEntities = (targetAssocs<0> + targetAssocs<1> + targetSpecs<0> + targetSpecs<1>) - ignoreEntities;
-	
-	refEntities = refAssocs<0> + refAssocs<1> + refSpecs<0> + refSpecs<1>;
-	targetEntities = targetAssocs<0> + targetAssocs<1> + targetSpecs<0> + targetSpecs<1>;
-	
-	// make subgraphs for the shared entities
-	refAssocs = refAssocs & (sharedEntities * sharedEntities); 
-	refSpecs = refSpecs & (sharedEntities * sharedEntities); 
-	targetAssocs = targetAssocs & (sharedEntities * sharedEntities); 
-	targetSpecs = targetSpecs & (sharedEntities * sharedEntities); 
-	
-	
-	
-	//println(refAssocs);
-	//println(targetAssocs);
-	
-	
-	refAssocsUndirected = makeUndirected(refAssocs);	
-	targetAssocsUndirected = makeUndirected(targetAssocs);	
-	globalSimularity = calculateSimularity(refAssocsUndirected + refSpecs, targetAssocsUndirected + targetSpecs);
-
-	set[set[str]] getAssocs(set[set[str]] src, str ent)
-		= { x | x <- src, ent in x};
-
-
-	invertedMapping = invert(mappedNames);
-	result = for(e <- sort([*sharedEntities])) {
-		append <
-			intercalate(", ", sort([*(mappedNames[invertedMapping[e]])]))
-			,intercalate(", ", sort([*invertedMapping[e]]))
-			, size((getAssocs(refAssocsUndirected, e) + refSpecs[e]) & (getAssocs(targetAssocsUndirected, e) + targetSpecs[e]))
-			, size((getAssocs(refAssocsUndirected, e) + refSpecs[e]))
-			, size((getAssocs(targetAssocsUndirected, e) + targetSpecs[e]))
-			, calculateSimularity((getAssocs(refAssocsUndirected, e) + refSpecs[e]), (getAssocs(targetAssocsUndirected, e) + targetSpecs[e]))
-			>;
-	};
-	return <globalSimularity, result>;
-}
-
-private void analyseResults(DomainModel target, ModelMappings mappings, ModelMappingFailures failures){
-	<total, details> = analyse(target, mappings, failures);
-	println("total simularity: <total *100>");
-	for (<e, overlap, _,_, s>  <- details) {
-		println(" <e>: <s*100> (<overlap>)");
-	}
-}
-
-
-private void printRelationMapping(str name, DomainModel ref, DomainModel target, ModelMappings mappings, ModelMappingFailures failures) {
-	println(name);
-	<sim, ent> = analyse2(ref, target, mappings, failures);
-	println("similarity: <sim>");
-	
-	
-	ent = visit(ent) {
-		case real x => 0.0
-			when x == 0.0	
-	};
-	str printFixed(int n) = "<n>";
-	str printFixed(real n) = left("<n>", 4, "0");
-	str printFixed(str n) = n;
-	
-	if (/<f:.*> -\> <t:.*>/ := name) {
-		println("\\tableEntitySim{<f>}{<t>}{}{");
-	}
-	
-	for (r <- ent) {
-		println("\t\\relationMapping<(""| it + "{<printFixed(e)>}" | e <- r)>");
-	}
-	println("}");
-	println();
-	println();
-	
-	str round4(real n) = printFixed(round(n * 1000) / 1000.0);
-	r = calculateGlobalRecallPrecision(ref, target, mappings);
-	println("\\rpDetails<("{<name>}"| it + "{<round4(e)>}" | e <- r)>");
-	println();
-	println();
-}
 
 
 private void printMappingUsage(lrel[str from, str to, ModelMappings mm, ModelMappingFailures mf] mappingCombos) {
@@ -251,36 +121,19 @@ private void printMappingUsage(lrel[str from, str to, ModelMappings mm, ModelMap
 
 
 public void main() {
-/*
-	printRelationMapping("Endeavour UI -\> Reference", project, endeavourUI, endeavourUIMapping, endeavourUIFailures);
-	printRelationMapping("Endeavour SRC -\> Endeavour UI", endeavourUI, endeavour, endeavourUIInternalMapping, endeavourUIInternalFailures);
-	printRelationMapping("Endeavour SRC -\> Reference", project, endeavour, endeavourMapping, endeavourFailures);
-	
-	printRelationMapping("OpenPM UI -\> Reference", project, openpmUI, openpmUIMapping, openpmUIFailures);
-	printRelationMapping("OpenPM SRC -\> OpenPM UI", openpmUI, openpm, openpmUIInternalMapping, openpmUIInternalFailures);
-	printRelationMapping("OpenPM SRC -\> Reference", project, openpm, openpmMapping, openpmFailures);
-*/
-	
 	printMappingUsage([
-		<"USR", "REF", endeavourUIMapping, endeavourUIFailures>
-		, <"SRC","REF", endeavourMapping, endeavourFailures>
-		, <"SRC", "USR", endeavourUIInternalMapping, endeavourUIInternalFailures>
+		<"USR", "REF", endeavourUSRMapping, endeavourUSRMappingFailures>
+		, <"SRC","REF", endeavourSRCMapping, endeavourSRCMappingFailures>
+		, <"SRC", "USR", endeavourINTMapping, endeavourINTMappingFailures>
 	]);
 	println();	
 	
 	printMappingUsage([
-		<"USR", "REF", openpmUIMapping, openpmUIFailures>
-		, <"SRC","REF", openpmMapping, openpmFailures>
-		, <"SRC", "USR", openpmUIInternalMapping, openpmUIInternalFailures>
+		<"USR", "REF", openpmUSRMapping, openpmUSRMappingFailures>
+		, <"SRC","REF", openpmSRCMapping, openpmSRCMappingFailures>
+		, <"SRC", "USR", openpmINTMapping, openpmINTMappingFailures>
 	]);
-		
-	/*<assocs, _, specs> = extractGraphs(project);
-	assocs = inheritRelations(assocs, specs);
-	assocs = assocs + assocs<1,0>;
-	println("public Graph[str] reference = <assocs>;");
-	printGraphVars("endeavour", endeavourUI, endeavour, endeavourUIMapping, endeavourMapping, endeavourUIInternalMapping);
-	printGraphVars("openPM", openpmUI, openpm, openpmUIMapping, openpmMapping, openpmUIInternalMapping);
-	*/
+	
 	printRecallPrecision(getMappedGraphs());
 }
 
@@ -292,7 +145,7 @@ alias MappedGraphs = lrel[str name, MappedDomain ui, MappedDomain src, MappedDom
 private Graph[&T] makeUndirected2(Graph[&T] inp) = inp + inp<1,0>;
 
 private Graph[str] getMappedGraph(DomainModel target, ModelMappings mm)
-	= makeUndirected2(mapGraph(project, target, mm));
+	= makeUndirected2(mapGraph(Reference, target, mm));
 	
 private set[str] getMappedEntities(DomainModel target, ModelMappings mm) 
 	= mapOntoReference(getEntities(target), mm);
@@ -305,8 +158,8 @@ private MappedDomain getCleanDomain(DomainModel target)
 
 private MappedGraphs getMappedGraphs() {
 	return [
-		<"Endeavour", getMappedDomain(endeavourUI, endeavourUIMapping), getMappedDomain(endeavour, endeavourMapping), getMappedDomain(endeavour, endeavourUIInternalMapping), getCleanDomain(endeavourUI)>
-		, <"OpenPM", getMappedDomain(openpmUI, openpmUIMapping), getMappedDomain(openpm, openpmMapping), getMappedDomain(openpm, openpmUIInternalMapping), getCleanDomain(openpmUI)>
+		<"Endeavour", getMappedDomain(endeavourUSR, endeavourUSRMapping), getMappedDomain(endeavourSRC, endeavourSRCMapping), getMappedDomain(endeavourSRC, endeavourINTMapping), getCleanDomain(endeavourUSR)>
+		, <"OpenPM", getMappedDomain(openpmUSR, openpmUSRMapping), getMappedDomain(openpmSRC, openpmSRCMapping), getMappedDomain(openpmSRC, openpmINTMapping), getCleanDomain(openpmUSR)>
 	];
 }
 
@@ -330,8 +183,8 @@ private real getSimilarity(Graph[str] expected, Graph[str] found)
 	= (1.0 - distance(expected, found));
 	
 private void printRecallPrecision(MappedGraphs mg) {
-	referenceGraph = getFlatGraph(project);
-	referenceEntities = getEntities(project);
+	referenceGraph = getFlatGraph(Reference);
+	referenceEntities = getEntities(Reference);
 	for (<str nm, MappedDomain ui, MappedDomain src, MappedDomain srcui, MappedDomain uiclean> <- mg) {
 		observedEntities = referenceEntities & ui.entities;
 		recoveredEntities = referenceEntities & src.entities;
