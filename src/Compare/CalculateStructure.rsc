@@ -182,9 +182,14 @@ private real getPrecision(set[&T] expected, set[&T] found)
 private real getSimilarity(Graph[str] expected, Graph[str] found) 
 	= (1.0 - distance(expected, found));
 	
+private MappedDomain joinDomains(list[MappedDomain] dms) {
+	return <{ *e | e <- dms.entities}, {*g | g <- dms.relations}>;
+}
+	
 private void printRecallPrecision(MappedGraphs mg) {
 	referenceGraph = getFlatGraph(Reference);
 	referenceEntities = getEntities(Reference);
+	mg = mg + [<"joined", joinDomains(mg.ui), joinDomains(mg.src), joinDomains(mg.srcui), joinDomains(mg.uiClean)>];
 	for (<str nm, MappedDomain ui, MappedDomain src, MappedDomain srcui, MappedDomain uiclean> <- mg) {
 		observedEntities = referenceEntities & ui.entities;
 		recoveredEntities = referenceEntities & src.entities;
@@ -192,33 +197,29 @@ private void printRecallPrecision(MappedGraphs mg) {
 		recoveredRelations = src.relations & (recoveredEntities * recoveredEntities);
 		
 		rowResult = [
-			<"\\OBS" ,"\\mappedOnto{\\USR}{\\REF}" 
-				, 2.0
-				, 2.0
+			<"\\comparedTo{\\USR}{\\REF}" 
+				, getRecall(referenceEntities, ui.entities)
+				, getRecall(referenceGraph, ui.relations)
 				, getPrecision(referenceEntities, ui.entities)
 				, getPrecision(referenceGraph, ui.relations)
-				, getSimilarity(referenceGraph, ui.relations)
 			>
-			, <"\\REC", "\\mappedOnto{\\SRC}{\\REF}"
-				, 2.0
-				, 2.0
+			, <"\\comparedTo{\\SRC}{\\REF}"
+				, getRecall(referenceEntities, src.entities)
+				, getRecall(referenceGraph, src.relations)
 				, getPrecision(referenceEntities, src.entities)
 				, getPrecision(referenceGraph, src.relations)
-				, getSimilarity(referenceGraph, src.relations)
 			>
-			, <"\\INT", "\\mappedOnto{\\SRC}{\\USR}"
+			, <"\\comparedTo{\\SRC}{\\USR}"
 				, getRecall(uiclean.entities, srcui.entities)
 				, getRecall(uiclean.relations, srcui.relations)
 				, getPrecision(uiclean.entities, srcui.entities)
 				, getPrecision(uiclean.relations, srcui.relations)
-				, getSimilarity(uiclean.relations, srcui.relations)
 			>
-			, <"\\LIM", "\\mappedOnto{\\REC}{\\ensuremath{\\text{\\OBS}\\cup\\text{\\REC}}}"
+			, <"\\mbox{\\comparedTo{\\REC}{\\ensuremath{\\text{\\OBS}\\cup\\text{\\REC}}}}"
 				, getRecall(observedEntities + recoveredEntities, recoveredEntities)
 				, getRecall(observedRelations + recoveredRelations, recoveredRelations)
 				, 2.0
 				, 2.0
-				, getSimilarity(observedRelations + recoveredRelations, recoveredRelations)
 			>
 		];
 		str printFixed(real n) = left("<n>", 4, "0");
