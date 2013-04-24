@@ -215,15 +215,10 @@ private void printRecallPrecision(MappedGraphs mg) {
 				, getPrecision(uiclean.entities, srcui.entities)
 				, getPrecision(uiclean.relations, srcui.relations)
 			>
-			, <"\\mbox{\\comparedTo{\\REC}{\\ensuremath{\\text{\\OBS}\\cup\\text{\\REC}}}}"
-				, getRecall(observedEntities + recoveredEntities, recoveredEntities)
-				, getRecall(observedRelations + recoveredRelations, recoveredRelations)
-				, 2.0
-				, 2.0
-			>
 		];
 		str printFixed(real n) = left("<n>", 4, "0");
-		str roundCustom(real n) = n == 2.0 ? "-" : printFixed(round(n * 100) / 100.0);
+		int printFixed(int n) = "<n>\\%";
+		str roundCustom(real n) = n == 2.0 ? "-" : printFixed(round(n * 100));
 		str roundCustom(str n) = n;
 		println("\\recallPrecisionResult{<nm>}{");
 		for (r <- rowResult) {
