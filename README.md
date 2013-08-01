@@ -1,4 +1,4 @@
-This repository contains the data and scripts mentioned in the ICPC2013 submission.
+This repository contains the data and scripts mentioned in the ICSM2013 submission.
 We used [Rascal](http://www.rascal-mpl.org/) to analyse the systems.
 This also contains a Rascal (eclipse) project.
 
